@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 
-const MainPage = ({ currentUser, matches, onMatchSelect }) => {
+function MainPage({ currentUser, matches, onMatchSelect }) {
   const router = useRouter();
 
   return (
@@ -14,6 +14,6 @@ const MainPage = ({ currentUser, matches, onMatchSelect }) => {
       {/* render matches or other components */}
     </div>
   );
-};
+}
 
 export default MainPage;

@@ -1,17 +1,8 @@
-/*
-  Likes.js
-
-  The likes display who the user liked from MainPage.
-
-  props:
-    
-*/
-
-
-import MatchesPage from '../components/MatchesPage';
 import { useRouter } from 'next/router';
+import MatchesPage from '../../pages/MatchesPage';
 
-const Matches = () => {
+
+function Matches() {
   const router = useRouter();
 
   const matches = [
@@ -30,7 +21,7 @@ const Matches = () => {
       onMatchSelect={handleMatchSelect} 
     />
   );
-};
+}
 
 export default Matches;
 

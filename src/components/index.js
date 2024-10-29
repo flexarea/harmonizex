@@ -8,9 +8,9 @@
     
 */
 
-import MainPage from './index.js';
+import MainPage from '../components/MainPage'; // Adjust the path as necessary
 
-const IndexPage = () => {
+function IndexPage() {
   const currentUser = {
     id: '1',
     name: 'Jane Doe',
@@ -26,6 +26,7 @@ const IndexPage = () => {
 
   const onMatchSelect = (matchId) => {
     console.log('Selected match:', matchId);
+    // You might want to navigate to a conversation page or something similar here
   };
 
   return (
@@ -35,7 +36,6 @@ const IndexPage = () => {
       onMatchSelect={onMatchSelect} 
     />
   );
-};
+}
 
 export default IndexPage;
-

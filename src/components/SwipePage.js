@@ -1,43 +1,70 @@
-import SwipePage from '../components/SwipePage';
 import { useRouter } from 'next/router';
+import PropTypes from 'prop-types';
 
-const Swipe = () => {
+function SwipePage({ currentUser, userToSwipe, onLike, onDislike }) {
   const router = useRouter();
-  
-  const currentUser = {
-    id: '1',
-    name: 'Jane Doe',
-    age: 28,
-    bio: 'I love Taylor Swift!',
-    avatarUrl: 'https://example.com/avatar.jpg',
+
+  const handleLike = () => {
+    onLike();
+    // navigate to matches page after liking
+    router.push('/matches');
   };
 
-  const userToSwipe = {
-    id: '2',
-    name: 'John Smith',
-    age: 30,
-    bio: 'I listen to music from League of Legends.',
-    avatarUrl: 'https://example.com/avatar2.jpg',
-  };
-
-  const onLike = () => {
-    console.log('Liked user:', userToSwipe.id);
-    // logic for saving the like in state or database can go here
-  };
-
-  const onDislike = () => {
-    console.log('Disliked user:', userToSwipe.id);
-    // logic for saving the dislike in state or database can go here
+  const handleDislike = () => {
+    onDislike();
+    // navigate to swipe page for the next user
+    router.push('/swipe');
   };
 
   return (
-    <SwipePage 
-      currentUser={currentUser} 
-      userToSwipe={userToSwipe} 
-      onLike={onLike} 
-      onDislike={onDislike} 
-    />
+    <div className="swipe-page">
+      <header>
+        <h1>Tinder</h1>
+        <nav>
+          <button onClick={() => router.push('/matches')}>Matches</button>
+          <button onClick={() => router.push('/profile')}>Profile</button>
+        </nav>
+      </header>
+
+      <main>
+        <section className="swipe-section">
+          {userToSwipe ? (
+            <UserProfile 
+              user={userToSwipe} 
+              onLike={handleLike} 
+              onDislike={handleDislike} 
+            />
+          ) : (
+            <p>No users to swipe on at the moment.</p>
+          )}
+        </section>
+      </main>
+
+      <footer>
+        <button className="swipe-button dislike" onClick={handleDislike}>👎</button>
+        <button className="swipe-button like" onClick={handleLike}>👍</button>
+      </footer>
+    </div>
   );
+}
+
+SwipePage.propTypes = {
+  currentUser: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    age: PropTypes.number,
+    bio: PropTypes.string,
+    avatarUrl: PropTypes.string,
+  }).isRequired,
+  userToSwipe: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    age: PropTypes.number,
+    bio: PropTypes.string,
+    avatarUrl: PropTypes.string,
+  }),
+  onLike: PropTypes.func.isRequired,
+  onDislike: PropTypes.func.isRequired,
 };
 
-export default Swipe;
+export default SwipePage;

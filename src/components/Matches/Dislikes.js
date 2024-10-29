@@ -1,7 +1,7 @@
 /*
-  Dismissed.js
+  Dislikes.js
 
-  The dismissed display who the user rejected from MainPage.
+  The dislikes display who the user rejected from MainPage.
 
   props:
     
@@ -10,7 +10,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
-const DislikedUsers = ({ currentUserId }) => {
+function DislikedUsers({ currentUserId }) {
   const [dislikedUsers, setDislikedUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
@@ -56,7 +56,7 @@ const DislikedUsers = ({ currentUserId }) => {
       )}
     </div>
   );
-};
+}
 
 DislikedUsers.propTypes = {
   currentUserId: PropTypes.string.isRequired,

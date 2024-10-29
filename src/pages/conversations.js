@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
-const Conversations = ({ currentUserId }) => {
+function Conversations({ currentUserId }) {
   const [conversations, setConversations] = useState([]);
   const [likedUsers, setLikedUsers] = useState([]);
   const [matchedUsers, setMatchedUsers] = useState([]);
@@ -86,7 +86,7 @@ const Conversations = ({ currentUserId }) => {
       )}
     </div>
   );
-};
+}
 
 Conversations.propTypes = {
   currentUserId: PropTypes.string.isRequired,
