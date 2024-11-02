@@ -1,6 +1,6 @@
 // components/Login/index.js
 
 import LoginForm from './LoginForm';
-import SocialLogin from './SocialLogin';
+import SpotifyLogin from './SpotifyLogin';
 
-export { LoginForm, SocialLogin };
+export { LoginForm, SpotifyLogin };

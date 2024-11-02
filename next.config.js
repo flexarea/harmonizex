@@ -1,6 +1,13 @@
+// /** @type {import('next').NextConfig} */
+// const nextConfig = {
+//   reactStrictMode: true,
+// };
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: true,
+  images: {
+    domains: ['images.unsplash.com', 'plus.unsplash.com'], // Add your domain here
+  },
 };
 
 module.exports = nextConfig;

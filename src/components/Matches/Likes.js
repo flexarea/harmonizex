@@ -1,28 +1,36 @@
-import { useRouter } from 'next/router';
-import MatchesPage from '../../pages/MatchesPage';
+// components/Matches/Likes.js
 
+import PropTypes from 'prop-types';
+import Image from 'next/image';
 
-function Matches() {
-  const router = useRouter();
-
-  const matches = [
-    { id: '2', name: 'John Smith', avatarUrl: 'https://example.com/avatar2.jpg' },
-    { id: '3', name: 'Alice Johnson', avatarUrl: 'https://example.com/avatar3.jpg' },
-  ];
-
-  const handleMatchSelect = (matchId) => {
-    // navigates to the conversations page for the selected match
-    router.push(`/conversations?matchId=${matchId}`);
-  };
-
+function Likes({ matches, onMatchSelect }) {
   return (
-    <MatchesPage 
-      matches={matches} 
-      onMatchSelect={handleMatchSelect} 
-    />
+    <div>
+      {matches.map((match) => (
+        <div key={match.id} onClick={() => onMatchSelect(match.id)}>
+          <Image 
+            src={match.avatarUrl} 
+            alt={`${match.name}'s avatar`} 
+            width={100} 
+            height={100} 
+            layout="fixed" 
+          />
+          <p>{match.name}</p>
+        </div>
+      ))}
+    </div>
   );
 }
 
-export default Matches;
+Likes.propTypes = {
+  matches: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      avatarUrl: PropTypes.string.isRequired,
+    })
+  ).isRequired,
+  onMatchSelect: PropTypes.func.isRequired,
+};
 
-
+export default Likes;

@@ -1,4 +1,4 @@
-import UserProfilePage from './UserProfilePage';
+import UserProfilePage from './UserProfile';
 
 function UserProfileContainer() {
   const currentUser = {

@@ -1,0 +1,60 @@
+/* styles/Swipe.module.css */
+
+.swipePage {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f9f9f9; /* Light background color */
+}
+
+.card {
+    background-color: white; /* White card */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Soft shadow */
+    padding: 20px;
+    text-align: center;
+    width: 300px; /* Fixed width for the card */
+    position: relative; /* Positioning for the buttons */
+    transition: transform 0.3s; /* Smooth transition */
+}
+
+.card:hover {
+    transform: scale(1.05); /* Scale on hover */
+}
+
+.avatar {
+    border-radius: 50%; /* Circular avatar */
+    width: 100px; /* Avatar size */
+    height: 100px; /* Avatar size */
+    margin-bottom: 10px; /* Space between avatar and name */
+}
+
+.buttonContainer {
+    display: flex;
+    justify-content: space-between; /* Space buttons evenly */
+    margin-top: 15px; /* Space above buttons */
+}
+
+.likeButton, .dislikeButton {
+    background-color: #0070f3; /* Blue button */
+    color: white;
+    border: none;
+    border-radius: 5px; /* Rounded button */
+    cursor: pointer;
+    padding: 10px 20px; /* Button padding */
+    font-size: 18px; /* Font size for buttons */
+    transition: background-color 0.3s; /* Transition for background color */
+}
+
+.likeButton:hover {
+    background-color: #005bb5; /* Darker blue on hover */
+}
+
+.dislikeButton {
+    background-color: #ff4d4d; /* Red button */
+}
+
+.dislikeButton:hover {
+    background-color: #cc0000; /* Darker red on hover */
+}

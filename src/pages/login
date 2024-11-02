@@ -9,7 +9,7 @@
 // pages/login.js
 
 import React from 'react';
-import { LoginForm, SocialLogin } from '../components/Login';
+import { LoginForm, SpotifyLogin } from '../components/Login';
 
 function LoginPage() {
   const handleLogin = (credentials) => {
