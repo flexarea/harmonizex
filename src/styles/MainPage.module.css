@@ -1,135 +1,72 @@
-/* styles/MainPage.module.css */
-/* .main-page {
-    text-align: center;
-    margin: 20px;
-  }
-  
-  .main-page h2 {
-    font-size: 24px;
-    color: #333;
-  }
-  
-  .main-page nav button {
-    margin: 10px;
-    padding: 10px 20px;
-    background-color: #0070f3;
-    color: white;
-    border: none;
-    cursor: pointer;
-    border-radius: 5px;
-  }
-  
-  .main-page nav button:hover {
-    background-color: #005bb5;
-  }
-   */
-
-   /* styles/MainPage.module.css */
-/* styles/MainPage.module.css */
+/* MainPage.module.css */
 
 
-/* styles/MainPage.module.css */
-
-.main-page {
-  text-align: center;
-  margin: 40px auto;
-  max-width: 600px; /* Adjust max-width if necessary */
-  padding: 30px;
-  background-color: #ffffff; /* White background for clean look */
-  border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-}
-
-.main-page h2 {
-  font-size: 28px;
-  color: #333;
-  margin-bottom: 20px;
-  font-family: 'Arial', sans-serif;
-}
-
-.main-page nav {
+.mainContainer {
+  height: 100vh;
   display: flex;
+  align-items: center;
   justify-content: center;
-  flex-wrap: wrap;
-}
-
-.main-page nav button {
-  margin: 10px;
-  padding: 12px 24px;
-  background-color: #0070f3;
-  color: white;
-  border: none;
-  cursor: pointer;
-  border-radius: 5px;
-  font-size: 16px;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-.main-page nav button:hover {
-  background-color: #005bb5;
-  transform: translateY(-2px);
-}
-
-.main-page nav button:focus {
-  outline: none;
-  box-shadow: 0 0 0 2px rgba(0, 114, 243, 0.5);
-}
-
-.main-page p {
-  font-size: 16px;
-  color: #666;
-  line-height: 1.6;
-}
-
-
-
-/* .main-page {
-  text-align: center;
-  margin: 20px auto;
-  max-width: 800px;
+  background-color: #ffab40; /* Orange background */
   padding: 20px;
-  background-color: #f9f9f9;
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
 }
 
-.main-page h2 {
-  font-size: 28px;
+.mainPage {
+  width: 100%;
+  max-width: 500px;
+  padding: 30px;
+  background-color: #ffffff;
+  border-radius: 15px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+  text-align: center;
+  transition: transform 0.2s ease;
+}
+
+.mainPage:hover {
+  transform: scale(1.02); /* Subtle zoom effect on hover */
+}
+
+.mainTitle {
+  font-size: 32px;
+  font-weight: 600;
   color: #333;
-  margin-bottom: 20px;
-  font-family: 'Arial', sans-serif;
+  margin-bottom: 25px;
+  font-family: 'Helvetica Neue', sans-serif;
 }
 
-.main-page nav {
+.mainText {
+  font-size: 18px;
+  color: #555;
+  line-height: 1.7;
+  margin-bottom: 30px;
+}
+
+.navContainer {
   display: flex;
   justify-content: center;
+  gap: 15px; /* Increased spacing between buttons */
   flex-wrap: wrap;
 }
 
-.main-page nav button {
-  margin: 10px;
-  padding: 12px 24px;
-  background-color: #0070f3;
+.navButton {
+  padding: 14px 28px;
+  background-color: #0078ff;
   color: white;
+  font-weight: 500;
   border: none;
+  border-radius: 8px;
+  font-size: 16px;
   cursor: pointer;
-  border-radius: 5px;
-  font-size: 16px;
-  transition: background-color 0.3s ease, transform 0.2s ease;
+  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.main-page nav button:hover {
-  background-color: #005bb5;
-  transform: translateY(-2px);
+.navButton:hover {
+  background-color: #0063cc;
+  transform: translateY(-3px);
+  box-shadow: 0 4px 15px rgba(0, 120, 255, 0.4);
 }
 
-.main-page nav button:focus {
+.navButton:focus {
   outline: none;
-  box-shadow: 0 0 0 2px rgba(0, 114, 243, 0.5);
+  box-shadow: 0 0 0 3px rgba(0, 120, 255, 0.4);
 }
-
-.main-page p {
-  font-size: 16px;
-  color: #666;
-  line-height: 1.6;
-} */

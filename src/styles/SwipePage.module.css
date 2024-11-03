@@ -1,60 +1,102 @@
-/* styles/Swipe.module.css */
+/* styles/SwipePage.module.css */
 
 .swipePage {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: #f9f9f9; /* Light background color */
-}
-
-.card {
-    background-color: white; /* White card */
-    border-radius: 10px; /* Rounded corners */
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Soft shadow */
+    background-color: #ffab40; /* Orange background */
+  }
+  
+  .card {
+    width: 100%;
+    max-width: 400px;
     padding: 20px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     text-align: center;
-    width: 300px; /* Fixed width for the card */
-    position: relative; /* Positioning for the buttons */
-    transition: transform 0.3s; /* Smooth transition */
-}
-
-.card:hover {
-    transform: scale(1.05); /* Scale on hover */
-}
-
-.avatar {
-    border-radius: 50%; /* Circular avatar */
-    width: 100px; /* Avatar size */
-    height: 100px; /* Avatar size */
-    margin-bottom: 10px; /* Space between avatar and name */
-}
-
-.buttonContainer {
     display: flex;
-    justify-content: space-between; /* Space buttons evenly */
-    margin-top: 15px; /* Space above buttons */
-}
-
-.likeButton, .dislikeButton {
-    background-color: #0070f3; /* Blue button */
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .avatar {
+    width: 100%;
+    height: auto;
+    max-width: 300px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .card h3 {
+    font-size: 24px;
+    color: #333;
+    margin: 10px 0;
+  }
+  
+  .card p {
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 20px;
+    padding: 0 10px;
+  }
+  
+  .buttonContainer {
+    display: flex;
+    gap: 20px;
+  }
+  
+  .likeButton,
+  .dislikeButton {
+    width: 60px;
+    height: 60px;
+    font-size: 24px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+  }
+  
+  .likeButton {
+    background-color: #28a745;
+    color: #fff;
+  }
+  
+  .dislikeButton {
+    background-color: #dc3545;
+    color: #fff;
+  }
+  
+  .likeButton:hover,
+  .dislikeButton:hover {
+    transform: scale(1.1);
+  }
+  
+  .noMoreMatches {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .noMoreMatches h2 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  .noMoreMatches button {
+    padding: 10px 20px;
+    background-color: #0070f3;
     color: white;
     border: none;
-    border-radius: 5px; /* Rounded button */
     cursor: pointer;
-    padding: 10px 20px; /* Button padding */
-    font-size: 18px; /* Font size for buttons */
-    transition: background-color 0.3s; /* Transition for background color */
-}
-
-.likeButton:hover {
-    background-color: #005bb5; /* Darker blue on hover */
-}
-
-.dislikeButton {
-    background-color: #ff4d4d; /* Red button */
-}
-
-.dislikeButton:hover {
-    background-color: #cc0000; /* Darker red on hover */
-}
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .noMoreMatches button:hover {
+    background-color: #005bb5;
+  }
+  

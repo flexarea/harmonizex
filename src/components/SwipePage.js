@@ -56,15 +56,16 @@ function Swipe() {
 
   if (noMoreMatches) {
     return (
-      <div style={{ textAlign: 'center', margin: '20px' }}>
-        <h2>No more matches available.</h2>
-        <button type = 'button' onClick={handleBackToMain} style={{ padding: '10px 20px', borderRadius: '5px', backgroundColor: '#0070f3', color: 'white', border: 'none', cursor: 'pointer' }}>
+      <div className={styles.noMoreMatches}>
+        <h2>No more matches available</h2>
+        <p>Check back later or update your preferences to see more profiles.</p>
+        <button type="button" onClick={handleBackToMain}>
           Back to Main Page
         </button>
       </div>
     );
   }
-
+  
   return (
         <div className={styles.swipePage}>
           <div className={styles.card}>
