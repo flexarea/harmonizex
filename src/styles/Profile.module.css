@@ -1,222 +1,85 @@
-/* Profile.module.css
-.userProfilePage {
-    padding: 20px;
-    max-width: 600px;
-    margin: 0 auto;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  /* .header {
-    display: flex;
-    align-items: center;
-    margin-bottom: 20px;
-  } */
-
-  /* .header {
-    display: flex;
-    align-items: center;
-  }
-  
-  .header h1 {
-    margin: 0;
-    font-size: 1.5rem;
-  }
-
-  .avatar {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    margin-right: 20px;
-  } */
-  
-  /* h1 {
-    margin: 0;
-    font-size: 1.5rem;
-  } */
-  
-  /* h2 {
-    margin-bottom: 10px;
-  } */
-
-  /* .section {
-    margin-bottom: 20px;
-  }
-  
-  .section h2 {
-    margin-bottom: 10px;
-  } */
-  
-  /* ul {
-    list-style-type: none;
-    padding: 0;
-  } */
-  
-  /* .list {
-    margin: 0;
-    padding: 0;
-    list-style-type: none;
-  }
-
-  .playlists,
-  .likedSongs,
-  .settings,
-  .dislikedUsers {
-    margin-bottom: 20px;
-    padding: 15px;
-    background-color: #fff;
-    border-radius: 6px;
-    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
-  }
-   */
-  /* button {
-    margin-right: 10px;
-    padding: 10px 15px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  } */
-
-  /* .button {
-    margin-right: 10px;
-    padding: 10px 15px;
-  }
-  
-  .button:hover {
-    background-color: #0056b3;
-  }
-   */ 
-
-   /* Profile.module.css */
-
-/* .userProfilePage {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-color: #f8f9fa; /* Light background for a clean look */
-  /* padding: 20px;
-  border-radius: 10px; /* Rounded corners */
-  /* box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Soft shadow */
-  /* max-width: 400px; /* Limit width for profiles */
-  /* margin: auto; Center the profile
-}
- */ 
-
- /* Profile.module.css */
+/* Profile.module.css */
 
 .userProfilePage {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #f8f9fa; /* Light background for a clean look */
   padding: 20px;
-  border-radius: 10px; /* Rounded corners */
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Soft shadow */
-  max-width: 400px; /* Limit width for profiles */
-  margin: auto; /* Center the profile */
+  background-color: #ffab40; /* orange background */
+  min-height: 100vh; /* full height */
+  box-sizing: border-box;
 }
 
 .header {
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #ffffff; /* white background for profile card */
+  border-radius: 15px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  padding: 20px;
+  width: 100%;
+  max-width: 500px; /* maximum width of the profile card */
   margin-bottom: 20px;
 }
 
 .avatar {
-  border-radius: 50%; /* Circular avatar */
-  border: 2px solid #007bff; /* Blue border */
+  border-radius: 50%; /* circular avatar */
+  border: 2px solid #0078ff; /* blue border for the avatar */
   margin-bottom: 10px;
 }
 
-.headerName {
-  font-size: 1.8rem;
-  color: #343a40; /* Dark gray for headings */
-  margin: 0;
+.header h1 {
+  font-size: 24px;
+  color: #333;
+  margin: 0; /* removes default margin */
+  font-family: 'Arial', sans-serif;
 }
 
-.sectionHeader {
-  font-size: 1.5rem;
-  color: #007bff; /* Accent color for section headings */
-  margin-bottom: 10px;
+.localClass {
+  text-align: center;
+  color: #555;
 }
 
-/* p {
-  font-size: 1rem;
-  color: #6c757d; /* Lighter gray for regular text */
-
-
-/* section {
-  width: 100%; /* Full width for sections */
-  /* margin-bottom: 20px;
-  background-color: #ffffff; /* White background for sections */
-  /* padding: 15px;
-  border-radius: 8px; /* Rounded corners for sections */
-  /* box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); Subtle shadow */ 
-
-  .localSection {
-    width: 100%; /* Full width for sections */
-    margin-bottom: 20px;
-    background-color: #ffffff; /* White background for sections */
-    padding: 15px;
-    border-radius: 8px; /* Rounded corners for sections */
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-  }
-
-
-/* ul {
-  list-style-type: none; /* Remove bullet points */
-  /* padding: 0; */
-
-  .localList {
-    /* Styles for the list container */
-    margin-top: 10px; /* Spacing above the list */
-  }
-
-/* li {
-  background-color: #e9ecef; /* Light background for list items */
-  /* margin: 5px 0; /* Spacing between items */
-  /* padding: 10px;
-  border-radius: 5px; /* Rounded corners for list items */
-  /* transition: background-color 0.3s; Smooth transition for hover effect */
-
-
-/* li:hover {
-  background-color: #dee2e6; Slightly darker on hover */
-
-  .localListItem {
-    /* Styles for list items wrapper */
-    margin: 5px 0; /* Spacing between items */
-  }
-  
-  .localListItem li {
-    background-color: #e9ecef; /* Light background for list items */
-    padding: 10px;
-    border-radius: 5px; /* Rounded corners for list items */
-    transition: background-color 0.3s; /* Smooth transition for hover effect */
-  }
-  
-  .localListItem li:hover {
-    background-color: #dee2e6; /* Slightly darker on hover */
-  }
-  
-.button {
-  background-color: #007bff; /* Primary button color */
-  color: white; /* White text for buttons */
-  border: none;
-  border-radius: 5px; /* Rounded corners */
-  padding: 10px 15px;
-  cursor: pointer;
-  transition: background-color 0.3s; /* Smooth transition */
+.localClass p {
+  font-size: 16px;
+  margin: 5px 0;
 }
 
-.button:hover {
-  background-color: #0056b3; /* Darker blue on hover */
+.localClass p:last-child {
+  margin-bottom: 0; /* removes margin from the last paragraph */
 }
 
-.dislikedUsers p {
-  text-align: center; /* Centered text */
-  color: #6c757d; /* Lighter gray for informational text */
+.playlistsSection {
+  margin-top: 20px;
 }
 
+.playlistContainer {
+  display: flex; /* uses flexbox to arrange items in a row */
+  justify-content: space-around; /* spaces items evenly */
+  overflow-x: auto; /* allows horizontal scrolling if needed */
+}
+
+.playlistCard {
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  margin: 10px;
+  text-align: center;
+  transition: transform 0.2s;
+  flex: 0 0 auto; /* prevents flex items from growing or shrinking */
+}
+
+.playlistCard:hover {
+  transform: scale(1.05); /* slight zoom effect on hover */
+}
+
+.playlistCover {
+  border-radius: 10px 10px 0 0; /* rounded corners for top */
+}
+
+.playlistTitle {
+  font-size: 18px;
+  padding: 10px 0;
+  color: #333;
+}

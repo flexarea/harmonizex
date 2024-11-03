@@ -46,10 +46,10 @@
   }
   
   .button:first-of-type {
-    background-color: #ff3b3b; /* Dislike color */
+    background-color: #ff3b3b; /* dislike color */
   }
   
   .button:last-of-type {
-    background-color: #0070f3; /* Like color */
+    background-color: #0070f3; /* like color */
   }
   

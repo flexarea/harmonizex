@@ -1,72 +1,54 @@
 /* MainPage.module.css */
 
-
 .mainContainer {
   height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #ffab40; /* Orange background */
-  padding: 20px;
-  box-sizing: border-box;
+  background-color: #ffb74d; /* orange background */
 }
 
 .mainPage {
-  width: 100%;
-  max-width: 500px;
+  text-align: center;
+  max-width: 600px;
   padding: 30px;
   background-color: #ffffff;
-  border-radius: 15px;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
-  text-align: center;
-  transition: transform 0.2s ease;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
 
-.mainPage:hover {
-  transform: scale(1.02); /* Subtle zoom effect on hover */
-}
-
-.mainTitle {
-  font-size: 32px;
-  font-weight: 600;
+.mainPage h2 {
+  font-size: 28px;
   color: #333;
-  margin-bottom: 25px;
-  font-family: 'Helvetica Neue', sans-serif;
+  margin-bottom: 20px;
+  font-family: 'Arial', sans-serif;
 }
 
-.mainText {
-  font-size: 18px;
-  color: #555;
-  line-height: 1.7;
-  margin-bottom: 30px;
-}
-
-.navContainer {
+.mainPage nav {
   display: flex;
   justify-content: center;
-  gap: 15px; /* Increased spacing between buttons */
-  flex-wrap: wrap;
+  flex-direction: column; /* stacks buttons vertically */
+  gap: 10px; /* adds space between buttons */
 }
 
-.navButton {
-  padding: 14px 28px;
-  background-color: #0078ff;
+.mainPage nav button {
+  padding: 12px 24px;
+  background-color: #0070f3;
   color: white;
-  font-weight: 500;
   border: none;
-  border-radius: 8px;
+  border-radius: 8px; /* rounded corners */
   font-size: 16px;
   cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* subtle shadow */
 }
 
-.navButton:hover {
-  background-color: #0063cc;
-  transform: translateY(-3px);
-  box-shadow: 0 4px 15px rgba(0, 120, 255, 0.4);
+.mainPage nav button:hover {
+  background-color: #005bb5;
+  transform: translateY(-2px); /* slight lift effect */
 }
 
-.navButton:focus {
+.mainPage nav button:focus {
   outline: none;
-  box-shadow: 0 0 0 3px rgba(0, 120, 255, 0.4);
+  box-shadow: 0 0 0 2px rgba(0, 114, 243, 0.5);
 }

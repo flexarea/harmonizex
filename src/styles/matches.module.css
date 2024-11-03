@@ -59,7 +59,7 @@
     flex: 1;
     display: flex;
     flex-direction: column;
-    background-color: #ffab40; /* Orange background */
+    background-color: #ffab40; /* orange background */
   }
   
   .messageList {
