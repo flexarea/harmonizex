@@ -10,7 +10,7 @@ function Conversations({ currentUserId }) {
   const [error, setError] = useState('');
   const router = useRouter();
 
-  // Mock data
+  // some mock data
   const mockLikedUsers = [
     { id: '1', name: 'Alice' },
     { id: '2', name: 'Bob' },
@@ -27,15 +27,15 @@ function Conversations({ currentUserId }) {
       try {
         setLoading(true);
 
-        // Simulate fetching liked users
-        // You can replace this with actual API call when it's available
+        // simulating fetching conversations
+        // you can replace this with actual API call when it's available
         setLikedUsers(mockLikedUsers);
 
-        // Simulate fetching conversations
-        // You can replace this with actual API call when it's available
+        // simulating fetching conversations
+        // you can replace this with actual API call when it's available
         setConversations(mockConversations);
 
-        // Finding matched users
+        // finds matched users
         const matchedUserIds = mockLikedUsers.filter(user => 
           mockConversations.some(convo => convo.participantId === user.id)
         ).map(user => user.id);
