@@ -1,13 +1,7 @@
-// // Profile.js
-
-// Profile.js
-
-// pages/profile.js
-
 import React from 'react';
 
 
-import Profile from '../components/Profile/Profile'; // Import the Profile component directly
+import Profile from '../components/Profile/Profile'; 
 
 function ProfilePage() {
   // define the user data here
@@ -20,7 +14,7 @@ function ProfilePage() {
   };
 
   return (
-    <Profile currentUser={currentUser} /> // Pass the currentUser data to Profile
+    <Profile currentUser={currentUser} /> // passes the currentUser data to Profile
   );
 }
 

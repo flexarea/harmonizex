@@ -13,7 +13,7 @@ import { LoginForm, SpotifyLogin } from '../components/Login';
 
 function LoginPage() {
   const handleLogin = (credentials) => {
-    // Handle login with credentials
+    // handles login with credentials
   };
 
   return (

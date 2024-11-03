@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import styles from './LoginForm.module.css';
+import styles from '../../styles/LoginForm.module.css';
 
 function LoginForm({ onLogin }) {
   const [email, setEmail] = useState('');
@@ -9,7 +9,6 @@ function LoginForm({ onLogin }) {
 
   const bypassAuth = process.env.REACT_APP_BYPASS_SPOTIFY_AUTH === 'true';
 
-  // Set a flag for bypassing authentication
   
 
   const handleSubmit = (e) => {
@@ -43,7 +42,7 @@ function LoginForm({ onLogin }) {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
-            disabled={bypassAuth} // Optionally disable input fields
+            disabled={bypassAuth} // optionally disable input fields
           />
         </div>
         <div className={styles.inputGroup}>
@@ -53,7 +52,7 @@ function LoginForm({ onLogin }) {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
-            disabled={bypassAuth} // Optionally disable input fields
+            disabled={bypassAuth} // optionally disable input fields
           />
         </div>
         <button type="submit">Login</button>

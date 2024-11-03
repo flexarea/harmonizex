@@ -1,13 +1,4 @@
-// // pages/index.js
-// import MainPage from '../components/MainPage';
-
-// function Home() {
-//   return <MainPage />;
-// }
-
-// export default Home;
-// pages/index.js
-import MainPage from '../components/MainPage'; // Ensure this path is correct
+import MainPage from '../components/MainPage'; 
 
 function Home() {
   const currentUser = {

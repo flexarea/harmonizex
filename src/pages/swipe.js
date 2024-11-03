@@ -1,11 +1,7 @@
 import React from 'react';
-// import { useRouter } from 'next/router';
 import SwipePage from '../components/SwipePage';
-// import PropTypes from 'prop-types';
-// import UserProfile from '../components/Profile/Profile'; // component to display user profile
 
 function Swipe() {
-  // const router = useRouter();
   
   const currentUser = {
     id: '1',

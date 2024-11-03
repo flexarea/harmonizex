@@ -7,7 +7,7 @@
     
 */
 
-import MainPage from './MainPage'; // Adjust the path as necessary
+import MainPage from './MainPage'; 
 
 function IndexPage() {
   const currentUser = {
