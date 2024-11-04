@@ -1,16 +1,12 @@
 import Head from "next/head";
 import Image from "next/image";
-import { Inter } from "next/font/google";
+// import { Inter } from "next/font/google";
 import styles from "@/styles/Home.module.css";
 import Link from "next/link";
 
-const inter = Inter({ subsets: ["latin"] });
-
-
+// const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
-
-
   return (
     <>
       <Head>
@@ -27,9 +23,13 @@ export default function Home() {
           height={400}
           // layout="responsive"
         />
-        <h1 style={{ color: '#ff4081' }}>Harmonize!</h1>
-        <p className={styles.description} style={{ borderBottom: '2px solid #ff4081' }}>
-          Discover your musical soulmate by selecting your favorite playlists, songs, and artists.
+        <h1 style={{ color: "#ff4081" }}>Harmonize!</h1>
+        <p
+          className={styles.description}
+          style={{ borderBottom: "2px solid #ff4081" }}
+        >
+          Discover your musical soulmate by selecting your favorite playlists,
+          songs, and artists.
         </p>
 
         <div className={styles.grid}>
@@ -39,8 +39,11 @@ export default function Home() {
               width={100}
               height={100}
             />
-            <h2 style={{ color: '#0070f3' }}>Select Playlists &rarr;</h2>
-            <p>Choose your playlists you want to share so you can find matches with similar tastes.</p>
+            <h2 style={{ color: "#0070f3" }}>Select Playlists &rarr;</h2>
+            <p>
+              Choose your playlists you want to share so you can find matches
+              with similar tastes.
+            </p>
             <ul>
               <li>Chill Vibes</li>
               <li>Workout Energy</li>
@@ -53,8 +56,11 @@ export default function Home() {
               width={100}
               height={100}
             />
-            <h2 style={{ color: '#00e676' }}>Select Songs &rarr;</h2>
-            <p>Pick your top songs to share your daily vibes with potential matches.</p>
+            <h2 style={{ color: "#00e676" }}>Select Songs &rarr;</h2>
+            <p>
+              Pick your top songs to share your daily vibes with potential
+              matches.
+            </p>
             <ul>
               <li>Song A - Artist 1</li>
               <li>Song B - Artist 2</li>
@@ -67,8 +73,11 @@ export default function Home() {
               width={100}
               height={100}
             />
-            <h2 style={{ color: '#ff5252' }}>Select Artists &rarr;</h2>
-            <p>Choose your favorite artists to match with others who like them as well.</p>
+            <h2 style={{ color: "#ff5252" }}>Select Artists &rarr;</h2>
+            <p>
+              Choose your favorite artists to match with others who like them as
+              well.
+            </p>
             <ul>
               <li>Artist 1</li>
               <li>Artist 2</li>
@@ -78,28 +87,24 @@ export default function Home() {
         </div>
 
         <div className={styles.footer}>
-          <p style={{ color: '#673ab7' }}>Start your journey and find your musical match today!</p>
+          <p style={{ color: "#673ab7" }}>
+            Start your journey and find your musical match today!
+          </p>
 
-          <Link legacyBehavior href="/picturechoose"><a style={{ color: '#0070f3' }}>Click Here to Select Your Photos!</a></Link>
+          <Link legacyBehavior href="/picturechoose">
+            <a style={{ color: "#0070f3" }}>
+              Click Here to Select Your Photos!{" "}
+            </a>
+          </Link>
 
-
+          <Link legacyBehavior href="/susanIndex">
+            <a style={{ color: "#0070f3" }}>Susanindex</a>
+          </Link>
         </div>
       </main>
     </>
   );
 }
-
-
-
-
-
-
-
-
-
-
-
-
 
 /*
 
