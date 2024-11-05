@@ -1,0 +1,54 @@
+/* MainPage.module.css */
+
+.mainContainer {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #ffb74d; /* orange background */
+}
+
+.mainPage {
+  text-align: center;
+  max-width: 600px;
+  padding: 30px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.mainPage h2 {
+  font-size: 28px;
+  color: #333;
+  margin-bottom: 20px;
+  font-family: 'Arial', sans-serif;
+}
+
+.mainPage nav {
+  display: flex;
+  justify-content: center;
+  flex-direction: column; /* stacks buttons vertically */
+  gap: 10px; /* adds space between buttons */
+}
+
+.mainPage nav button {
+  padding: 12px 24px;
+  background-color: #0070f3;
+  color: white;
+  border: none;
+  border-radius: 8px; /* rounded corners */
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* subtle shadow */
+}
+
+.mainPage nav button:hover {
+  background-color: #005bb5;
+  transform: translateY(-2px); /* slight lift effect */
+}
+
+.mainPage nav button:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(0, 114, 243, 0.5);
+}

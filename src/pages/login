@@ -1,0 +1,27 @@
+/*
+  LoginPage.js
+
+  The login page displays the login account option with Spotify.
+
+  props:
+    
+*/
+// pages/login.js
+
+import React from 'react';
+import { LoginForm, SpotifyLogin } from '../components/Login';
+
+function LoginPage() {
+  const handleLogin = (credentials) => {
+    // handles login with credentials
+  };
+
+  return (
+    <div>
+      <LoginForm onLogin={handleLogin} />
+      <SocialLogin />
+    </div>
+  );
+}
+
+export default LoginPage;
