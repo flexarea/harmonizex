@@ -4,6 +4,11 @@ import Image from "next/image";
 import styles from "@/styles/Home.module.css";
 import Link from "next/link";
 
+// eslint-disable-next-line import/no-extraneous-dependencies
+require("dotenv").config();
+
+
+
 // const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
