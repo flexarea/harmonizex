@@ -3,7 +3,6 @@ import "@/styles/globals.css";
 import PropTypes from "prop-types";
 import { useRouter } from "next/router";
 import Head from "next/head";
-import { Main } from "next/document";
 
 function App({ Component, pageProps }) {
 
@@ -14,10 +13,10 @@ function App({ Component, pageProps }) {
           Harmonize
         </title>
       </Head>
-      <Main>
+      <main>
         <h1 className="title"> Harmonize </h1>
         <Component {...pageProps} />
-      </Main>
+      </main>
       <footer>copyright @ middlebury college</footer>
     </div>
   )
