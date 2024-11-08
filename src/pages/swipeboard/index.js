@@ -1,15 +1,11 @@
-import MainPage from "@/components/MainPage";
 
-export default function Home() {
-  const currentUser = {
-    id: "1",
-    name: "Jane Doe",
-    age: 25,
-    bio: "Loves music",
-    avatarUrl: "https://example.com/avatar.jpg",
-  };
+export default function MatchBoard() {
 
-  return <MainPage currentUser={currentUser} />;
+  return (
+    <div>
+      welcome to the matchBoard!
+    </div>
+  )
 }
 
 
