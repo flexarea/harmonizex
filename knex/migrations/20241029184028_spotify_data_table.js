@@ -1,7 +1,7 @@
 /* eslint-disable func-names */
 // knex/migrations/YYYYMMDDHHMMSS_create_api_data_table.js
 
-exports.up = function (knex) {
+exports.up = function(knex) {
   return knex.schema.createTable("api_data", (table) => {
     table.increments("user_id").primary();
     table.string("name");
@@ -15,6 +15,6 @@ exports.up = function (knex) {
   });
 };
 
-exports.down = function (knex) {
+exports.down = function(knex) {
   return knex.schema.dropTable("api_data");
 };
