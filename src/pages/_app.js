@@ -1,5 +1,4 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import PropTypes from "prop-types";
 import "@/styles/globals.css";
 import PropTypes from "prop-types";
 import { useRouter } from "next/router";
@@ -7,7 +6,7 @@ import Head from "next/head";
 import { Main } from "next/document";
 import { Component } from "react";
 
-function MainApp({ Component, pageProps }) {
+function App({ Component, pageProps }) {
 
   return (
     <div>
@@ -26,7 +25,7 @@ function MainApp({ Component, pageProps }) {
 
 }
 
-export default MainApp;
+export default App;
 
 App.propTypes = {
   Component: PropTypes.elementType.isRequired,

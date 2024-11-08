@@ -2,7 +2,6 @@ import Head from "next/head";
 import Image from "next/image";
 import { useState } from "react";
 import styles from "@/styles/Home.module.css";
-
 export default function MainPage() {
     const [currentUserIndex, setCurrentUserIndex] = useState(0);
     const [currentSongIndex, setCurrentSongIndex] = useState(0);
@@ -33,24 +32,24 @@ export default function MainPage() {
 
 
 
-    
+
     return (
         <>
-         <Head>
-            <title>Main Page</title>
-        </Head>
-        <main className={styles.main}>
-            <div style={{ width: '100%', position: 'absolute', top: '38%' }}>
-                <button onClick={topreviousSong} style={{ float: 'left' }}>Previous Song</button>
-                <button onClick={tonextSong} style={{ float: 'right' }}>Next Song</button>
-            </div>
-            <h1>{currentUser.name}</h1>
-            <Image src={currentUser.imageUrl} alt="User Image" width={200} height={200} />
-            <div>
-                <h2>Current Song: {currentUser.songs[currentSongIndex]}</h2>
-                <button onClick={iflikeUser} style={{ position: 'absolute', bottom: '20px', left: '50%', transform: 'translateX(-50%)' }}>Like</button>
-            </div>
-        </main>
+            <Head>
+                <title>Main Page</title>
+            </Head>
+            <main className={styles.main}>
+                <div style={{ width: '100%', position: 'absolute', top: '38%' }}>
+                    <button onClick={topreviousSong} style={{ float: 'left' }}>Previous Song</button>
+                    <button onClick={tonextSong} style={{ float: 'right' }}>Next Song</button>
+                </div>
+                <h1>{currentUser.name}</h1>
+                <Image src={currentUser.imageUrl} alt="User Image" width={200} height={200} />
+                <div>
+                    <h2>Current Song: {currentUser.songs[currentSongIndex]}</h2>
+                    <button onClick={iflikeUser} style={{ position: 'absolute', bottom: '20px', left: '50%', transform: 'translateX(-50%)' }}>Like</button>
+                </div>
+            </main>
         </>
     );
 }
