@@ -72,5 +72,4 @@ harmonize/
 ├── next.config.js               # Next.js configuration file
 ├── package.json                 # Dependencies and scripts
 └── README.md                    # Project documentation
-
 ```
