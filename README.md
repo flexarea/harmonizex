@@ -1,3 +1,5 @@
+![workflow status](https://github.com/csci312-f24/project-camelshump/actions/workflows/node.js.yml/badge.svg)
+
 # Project Skeleton
 
 TODO: Implement CI badges, provide a link to the deployed version of your application, and provide a brief description of the application functionality.
@@ -34,7 +36,6 @@ Note we need to pin the `node-fetch` version due to breaking changes when used w
 
 The project structure should look like this at first
 
-
 ```
 harmonize/
 ├── public/
@@ -44,14 +45,14 @@ harmonize/
 ├── src/
 │   ├── components/              # Reusable React components
 │   │   ├── setting.test.js      # testing for setting
-│   │   ├── card.test.js         # testing for card 
+│   │   ├── card.test.js         # testing for card
 │   │   ├── button.test.js       # testing for button
 │   │   ├── setting.js           # App setting
 │   │   ├── card.js              # Profile card with user information and album cover display
 │   │   └── Button.js            # yes/no swipe buttons
 │   ├── pages/                   # Next.js pages and API routes
 │   │   ├── api/                 # API routes
-│   │   │   └── user             # 
+│   │   │   └── user             #
 │   │   │         └── [id].js    # get data from db
 │   │   ├── preference/          #
 │   │   │   └── [id].js          # user preferences
