@@ -4,7 +4,6 @@ import PropTypes from "prop-types";
 import { useRouter } from "next/router";
 import Head from "next/head";
 import { Main } from "next/document";
-import { Component } from "react";
 
 function App({ Component, pageProps }) {
 
