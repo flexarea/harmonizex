@@ -4,7 +4,7 @@ import queryString from "query-string";
 const router = createRouter();
 
 const client_id = process.env.CLIENT_ID;
-const redirect_uri = 'http://localhost:3000/callback';
+const redirect_uri = 'http://localhost:3000/api/spotify/callback';
 
 const generateRandomString = (length) => {
 	return Math.random().toString(36).substring(2, 2 + length);
