@@ -18,3 +18,20 @@ exports.up = function(knex) {
 exports.down = function(knex) {
   return knex.schema.dropTable("api_data");
 };
+
+
+/* Per Friday Meetind discussion
+{
+  id: 1,
+  name: "John Doe",
+  age: 25,
+  gender: "male",
+  preferences: {
+    prefer_men: false,
+    prefer_women: true,
+    prefer_enby: false
+  },
+  spotify: ["artist1", "song1", "genre1"],
+  updated: "2024-03-15T12:00:00Z"
+}
+*/

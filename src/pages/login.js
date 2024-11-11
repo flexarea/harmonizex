@@ -1,4 +1,10 @@
 import { useEffect } from 'react';
+
+/*
+TODO: error handling, login UI, ...
+ * */
+
+
 import { useRouter } from 'next/router';
 
 export default function LoginPage() {
