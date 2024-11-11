@@ -40,33 +40,22 @@ router
 				const tokenData = await tokenResponse.json()
 
 				if (!tokenResponse.ok) {
-					return res.status(400).json({ error: 'Unable to retrieve tokens' })
-
-				}
-				const access_token = tokenData.access_token
-				const refresh_token = tokenData.refresh_token;
-
-				const options = {
-					method: 'GET',
-					headers: { 'Authorization': `Bearer ${access_token}` },
-					json: true
-				};
-				//use the access token to access the spotify web api
-				const userinfo = await fetch('https://api.spotify.com/v1/me/top/artists', options)
-				const userdata = await userinfo.json()
-
-				if (!userinfo.ok) {
-					return res.status(userinfo.status).json({
-						error: 'Token error',
-						details: userdata.error
-					})
+					return res.redirect('/login?error=auth_failed')
 				}
 
-				return res.status(200).json(userdata)
+				//store tokens in cookies or session
+				res.setHeader('Set-Cookie', [
+					`spotify_access_token=${tokenData.access_token}; Path=/; HttpOnly`,
+					`spotify_refresh_token=${tokenData.refresh_token}; Path=/; HttpOnly`
+				])
+
+				//redirect to swipeboard
+				return res.redirect('/swipeboard')
 
 
 			} catch (error) {
-				res.status(500).json({ error: 'Internal Server Error', message: error.message });
+				console.log('Auth error', error)
+				return res.redirect('/login?error=server_error')
 			}
 
 		}
