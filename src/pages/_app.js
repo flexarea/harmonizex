@@ -1,31 +1,13 @@
-/* eslint-disable react/jsx-props-no-spreading */
-import "@/styles/globals.css";
-import PropTypes from "prop-types";
-import { useRouter } from "next/router";
-import Head from "next/head";
+import '../styles/globals.css';  // Import global CSS
+import PropTypes from 'prop-types';
 
-function App({ Component, pageProps }) {
-
-  return (
-    <div>
-      <Head>
-        <title>
-          Harmonize
-        </title>
-      </Head>
-      <main>
-        <h1 className="title"> Harmonize </h1>
-        <Component {...pageProps} />
-      </main>
-      <footer>copyright @ middlebury college</footer>
-    </div>
-  )
-
+function MyApp({ Component, pageProps }) {
+  return <Component {...pageProps} />;
 }
 
-export default App;
-
-App.propTypes = {
+MyApp.propTypes = {
   Component: PropTypes.elementType.isRequired,
-  pageProps: PropTypes.shape({}),
+  pageProps: PropTypes.object.isRequired,
 };
+
+export default MyApp;

@@ -1,0 +1,112 @@
+/* login.module.css */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
+
+.container {
+  position: relative;
+  max-width: 100%;
+  background-color: transparent;
+  border-radius: 20px;
+  backdrop-filter: blur(120px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem 3rem;
+  margin: auto;
+  min-height: 100vh;
+  background-image: url('/ourImages/datingapp.jpg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.form {
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.6); /* Added transparency to background */
+  padding: 2rem 3rem;
+  border-radius: 15px;
+}
+
+.title {
+  font-size: 2rem;
+  color: #fff;
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.inputbox {
+  position: relative;
+  margin: 1.5rem 0;
+  max-width: 400px;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  border-bottom: 2px solid #fff;
+  display: flex;
+  flex-direction: column;
+}
+
+.input {
+  width: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  padding: 0.5rem;
+  color: #fff;
+  height: 2.5rem;
+}
+
+.forget {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  color: #fff;
+  margin: 1rem 0;
+  width: 100%;
+}
+
+.forget a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.forget a:hover {
+  text-decoration: underline;
+}
+
+.button, .spotifyBtn {
+  width: 100%;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  border-radius: 20px;
+  background-color: #FF6347; /* Change button color to match the image */
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.button:hover, .spotifyBtn:hover {
+  background-color: #FF4500; /* Darker shade of red */
+}
+
+/* Register Text Styling */
+.register {
+  color: #fff;
+  text-align: center;
+  font-size: 0.9rem;
+  margin-top: 2rem;
+  width: 100%; /* Full width */
+  display: flex;
+  justify-content: center; /* Centering the Register Now text */
+}
+
+.register a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.register a:hover {
+  text-decoration: underline;
+}
