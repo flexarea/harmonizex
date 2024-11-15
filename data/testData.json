@@ -1,0 +1,266 @@
+[
+    {
+      "id": 1,
+      "name": "Alice Williams",
+      "gender": "female",
+      "preferences": {
+        "prefer_men": false,
+        "prefer_women": true,
+        "prefer_enby": false
+      },
+      "age_pref_low": 20,
+      "age_pref_high": 30,
+      "artist_1": "Artist A",
+      "artist_2": "Artist B",
+      "artist_3": "Artist C",
+      "song_1": "Song X",
+      "song_2": "Song Y",
+      "song_3": "Song Z",
+      "genre_1": "Pop",
+      "genre_2": "Rock",
+      "genre_3": "Indie"
+    },
+    {
+      "id": 2,
+      "name": "Bob Johnson",
+      "gender": "male",
+      "preferences": {
+        "prefer_men": false,
+        "prefer_women": true,
+        "prefer_enby": false
+      },
+      "age_pref_low": 18,
+      "age_pref_high": 40,
+      "artist_1": "Artist D",
+      "artist_2": "Artist E",
+      "artist_3": "Artist F",
+      "song_1": "Song A",
+      "song_2": "Song B",
+      "song_3": "Song C",
+      "genre_1": "Jazz",
+      "genre_2": "Classical",
+      "genre_3": "Pop"
+    },
+    {
+      "id": 3,
+      "name": "Charlie Roberts",
+      "gender": "enby",
+      "preferences": {
+        "prefer_men": false,
+        "prefer_women": true,
+        "prefer_enby": true
+      },
+      "age_pref_low": 21,
+      "age_pref_high": 35,
+      "artist_1": "Artist G",
+      "artist_2": "Artist H",
+      "artist_3": "Artist I",
+      "song_1": "Song L",
+      "song_2": "Song M",
+      "song_3": "Song N",
+      "genre_1": "Electronic",
+      "genre_2": "Pop",
+      "genre_3": "Experimental"
+    },
+    {
+      "id": 4,
+      "name": "David Miller",
+      "gender": "male",
+      "preferences": {
+        "prefer_men": true,
+        "prefer_women": false,
+        "prefer_enby": false
+      },
+      "age_pref_low": 22,
+      "age_pref_high": 28,
+      "artist_1": "Artist J",
+      "artist_2": "Artist K",
+      "artist_3": "Artist L",
+      "song_1": "Song D",
+      "song_2": "Song E",
+      "song_3": "Song F",
+      "genre_1": "Hip-Hop",
+      "genre_2": "R&B",
+      "genre_3": "Jazz"
+    },
+    {
+      "id": 5,
+      "name": "Eva Green",
+      "gender": "female",
+      "preferences": {
+        "prefer_men": false,
+        "prefer_women": true,
+        "prefer_enby": false
+      },
+      "age_pref_low": 30,
+      "age_pref_high": 50,
+      "artist_1": "Artist M",
+      "artist_2": "Artist N",
+      "artist_3": "Artist O",
+      "song_1": "Song G",
+      "song_2": "Song H",
+      "song_3": "Song I",
+      "genre_1": "Pop",
+      "genre_2": "Soul",
+      "genre_3": "Folk"
+    },
+    {
+      "id": 6,
+      "name": "Frank King",
+      "gender": "male",
+      "preferences": {
+        "prefer_men": true,
+        "prefer_women": false,
+        "prefer_enby": false
+      },
+      "age_pref_low": 23,
+      "age_pref_high": 35,
+      "artist_1": "Artist P",
+      "artist_2": "Artist Q",
+      "artist_3": "Artist R",
+      "song_1": "Song J",
+      "song_2": "Song K",
+      "song_3": "Song L",
+      "genre_1": "Rock",
+      "genre_2": "Indie",
+      "genre_3": "Pop"
+    },
+    {
+      "id": 7,
+      "name": "Grace Lee",
+      "gender": "female",
+      "preferences": {
+        "prefer_men": false,
+        "prefer_women": false,
+        "prefer_enby": true
+      },
+      "age_pref_low": 25,
+      "age_pref_high": 35,
+      "artist_1": "Artist S",
+      "artist_2": "Artist T",
+      "artist_3": "Artist U",
+      "song_1": "Song P",
+      "song_2": "Song Q",
+      "song_3": "Song R",
+      "genre_1": "Electronic",
+      "genre_2": "Dance",
+      "genre_3": "Pop"
+    },
+    {
+      "id": 8,
+      "name": "Henry Taylor",
+      "gender": "male",
+      "preferences": {
+        "prefer_men": false,
+        "prefer_women": true,
+        "prefer_enby": false
+      },
+      "age_pref_low": 18,
+      "age_pref_high": 25,
+      "artist_1": "Artist V",
+      "artist_2": "Artist W",
+      "artist_3": "Artist X",
+      "song_1": "Song S",
+      "song_2": "Song T",
+      "song_3": "Song U",
+      "genre_1": "Pop",
+      "genre_2": "Electronic",
+      "genre_3": "Rock"
+    },
+    {
+      "id": 9,
+      "name": "Ivy Allen",
+      "gender": "female",
+      "preferences": {
+        "prefer_men": false,
+        "prefer_women": true,
+        "prefer_enby": false
+      },
+      "age_pref_low": 20,
+      "age_pref_high": 30,
+      "artist_1": "Artist A",
+      "artist_2": "Artist B",
+      "artist_3": "Artist C",
+      "song_1": "Song X",
+      "song_2": "Song Y",
+      "song_3": "Song Z",
+      "genre_1": "Pop",
+      "genre_2": "Rock",
+      "genre_3": "Indie"
+    },
+    {
+      "id": 10,
+      "name": "Jackie Green",
+      "gender": "female",
+      "preferences": {
+        "prefer_men": false,
+        "prefer_women": true,
+        "prefer_enby": false
+      },
+      "age_pref_low": 30,
+      "age_pref_high": 40,
+      "artist_1": "Artist A",
+      "artist_2": "Artist B",
+      "artist_3": "Artist C",
+      "song_1": "Song X",
+      "song_2": "Song Z",
+      "song_3": "Song Y",
+      "genre_1": "Pop",
+      "genre_2": "Jazz",
+      "genre_3": "Soul"
+    },
+    {
+      "id": 11,
+      "name": "George Brown",
+      "gender": "male",
+      "preferences": {
+        "prefer_men": false,
+        "prefer_women": true,
+        "prefer_enby": false
+      },
+      "age_pref_low": 25,
+      "age_pref_high": 35,
+      "artist_1": "Artist D",
+      "artist_2": "Artist E",
+      "artist_3": "Artist F",
+      "song_1": "Song A",
+      "song_2": "Song C",
+      "song_3": "Song B",
+      "genre_1": "Jazz",
+      "genre_2": "Pop",
+      "genre_3": "Classical"
+    },
+    {
+      "id": 12,
+      "name": "Kate White",
+      "gender": "female",
+      "preferences": {
+        "prefer_men": false,
+        "prefer_women": true,
+        "prefer_enby": false
+      },
+      "age_pref_low": 25,
+      "age_pref_high": 35,
+      "artist_1": "Artist G",
+      "artist_2": "Artist H",
+      "artist_3": "Artist I",
+      "song_1": "Song M",
+      "song_2": "Song L",
+      "song_3": "Song N",
+      "genre_1": "Pop",
+      "genre_2": "Electronic",
+      "genre_3": "Experimental"
+    },
+    {
+      "id": 13,
+      "name": "Zara Blue",
+      "gender": "enby",
+      "preferences": {
+        "prefer_men": false,
+        "prefer_women": true,
+        "prefer_enby": true
+      },
+      "age_pref_low": 20,
+      "age_pref_high": 30,
+     
+  
