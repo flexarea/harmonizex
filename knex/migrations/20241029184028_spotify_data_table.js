@@ -20,18 +20,33 @@ exports.down = function(knex) {
 };
 
 
-/* Per Friday Meetind discussion
+/* User Model
 {
-  id: 1,
-  name: "John Doe",
-  age: 25,
-  gender: "male",
-  preferences: {
+  id: 1, // Unique identifier for the user
+  name: "John Doe", // User's name
+  spotify_id: "user_spotify_id", // User's Spotify ID for music data integration
+  age: 25, // User's age
+  gender: "male", // User's gender
+  preferences: { // User's preferences for matches
     prefer_men: false,
     prefer_women: true,
     prefer_enby: false
   },
-  spotify: ["artist1", "song1", "genre1"],
-  updated: "2024-03-15T12:00:00Z"
+  // Favorite artists
+  artist_1: null, // First favorite artist
+  artist_2: null, // Second favorite artist
+  artist_3: null, // Third favorite artist
+  
+  // Favorite songs
+  song_1: null, // First favorite song
+  song_2: null, // Second favorite song
+  song_3: null, // Third favorite song
+  
+  // Favorite genres
+  genre_1: null, // First favorite genre
+  genre_2: null, // Second favorite genre
+  genre_3: null, // Third favorite genre
+
+  updated: "2024-03-15T12:00:00Z" // Last updated timestamp
 }
 */
