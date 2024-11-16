@@ -1,5 +1,5 @@
 // age-matching.test.js
-const { filterByAge } = require('../services/potentialsFinder');
+const { filterByAge } = require('../services/candidatesFinder');
 
 describe('Age Preference Matching', () => {
   test('should match users within the same age range', () => {
