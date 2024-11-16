@@ -4,76 +4,106 @@ const {
     scoreByGenres, 
     scoreByMusic, 
     filterByScore, 
-} = require('../services/potentialsFinder');
+} = require('../services/candidatesFinder');
 
-describe('filterByScore', () => {
-    test('should return candidates with scores greater than or equal to minScore', () => {
-        const candidatesWithScores = [
-            { candidate: { name: 'Artist A' }, score: 4 },
-            { candidate: { name: 'Artist B' }, score: 2 },
-            { candidate: { name: 'Artist C' }, score: 5 }
-        ];
+const candidate = {
+    song_1: 'song_A',
+    song_2: 'song_B',
+    song_3: 'song_C',
+    artist_1: 'Artist A',
+    artist_2: 'Artist B',
+    artist_3: 'Artist C',
+    genre_1: 'Pop',
+    genre_2: 'Rock',
+    genre_3: 'Hip-Hop',
+};
 
-        const result = filterByScore(candidatesWithScores, 3);
-        expect(result).toEqual([{ name: 'Artist A' }, { name: 'Artist C' }]);
-    });
-
-    test('should return an empty array if no candidates meet the score threshold', () => {
-        const candidatesWithScores = [
-            { candidate: { name: 'Artist A' }, score: 2 },
-            { candidate: { name: 'Artist B' }, score: 1 }
-        ];
-
-        const result = filterByScore(candidatesWithScores, 3);
-        expect(result).toEqual([]);
-    });
-});
+const user = {
+    song_1: 'song_A',
+    song_2: 'song_X',
+    song_3: 'song_Y',
+    artist_1: 'Artist A',
+    artist_2: 'Artist Z',
+    artist_3: 'Artist Y',
+    genre_1: 'Pop',
+    genre_2: 'Jazz',
+    genre_3: 'Classical',
+};
 
 describe('scoreBySongs', () => {
-    test('should calculate score based on song preferences', () => {
-        const preferences = { song_1: 'Song A', song_2: 'Song B' };
-        const candidate = { songs: ['Song A', 'Song C'] };
-
-        const score = scoreBySongs(candidate, preferences);
-        expect(score).toBe(1); // Only one match: 'Song A'
+    it('Calculate score based on song preferences', () => {
+        const score = scoreBySongs(user, candidate);
+        expect(score).toBe(1); // Only one match: 'song_1'
     });
 });
 
 describe('scoreByArtists', () => {
-    test('should calculate score based on artist preferences', () => {
-        const preferences = { artist_1: 'Artist A', artist_2: 'Artist B' };
-        const candidate = { artists: ['Artist A', 'Artist C'] };
-
-        const score = scoreByArtists(candidate, preferences);
-        expect(score).toBe(1); // Only one match: 'Artist A'
+    it('Calculate score based on artist preferences', () => {
+        const score = scoreByArtists(user, candidate);
+        expect(score).toBe(1); // Only one match: 'artist_1'
     });
 });
 
 describe('scoreByGenres', () => {
-    test('should calculate score based on genre preferences', () => {
-        const preferences = { genre_1: 'Pop', genre_2: 'Rock' };
-        const candidate = { genres: ['Pop', 'Indie'] };
-
-        const score = scoreByGenres(candidate, preferences);
-        expect(score).toBe(1); // Only one match: 'Pop'
+    it('Calculate score based on genre preferences', () => {
+        const score = scoreByGenres(user, candidate);
+        expect(score).toBe(1); // Only one match: 'genre_1'
     });
 });
 
 describe('scoreByMusic', () => {
-    test('should calculate score based on a combination of music preferences', () => {
-        const preferences = { 
-            genres: { genre_1: 'Pop', genre_2: 'Rock' },
-            artists: { artist_1: 'Artist A' },
-            songs: { song_1: 'Song A' }
-        };
-        const candidate = {
-            genres: ['Pop', 'Jazz'],
-            artists: ['Artist A', 'Artist C'],
-            songs: ['Song A', 'Song C']
-        };
-
-        const score = scoreByMusic(candidate, preferences);
-        expect(score).toBe(3); // Matches in genres, artists, and songs
+    it('Calculate score based on a combination of music preferences', () => {
+        const score = scoreByMusic(user, candidate);
+        expect(score).toBe(3); // Matches in 'song_1', 'artist_1', and 'genre_1'
     });
 });
 
+describe('filterByScore', () => {
+    it('Filter out candidates with scores below the minimum', () => {
+        const candidatesWithScores = [
+            { candidate: { name: 'Alice' }, score: 4 },
+            { candidate: { name: 'Bob' }, score: 2 },
+            { candidate: { name: 'Charlie' }, score: 3 },
+        ];
+
+        const result = filterByScore(candidatesWithScores, 3);
+
+        expect(result).toEqual([
+            { name: 'Alice' }, 
+            { name: 'Charlie' }
+        ]); // Bob is excluded since his score is below 3
+    });
+
+    it('Default to a minimum score of 3 when no minScore is provided', () => {
+        const candidatesWithScores = [
+            { candidate: { name: 'Alice' }, score: 4 },
+            { candidate: { name: 'Bob' }, score: 2 },
+            { candidate: { name: 'Charlie' }, score: 3 },
+        ];
+
+        const result = filterByScore(candidatesWithScores);
+
+        expect(result).toEqual([
+            { name: 'Alice' }, 
+            { name: 'Charlie' }
+        ]);
+    });
+
+    it('Return an empty array if no candidates meet the minimum score', () => {
+        const candidatesWithScores = [
+            { candidate: { name: 'Alice' }, score: 1 },
+            { candidate: { name: 'Bob' }, score: 2 },
+        ];
+
+        const result = filterByScore(candidatesWithScores, 3);
+
+        expect(result).toEqual([]);
+    });
+
+    it('Handle an empty array', () => {
+        const result = filterByScore([], 3);
+
+        expect(result).toEqual([]);
+    });
+
+});

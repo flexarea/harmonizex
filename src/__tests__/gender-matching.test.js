@@ -1,4 +1,4 @@
-const { filterByGender } = require('../services/potentialsFinder');
+const { filterByGender } = require('../services/candidatesFinder');
 
 describe('Gender Preference Matching', () => {
   test('should match a female user who prefers women with other females who prefer women', () => {

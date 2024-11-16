@@ -36,7 +36,6 @@ const filterByGender = (user, candidates) => candidates.filter(candidate => {
 const filterByAge = (user, candidates) => candidates.filter(candidate => candidate.age >= user.age_pref_low && candidate.age <= user.age_pref_high);
 
 // Function to calculate artist score
-// TODO:
 const scoreByArtists = (user, candidate) => {
     let artistScore = 0;
   
@@ -48,7 +47,6 @@ const scoreByArtists = (user, candidate) => {
   };
   
 // Function to calculate song score for two users
-// TODO:
 const scoreBySongs = (user, candidate) => {
     let songScore = 0;
 
@@ -60,7 +58,6 @@ const scoreBySongs = (user, candidate) => {
     };
   
 // Function to calculate genre score for two users
-// TODO:
 const scoreByGenres = (user, candidate) => {
     let genreScore = 0;
 
@@ -72,7 +69,6 @@ const scoreByGenres = (user, candidate) => {
     };
 
 // Function to calculate total score for two users based on their genres, songs, and artists
-// TODO:
 const scoreByMusic = (user, candidate) => {
     let score = 0;
     
@@ -106,9 +102,6 @@ const calculateScores = (user, candidates) => candidates.map(candidate => ({
   
 // TODO: filtering by score
 const filterByScore = (candidatesWithScores, minScore = 3) => {
-    if (!Array.isArray(candidatesWithScores)) {
-        console.error("Expected an array but received:", candidatesWithScores);
-    }
     const candidates = Array.from(candidatesWithScores); // Convert if it's not already an array
 
     return candidates
