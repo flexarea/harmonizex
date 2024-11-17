@@ -1,7 +1,7 @@
 /* eslint-disable func-names */
 // knex/migrations/YYYYMMDDHHMMSS_create_api_data_table.js
 
-exports.up = function(knex) {
+exports.up = function (knex) {
   return knex.schema.createTable("api_data", (table) => {
     table.increments("user_id").primary();
     table.string("name");
@@ -15,10 +15,9 @@ exports.up = function(knex) {
   });
 };
 
-exports.down = function(knex) {
+exports.down = function (knex) {
   return knex.schema.dropTable("api_data");
 };
-
 
 /* User Model
 {
@@ -27,6 +26,8 @@ exports.down = function(knex) {
   spotify_id: "user_spotify_id", // User's Spotify ID for music data integration
   age: 25, // User's age
   gender: "male", // User's gender
+  age_pref_low: 25 // User's minimum age preference
+  age_pref_high: 30 // User's maximum age preference
   preferences: { // User's preferences for matches
     prefer_men: false,
     prefer_women: true,
