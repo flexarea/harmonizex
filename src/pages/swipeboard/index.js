@@ -19,7 +19,7 @@ export default function MatchBoard() {
       } catch (error) {
         setError(error.message);
         // Redirect to login if unauthorized
-        if (response.status === 401) {
+        if (error.response && error.response.status === 401) {
           router.push('/login');
         }
       }

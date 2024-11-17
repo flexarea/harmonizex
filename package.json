@@ -15,6 +15,10 @@
     "prepare": "node .husky/install.mjs"
   },
   "dependencies": {
+    "@emotion/react": "^11.13.3",
+    "@emotion/styled": "^11.13.0",
+    "@mui/icons-material": "^6.1.7",
+    "@mui/material": "^6.1.7",
     "@next/env": "^15.0.3",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
