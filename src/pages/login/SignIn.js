@@ -102,6 +102,7 @@ export default function SignIn(props) {
               onClick={handleSignIn}
               startIcon={<GoogleIcon />}
             >
+              Sign in with Spotify
             </Button>
             <Typography sx={{ textAlign: 'center' }}>
               Don&apos;t have an account?{' '}
