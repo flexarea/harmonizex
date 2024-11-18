@@ -13,33 +13,39 @@ export const authOptions = {
 			}
 		}),
 	],
+	secret: process.env.NEXTAUTH_SECRET,
+	pages: {
+		signIn: '/login/SignIn',
+	},
 	callbacks: {
 		async signIn({ account, profile }) {
-			if (account.provider === "spotify") {
-				return profile?.email && profile?.id;
+			if (account.provider === "spotify" && profile?.id) {
+				return true
 			}
 			return false //deny sign-in for other providers 
 		},
-		async jwt({ token, account, user, profile }) {
+		async jwt({ token, account, profile }) {
 			//initial sign-in
-			if (account && user) {
+			if (account && profile) {
 				token.accessToken = account.access_token
 				token.refreshToken = account.refresh_token
 				token.spotifyId = profile.id
 				token.accessTokenExpires = account.expires_at * 1000
 			}
+			return token
 		},
 		async session({ session, token }) {
 			// Add user id to the session
-			// eslint-disable-next-line no-param-reassign
-			session.user.id = token.sub
+			session.user = {
+				...session.user,
+				accessToken: token.accessToken,
+				refreshToken: token.refreshToken,
+				SpotifyId: token.spotifyId
+			}
 			return session;
 		},
 
 	},
-	pages: {
-		signIn: "/login/signIn"
-	}
 }
 
 export default NextAuth(authOptions)

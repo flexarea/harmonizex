@@ -10,6 +10,7 @@ import { styled } from '@mui/material/styles';
 import { GoogleIcon } from './CustomIcons';
 import AppTheme from './shared-theme/AppTheme';
 import ColorModeSelect from './shared-theme/ColorModeSelect';
+import { signIn, signOut, useSession } from 'next-auth/react';
 
 const Card = styled(MuiCard)(({ theme }) => ({
   display: 'flex',
@@ -56,14 +57,30 @@ const SignInContainer = styled(Stack)(({ theme }) => ({
 export default function SignIn(props) {
   const [open, setOpen] = React.useState(false);
 
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
+  const handleSignIn = async () => {
+    try {
+      await signIn("spotify", {
+        callbackUrl: "/swipeboard"
+      })
+    } catch (error) {
+      console.error("Sign in error:", error)
+    }
+  }
   const handleClose = () => {
     setOpen(false);
   };
 
+  const { data: session } = useSession();
+
+  /*
+    if (session) {
+      return (
+        <div>
+          <p>Signed in as {session.user.email} <button type="button" onClick={signOut}>Sign out</button></p>
+        </div>
+      );
+    }
+  */
 
   return (
     <AppTheme {...props}>
@@ -82,10 +99,9 @@ export default function SignIn(props) {
             <Button
               fullWidth
               variant="outlined"
-              onClick={() => alert('Sign in with Google')}
+              onClick={handleSignIn}
               startIcon={<GoogleIcon />}
             >
-              Sign in with Google
             </Button>
             <Typography sx={{ textAlign: 'center' }}>
               Don&apos;t have an account?{' '}

@@ -1,11 +1,15 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
+import { useSession, signOut } from 'next-auth/react';
+
 
 export default function MatchBoard() {
+  const { data: session } = useSession();
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
   const router = useRouter();
 
+  /*
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -27,11 +31,24 @@ export default function MatchBoard() {
 
     fetchData();
   }, [router]);
+  */
 
+  /*
   if (error) return <div>Error: {error}</div>;
   if (!data) return <div>Loading...</div>;
+  */
+
+  if (session) {
+    return (
+      <div>
+        <p>Signed in as {session.user.email} <button type="button" onClick={signOut}>Sign out</button></p>
+      </div>
+    );
+  }
 
   return (
+    <div>Session inactive or not defined </div>
+    /*
     <div>
 
       {data.items && data.items.map(artist => (
@@ -40,5 +57,6 @@ export default function MatchBoard() {
         </div>
       ))}
     </div>
+    */
   );
 }
