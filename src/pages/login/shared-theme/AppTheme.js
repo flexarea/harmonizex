@@ -14,7 +14,6 @@ function AppTheme({ children, disableCustomTheme, themeComponents }) {
     return disableCustomTheme
       ? {}
       : createTheme({
-        // For more details about CSS variables configuration, see https://mui.com/material-ui/customization/css-theme-variables/configuration/
         cssVariables: {
           colorSchemeSelector: 'data-mui-color-scheme',
           cssVarPrefix: 'template',

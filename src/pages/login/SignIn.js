@@ -7,10 +7,10 @@ import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
 import MuiCard from '@mui/material/Card';
 import { styled } from '@mui/material/styles';
-import { GoogleIcon } from './CustomIcons';
+import { SpotifyIcon } from './CustomIcons';
 import AppTheme from './shared-theme/AppTheme';
 import ColorModeSelect from './shared-theme/ColorModeSelect';
-import { signIn, signOut, useSession } from 'next-auth/react';
+import { signIn } from 'next-auth/react';
 
 const Card = styled(MuiCard)(({ theme }) => ({
   display: 'flex',
@@ -55,8 +55,6 @@ const SignInContainer = styled(Stack)(({ theme }) => ({
 }));
 
 export default function SignIn(props) {
-  const [open, setOpen] = React.useState(false);
-
   const handleSignIn = async () => {
     try {
       await signIn("spotify", {
@@ -66,21 +64,6 @@ export default function SignIn(props) {
       console.error("Sign in error:", error)
     }
   }
-  const handleClose = () => {
-    setOpen(false);
-  };
-
-  const { data: session } = useSession();
-
-  /*
-    if (session) {
-      return (
-        <div>
-          <p>Signed in as {session.user.email} <button type="button" onClick={signOut}>Sign out</button></p>
-        </div>
-      );
-    }
-  */
 
   return (
     <AppTheme {...props}>
@@ -89,7 +72,7 @@ export default function SignIn(props) {
         <ColorModeSelect sx={{ position: 'fixed', top: '1rem', right: '1rem' }} />
         <Card variant="outlined">
           <Typography
-            component="h1"
+            component="h4"
             variant="h4"
             sx={{ width: '100%', fontSize: 'clamp(2rem, 10vw, 2.15rem)' }}
           >
@@ -100,7 +83,7 @@ export default function SignIn(props) {
               fullWidth
               variant="outlined"
               onClick={handleSignIn}
-              startIcon={<GoogleIcon />}
+              startIcon={<SpotifyIcon />}
             >
               Sign in with Spotify
             </Button>
