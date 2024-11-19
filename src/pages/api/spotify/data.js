@@ -1,6 +1,5 @@
 import { createRouter } from "next-connect";
 import { authOptions } from "../auth/[...nextauth]"
-import { getSession } from "next-auth/react";
 import { getServerSession } from "next-auth";
 
 const dataRouter = createRouter();
@@ -8,11 +7,6 @@ const dataRouter = createRouter();
 dataRouter.get(async (req, res) => {
 	const session = await getServerSession(req, res, authOptions);
 	// Check if session exists
-	console.log("Frontend Session:", {
-		full: session,
-		token: session?.user?.accessToken,
-		email: session?.user?.email
-	});
 	if (!session) {
 		return res.status(401).json({
 			error: 'Unauthorized',

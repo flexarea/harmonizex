@@ -20,7 +20,7 @@ export default function MatchBoard() {
     const fetchData = async () => {
       try {
         setIsLoading(true)
-        const response = await fetch('/api/spotify/boardData');
+        const response = await fetch('/api/spotify/data');
         if (!response.ok) {
           if (response.status === 401) {
             router.push("/login/signIn")
