@@ -7,9 +7,9 @@ import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
 import MuiCard from '@mui/material/Card';
 import { styled } from '@mui/material/styles';
-import { SpotifyIcon } from './CustomIcons';
-import AppTheme from './shared-theme/AppTheme';
-import ColorModeSelect from './shared-theme/ColorModeSelect';
+import { SpotifyIcon } from '../../styles/CustomIcons';
+import AppTheme from '../../styles/shared-theme/AppTheme';
+import ColorModeSelect from '../../styles/shared-theme/ColorModeSelect';
 import { signIn } from 'next-auth/react';
 
 const Card = styled(MuiCard)(({ theme }) => ({
