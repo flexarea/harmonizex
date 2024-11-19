@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-import Profile from '../components/Profile/Profile'; 
+import Profile from '../components/Profile'; 
 
 function ProfilePage() {
   // define the user data here

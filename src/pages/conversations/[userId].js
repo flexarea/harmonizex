@@ -1,88 +1,96 @@
-// pages/conversations/[userId].js
-
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
+import { useMatches } from '../../context/MatchesContext';
+import axios from 'axios';
 
 function Conversation() {
   const router = useRouter();
-  const { userId } = router.query; // gets the userId from the URL
+  const { userId } = router.query; // Gets the userId from the URL
+  const { matches } = useMatches(); // Retrieve matches from global state
+  const [user, setUser] = useState(null); // Store the matched user
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [newMessage, setNewMessage] = useState('');
 
+  // fetch messages for the conversation
   useEffect(() => {
     const fetchMessages = async () => {
+      if (!userId) return;
+
+      const matchedUser = matches.find((match) => match.id === userId);
+      if (!matchedUser) {
+        setError('User not found in matches.');
+        return;
+      }
+      setUser(matchedUser);
+
       try {
-        setLoading(true);
-
-        // mock messages data
-        const mockMessages = [
-          { id: '1', senderName: 'Alice', content: 'Hey! How are you?', timestamp: Date.now() - 100000 },
-          { id: '2', senderName: 'Bob', content: 'What are you up to?', timestamp: Date.now() - 50000 },
-        ];
-
-        // simulates a delay to mimic fetching from an API
-        const data = await new Promise((resolve) => {
-          setTimeout(() => {
-            resolve(mockMessages);
-          }, 1000); // 1-second delay
-        });
-
+        const { data } = await axios.get(`/api/messages/${userId}`); // Fetch messages from the API
         setMessages(data);
       } catch (err) {
-        setError('Failed to fetch messages');
+        console.error(err);
+        setError('Failed to fetch messages.');
       } finally {
         setLoading(false);
       }
     };
-    if (userId) {
-        fetchMessages();
-      }
-    }, [userId]);
-  
-    const handleSendMessage = () => {
-      if (newMessage.trim()) {
-        const newMsg = {
-          id: Date.now().toString(),
-          senderName: 'You', 
-          content: newMessage,
-          timestamp: Date.now(),
-        };
-        setMessages((prevMessages) => [...prevMessages, newMsg]);
-        setNewMessage(''); // clears the input field
-      }
+
+    fetchMessages();
+  }, [userId, matches]);
+
+  // Handle sending a new message
+  const handleSendMessage = async () => {
+    if (!newMessage.trim()) return;
+
+    const message = {
+      senderId: 'currentUserId', // Replace with the actual logged-in user's ID
+      receiverId: userId,
+      content: newMessage,
+      timestamp: Date.now(),
     };
-  
-    if (loading) return <div>Loading messages...</div>;
-    if (error) return <div className="error">{error}</div>;
-  
-    return (
+
+    try {
+      const { data } = await axios.post('/api/messages', message); // Send the message to the API
+      setMessages((prevMessages) => [...prevMessages, data]); // Add the new message to the UI
+      setNewMessage('');
+    } catch (err) {
+      console.error(err);
+      setError('Failed to send message.');
+    }
+  };
+
+  if (loading) return <div>Loading messages...</div>;
+  if (error) return <div className="error">{error}</div>;
+
+  return (
+    <div>
+      <h2>Conversation with {user?.name || 'Unknown User'}</h2>
+      {messages.length === 0 ? (
+        <p>No messages yet.</p>
+      ) : (
+        <ul>
+          {messages.map((message) => (
+            <li key={message.id}>
+              <strong>{message.senderId === 'currentUserId' ? 'You' : user?.name}:</strong> {message.content}
+              <span> {new Date(message.timestamp).toLocaleString()}</span>
+            </li>
+          ))}
+        </ul>
+      )}
       <div>
-        <h2>Conversation with User {userId}</h2>
-        {messages.length === 0 ? (
-          <p>No messages yet.</p>
-        ) : (
-          <ul>
-            {messages.map((message) => (
-              <li key={message.id}>
-                <strong>{message.senderName}:</strong> {message.content}
-                <span> {new Date(message.timestamp).toLocaleString()}</span>
-              </li>
-            ))}
-          </ul>
-        )}
-        <div>
-          <input
-            type="text"
-            value={newMessage}
-            onChange={(e) => setNewMessage(e.target.value)}
-            placeholder="Type a message"
-          />
-          <button type="button" onClick={handleSendMessage}>Send</button>
-        </div>
+        <input
+          type="text"
+          value={newMessage}
+          onChange={(e) => setNewMessage(e.target.value)}
+          placeholder="Type a message"
+        />
+        <button type="button" onClick={handleSendMessage}>
+          Send
+        </button>
       </div>
-    );
-  }
-  
-  export default Conversation;
+    </div>
+  );
+}
+
+export default Conversation;
