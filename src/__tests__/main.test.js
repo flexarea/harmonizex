@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import Home from "@/pages/susanIndex";
+import Home from "@/pages";
 
 describe("End-to-end testing", () => {
   test("Render index.js component", () => {
