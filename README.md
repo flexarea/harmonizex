@@ -1,5 +1,57 @@
 ![workflow status](https://github.com/csci312-f24/project-camelshump/actions/workflows/node.js.yml/badge.svg)
 
+# Project Setup
+
+## Spotify API Setup
+To run this project, each developer needs to set up their own Spotify Developer account and application:
+
+1. Go to [Spotify Developer Dashboard](https://developer.spotify.com/dashboard)
+2. Log in with your Spotify account
+3. Click "Create App"
+4. Fill in the app details:
+   - App name: (choose any name)
+   - App description: (brief description)
+   - Redirect URI: `http://localhost:3000/api/auth/callback/spotify`
+   - Website: `http://localhost:3000`
+
+5. After creating the app, you'll get your Client ID and Client Secret
+6. Copy `.env.example` to `.env.local`:
+   ```bash
+   cp .env.example .env.local
+   ```
+
+7. Fill in your `.env.local` with your Spotify app credentials:
+   ```
+   NEXTAUTH_URL=http://localhost:3000
+   NEXTAUTH_SECRET=generate-a-random-string-here
+   SPOTIFY_CLIENT_ID=your-client-id-from-spotify-dashboard
+   SPOTIFY_CLIENT_SECRET=your-client-secret-from-spotify-dashboard
+   ```
+
+8. Generate a random string for NEXTAUTH_SECRET:
+   ```bash
+   openssl rand -base64 32
+   ```
+
+## Running the Project
+1. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+2. Run the development server:
+   ```bash
+   npm run dev
+   ```
+
+3. Open [http://localhost:3000](http://localhost:3000)
+
+## Common Issues
+- If you get an "OAuthCallback" error, check that:
+  - Your Spotify app's redirect URI exactly matches `http://localhost:3000/api/auth/callback/spotify`
+  - You've properly set up all environment variables
+  - You're using your own Spotify application credentials, not someone else's
+
 # Project Skeleton
 
 TODO: Implement CI badges, provide a link to the deployed version of your application, and provide a brief description of the application functionality.
@@ -37,40 +89,48 @@ Note we need to pin the `node-fetch` version due to breaking changes when used w
 The project structure should look like this at first
 
 ```
-harmonize/
+project-root/
 ├── public/
-│   ├── favicon.ico              # Site favicon
-│   └── images/                  # Static images for the app
-│       └── logo.png
+│   └── ourImages/
+│       ├── datingapp.jpg
+│       └── [other images]
 ├── src/
-│   ├── components/              # Reusable React components
-│   │   ├── setting.test.js      # testing for setting
-│   │   ├── card.test.js         # testing for card
-│   │   ├── button.test.js       # testing for button
-│   │   ├── setting.js           # App setting
-│   │   ├── card.js              # Profile card with user information and album cover display
-│   │   └── Button.js            # yes/no swipe buttons
-│   ├── pages/                   # Next.js pages and API routes
-│   │   ├── api/                 # API routes
-│   │   │   └── user             #
-│   │   │         └── [id].js    # get data from db
-│   │   ├── preference/          #
-│   │   │   └── [id].js          # user preferences
-│   │   ├── matches/             #
-│   │   │   └── [id].js          # user's matches
-│   │   ├── _app.js              # Load api data directly in app
-│   │   ├── index.js             # main page (swipe interface)
-│   │   ├── login.js             # login page
-│   ├── styles/                  # CSS or SCSS files
-│   │   ├── globals.css          # Global styles
-│   │   ├── Home.module.css      # Styles specific to Home page
-│   │   └── Navbar.module.css    # Component-specific styles
-├── knex
-│   ├── migrations/              # database
-│   │   ├── migration.js           # db schema
-├── .env.local                   # Environment variables
-├── .gitignore                   # Git ignore file
-├── next.config.js               # Next.js configuration file
-├── package.json                 # Dependencies and scripts
-└── README.md                    # Project documentation
+│   ├── components/
+│   │   ├── Dislikes.js
+│   │   ├── Likes.js
+│   │   ├── MainPage.js
+│   │   ├── MatchItem.js
+│   │   ├── MatchesList.js
+│   │   ├── Profile.js
+│   │   ├── SwipePage.js
+│   │   ├── UserProfile.js
+│   │   └── [other components]
+│   ├── pages/
+│   │   ├── _app.js
+│   │   ├── _document.js
+│   │   ├── api/
+│   │   │   ├── auth/
+│   │   │   │   └── [...nextauth].js
+│   │   │   ├── spotify/
+│   │   │   │   ├── auth.js
+│   │   │   │   ├── callback.js
+│   │   │   │   └── data.js
+│   │   │   └── user/
+│   │   │       └── index.js
+│   │   ├── login/
+│   │   │   ├── CustomIcons.js
+│   │   │   ├── ForgotPassword.js
+│   │   │   ├── SignIn.js
+│   │   │   └── shared-theme/
+│   │   ├── matches/
+│   │   │   └── [id].js
+│   │   ├── preference/
+│   │   │   └── [id].js
+│   │   └── swipeboard/
+│   │       └── index.js
+│   └── styles/
+│       ├── globals.css
+│       └── [other CSS modules]
+├── package.json
+└── tsconfig.json
 ```

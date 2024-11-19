@@ -15,6 +15,10 @@
     "prepare": "node .husky/install.mjs"
   },
   "dependencies": {
+    "@emotion/react": "^11.13.3",
+    "@emotion/styled": "^11.13.0",
+    "@mui/icons-material": "^6.1.7",
+    "@mui/material": "^6.1.7",
     "@next/env": "^15.0.3",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
@@ -22,6 +26,7 @@
     "fetch": "^1.1.0",
     "knex": "^3.1.0",
     "next": "^13.5.6",
+    "next-auth": "^4.24.10",
     "next-connect": "^1.0.0-next.4",
     "node-fetch": "^3.3.2",
     "pg": "^8.13.1",
