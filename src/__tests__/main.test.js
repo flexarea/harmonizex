@@ -1,27 +1,39 @@
-import { render, screen } from "@testing-library/react";
-import Home from "@/pages";
+import { render, screen, fireEvent } from "@testing-library/react";
+import { useRouter } from "next/router";
+import MainPage from "../components/MainPage";
+import "@testing-library/jest-dom";
 
-describe("End-to-end testing", () => {
-  test("Render index.js component", () => {
-    render(<Home />);
+jest.mock("next/router", () => ({
+  useRouter: jest.fn(),
+}));
+
+describe("MainPage Component", () => {
+  const mockPush = jest.fn();
+
+  beforeEach(() => {
+    useRouter.mockReturnValue({
+      push: mockPush,
+      pathname: "/",
+      query: {},
+    });
   });
 
-  test("Check if Home component contains specific text", () => {
-    render(<Home />);
-    const linkElement = screen.getByText(/specific text/i);
-    expect(linkElement).toBeInTheDocument();
+  test("renders correctly", () => {
+    const currentUser = { id: "1", name: "Jane Doe", age: 25 };
+
+    render(<MainPage currentUser={currentUser} />);
+
+    expect(screen.getByText(/Welcome, Jane Doe!/i)).toBeInTheDocument();
   });
 
-  test("Check if Home component has a button", () => {
-    render(<Home />);
-    const buttonElement = screen.getByRole('button');
-    expect(buttonElement).toBeInTheDocument();
-  });
+  test("navigates to the swipe page on button click", () => {
+    const currentUser = { id: "1", name: "Susan", age: 25 };
 
-  test("Check if Home component matches snapshot", () => {
-    const { asFragment } = render(<Home />);
-    expect(asFragment()).toMatchSnapshot();
+    render(<MainPage currentUser={currentUser} />);
+
+    const swipeButton = screen.getByRole("button", { name: /Start Swiping/i });
+    fireEvent.click(swipeButton);
+
+    expect(mockPush).toHaveBeenCalledWith("/swipe");
   });
 });
-
-// We recommend installing an extension to run jest tests.
