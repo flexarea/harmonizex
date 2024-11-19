@@ -25,6 +25,13 @@ export const authOptions = {
 			return false //deny sign-in for other providers 
 		},
 		async jwt({ token, account, profile }) {
+			// If this is a new account, replace the existing token
+			if (account) {
+				token.accessToken = account.access_token;
+				token.refreshToken = account.refresh_token;
+				token.accessTokenExpires = account.expires_at * 1000; // Convert to ms
+				return token;
+			}
 			//initial sign-in
 			if (account && profile) {
 				token.accessToken = account.access_token

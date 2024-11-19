@@ -58,7 +58,15 @@ export default function SignIn(props) {
   const handleSignIn = async () => {
     try {
       await signIn("spotify", {
-        callbackUrl: "/swipeboard"
+        callbackUrl: "/swipeboard",
+        redirect: true,
+        // Add these parameters to force account selection
+        authorization: {
+          params: {
+            show_dialog: true,
+            prompt: "consent"
+          }
+        }
       })
     } catch (error) {
       console.error("Sign in error:", error)
@@ -76,7 +84,7 @@ export default function SignIn(props) {
             variant="h4"
             sx={{ width: '100%', fontSize: 'clamp(2rem, 10vw, 2.15rem)' }}
           >
-            Sign in
+            Harmonize
           </Typography>
           <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
             <Button
@@ -85,7 +93,7 @@ export default function SignIn(props) {
               onClick={handleSignIn}
               startIcon={<SpotifyIcon />}
             >
-              Sign in with Spotify
+              Continue with Spotify
             </Button>
             <Typography sx={{ textAlign: 'center' }}>
               Don&apos;t have an account?{' '}
