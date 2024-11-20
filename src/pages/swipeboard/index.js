@@ -26,9 +26,9 @@ export default function MatchBoard() {
           }
           throw new Error("Failed to fetch data");
         }
-        const fetchedData = await response.json();
-        // console.log(fetchedData)
-        setData(fetchedData);
+        const newdata = await response.json();
+        console.log(newdata);
+        setData(newdata);
       } catch (err) {
         setError(err.message);
       } finally {

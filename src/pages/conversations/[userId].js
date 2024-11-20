@@ -94,3 +94,9 @@
 // }
 
 // export default Conversation;
+
+function Conversation() {
+  return <div>Conversation Page</div>;
+}
+
+export default Conversation;

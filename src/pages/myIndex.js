@@ -2,7 +2,7 @@
 // import SwipePage from '../components/SwipePage';
 
 // function Swipe() {
-  
+
 //   const currentUser = {
 //     id: '1',
 //     name: 'Jane Doe',
@@ -30,13 +30,21 @@
 //   };
 
 //   return (
-//     <SwipePage 
-//       currentUser={currentUser} 
-//       userToSwipe={userToSwipe} 
-//       onLike={onLike} 
-//       onDislike={onDislike} 
+//     <SwipePage
+//       currentUser={currentUser}
+//       userToSwipe={userToSwipe}
+//       onLike={onLike}
+//       onDislike={onDislike}
 //     />
 //   );
 // }
 
-// export default Swipe;
+function Swipe() {
+  return (
+    <div>
+      <h1>Unused Swipe Page</h1>
+    </div>
+  );
+}
+
+export default Swipe;
