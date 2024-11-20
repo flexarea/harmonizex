@@ -1,46 +1,48 @@
-import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
-import { useRouter } from 'next/router';
+import React, { useState, useEffect } from "react";
+import PropTypes from "prop-types";
+// import { useRouter } from 'next/router';
 
 function Conversations({ currentUserId }) {
   const [conversations, setConversations] = useState([]);
   const [, setLikedUsers] = useState([]);
   const [matchedUsers, setMatchedUsers] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState('');
-  const router = useRouter();
-
-  // some mock data
-  const mockLikedUsers = [
-    { id: '1', name: 'Alice' },
-    { id: '2', name: 'Bob' },
-    { id: '3', name: 'Charlie' },
-  ];
-
-  const mockConversations = [
-    { id: '1', participantId: '1', participantName: 'Alice', lastMessage: 'Hey there!', timestamp: Date.now() },
-    { id: '2', participantId: '2', participantName: 'Bob', lastMessage: 'How are you?', timestamp: Date.now() - 100000 },
-  ];
+  const [error, setError] = useState("");
+  // const router = useRouter();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         setLoading(true);
-
-        // simulating fetching conversations
-        // you can replace this with actual API call when it's available
+        const mockConversations = [
+          {
+            id: "1",
+            participantId: "1",
+            participantName: "Alice",
+            lastMessage: "Hey there!",
+            timestamp: Date.now(),
+          },
+          {
+            id: "2",
+            participantId: "2",
+            participantName: "Bob",
+            lastMessage: "How are you?",
+            timestamp: Date.now() - 100000,
+          },
+        ];
+        const mockLikedUsers = [
+          { id: "1", name: "Alice" },
+          { id: "2", name: "Bob" },
+          { id: "3", name: "Charlie" },
+        ];
         setLikedUsers(mockLikedUsers);
-
-        // simulating fetching conversations
-        // you can replace this with actual API call when it's available
-        setConversations(mockConversations);
-
-        // finds matched users
-        const matchedUserIds = mockLikedUsers.filter(user => 
-          mockConversations.some(convo => convo.participantId === user.id)
-        ).map(user => user.id);
+        const matchedUserIds = mockLikedUsers
+          .filter((user) =>
+            mockConversations.some((convo) => convo.participantId === user.id),
+          )
+          .map((user) => user.id);
         setMatchedUsers(matchedUserIds);
-
+        setConversations(mockConversations);
       } catch (err) {
         setError(err.message);
       } finally {
@@ -50,14 +52,25 @@ function Conversations({ currentUserId }) {
 
     fetchData();
   }, [currentUserId]);
-
-  const handleStartConversation = (userId) => {
-    console.log(`Starting conversation with user ID: ${userId}`);
-    router.push(`pages/conversations/${userId}`);
-  };
-
   if (loading) return <div>Loading conversations...</div>;
   if (error) return <div className="error">{error}</div>;
+
+  const handleStartConversation = (userId) => {
+    const newConversation = {
+      id: Date.now().toString(), // Generate a unique ID for the conversation
+      participantId: userId,
+      participantName: `User ${userId}`, // Replace with actual user name if available
+      lastMessage: "",
+      timestamp: Date.now(),
+    };
+
+    setConversations((prevConversations) => [
+      ...prevConversations,
+      newConversation,
+    ]);
+    // console.log(`Starting conversation with user ${userId}`);
+    // router.push(`/conversations/${newConversation.id}`);
+  };
 
   return (
     <div className="conversations">
@@ -83,7 +96,10 @@ function Conversations({ currentUserId }) {
         <ul>
           {matchedUsers.map((userId) => (
             <li key={userId}>
-              <button type='button' onClick={() => handleStartConversation(userId)}>
+              <button
+                type="button"
+                onClick={() => handleStartConversation(userId)}
+              >
                 Start Conversation with User {userId}
               </button>
             </li>

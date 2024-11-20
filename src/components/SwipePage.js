@@ -58,14 +58,14 @@ function Swipe() {
   // useEffect to handle hasLikedSong check
   useEffect(() => {
     if (justLiked) {
-      console.log("Checking hasLikedSong after like:", {
-        currentSongId: userToSwipe.songId,
-        likes,
-        hasLikedSong: likes.includes(userToSwipe.songId),
-      });
+      // console.log("Checking hasLikedSong after like:", {
+      //   currentSongId: userToSwipe.songId,
+      //   likes,
+      //   hasLikedSong: likes.includes(userToSwipe.songId),
+      // });
       setJustLiked(false);
     }
-  }, [likes, justLiked]);
+  }, [likes, justLiked, userToSwipe.songId]);
 
   useEffect(() => {
     // Reset the index to 0 if no more matches are available
@@ -135,33 +135,33 @@ function Swipe() {
   // a random song from the user’s list of songs
   const randomSong =
     userToSwipe.songs[Math.floor(Math.random() * userToSwipe.songs.length)];
-  console.log("Audio URL:", randomSong?.url);
+  // console.log("Audio URL:", randomSong?.url);
 
   // log the exact values being compared
-  console.log({
-    likesArray: likes,
-    currentSongId: userToSwipe.songId,
-    songIdFromUser: userToSwipe.songs?.[0]?.id, // Check if this is what we should be comparing
-  });
+  // console.log({
+  //   likesArray: likes,
+  //   currentSongId: userToSwipe.songId,
+  //   songIdFromUser: userToSwipe.songs?.[0]?.id, // Check if this is what we should be comparing
+  // });
 
   // debug logs above hasLikedSong check
-  console.log("userToSwipe:", userToSwipe); // entire user object
-  console.log("songId type:", typeof userToSwipe.songId); // data type
-  console.log("likes array:", likes); // likes array content
-  console.log(
-    "includes check:",
-    likes.some((id) => id === userToSwipe.songId)
-  ); // Alternative check
+  // console.log("userToSwipe:", userToSwipe); // entire user object
+  // console.log("songId type:", typeof userToSwipe.songId); // data type
+  // console.log("likes array:", likes); // likes array content
+  // console.log(
+  //   "includes check:",
+  //   likes.some((id) => id === userToSwipe.songId)
+  // ); // Alternative check
 
   // onLike function
   const onLike = () => {
     const songToLike = userToSwipe.songId;
-    console.log("Liking song:", songToLike);
+    // console.log("Liking song:", songToLike);
 
     setLikes((prev) => {
-      console.log("Previous likes:", prev);
+      // console.log("Previous likes:", prev);
       const newLikes = [...prev, songToLike];
-      console.log("New likes:", newLikes);
+      // console.log("New likes:", newLikes);
       setJustLiked(true);
       return newLikes;
     });
@@ -180,18 +180,18 @@ function Swipe() {
   const hasLikedSong = likes.includes(userToSwipe.songId);
 
   // debug logging
-  console.log("Current state:", {
-    songToSwipe: userToSwipe.songId,
-    currentLikes: likes,
-    hasLikedSong,
-  });
+  // console.log("Current state:", {
+  //   songToSwipe: userToSwipe.songId,
+  //   currentLikes: likes,
+  //   hasLikedSong,
+  // });
 
   // debug logging
-  console.log({
-    currentUserSongId: userToSwipe.songId,
-    likesArray: likes,
-    hasLikedSong,
-  });
+  // console.log({
+  //   currentUserSongId: userToSwipe.songId,
+  //   likesArray: likes,
+  //   hasLikedSong,
+  // });
 
   return (
     <div className={styles.swipePage}>
