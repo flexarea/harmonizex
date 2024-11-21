@@ -1,17 +1,22 @@
-// /** @type {import('next').NextConfig} */
+module.exports = {
+  async redirects() {
+    return [
+      {
+        source: "/",
+        destination: "/login/SignIn",
+        permanent: false,
+      },
+    ];
+  }
+}
 // const nextConfig = {
-//   reactStrictMode: true,
+//   images: {
+//     domains: [
+//       "images.unsplash.com",
+//       "plus.unsplash.com",
+//       "source.unsplash.com",
+//     ],
+//   },
 // };
-
-/** @type {import('next').NextConfig} */
-const nextConfig = {
-  images: {
-    domains: [
-      "images.unsplash.com",
-      "plus.unsplash.com",
-      "source.unsplash.com",
-    ],
-  },
-};
 
 module.exports = nextConfig;
