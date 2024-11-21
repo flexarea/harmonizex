@@ -1,7 +1,8 @@
-import * as React from "react";
-import SvgIcon from "@mui/material/SvgIcon";
+import * as React from 'react';
+import SvgIcon from '@mui/material/SvgIcon';
 
-export default function SpotifyIcon() {
+
+export function SpotifyIcon() {
   return (
     <SvgIcon>
       <svg

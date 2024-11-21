@@ -84,11 +84,13 @@ describe("filterUsers", () => {
     const result = filterUsers(user, candidates);
 
     // Check if the result matches the expected candidates
-    //    console.log("result", result); // Log result to debug
+    console.log("result", result); // Log result to debug
     expect(result.length).toBe(2); // Assuming we expect two candidates to pass the filter
     expect(result[0].gender).toBe("female");
     expect(result[1].gender).toBe("female");
     expect(result[0].age).toBe(25);
     expect(result[1].age).toBe(40);
+
+    // You can add further assertions based on your business logic
   });
 });
