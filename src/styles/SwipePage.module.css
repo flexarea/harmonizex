@@ -8,7 +8,7 @@
     background-color: #ffab40; /* orange background */
   }
   
-   .card {
+  .card {
     width: 100%;
     max-width: 400px;
     padding: 20px;
@@ -20,9 +20,7 @@
     flex-direction: column;
     align-items: center;
   }
-   
-
-   
+  
   .avatar {
     width: 100%;
     height: auto;
@@ -44,13 +42,9 @@
     padding: 0 10px;
   }
   
-  .card:hover {
-    transform: translateY(-5px);
-  } 
-
   .buttonContainer {
     display: flex;
-    gap: 40px;
+    gap: 20px;
   }
   
   .likeButton,
@@ -62,7 +56,6 @@
     border: none;
     cursor: pointer;
     transition: transform 0.2s ease;
-    margin: 0 10px;
   }
   
   .likeButton {
@@ -81,67 +74,6 @@
   }
   
   .noMoreMatches {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background: linear-gradient(135deg, #f7f7f7, #e0e0e0);
-    padding: 40px;
-    border-radius: 15px;
-    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    max-width: 400px;
-    margin: 50px auto;
-    opacity: 0;
-    animation: fadeInUp 1s ease-out forwards;
-  }
-  
-  @keyframes fadeInUp {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-  
-  .noMoreMatches h2 {
-    font-size: 28px;
-    font-weight: 600;
-    color: #333;
-    margin-bottom: 15px;
-  }
-  
-  .noMoreMatches p {
-    font-size: 16px;
-    color: #555;
-    margin-bottom: 30px;
-  }
-  
-  .noMoreMatchesButton {
-    padding: 12px 25px;
-    background-color: #0070f3;
-    color: white;
-    border: none;
-    cursor: pointer;
-    border-radius: 8px;
-    font-size: 16px;
-    font-weight: 600;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-  }
-  
-  .noMoreMatchesButton:hover {
-    background-color: #005bb5;
-    transform: translateY(-2px);
-  }
-  
-  .noMoreMatchesButton:active {
-    transform: translateY(1px);
-  }
-  
-  /* .noMoreMatches {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -167,4 +99,4 @@
   .noMoreMatches button:hover {
     background-color: #005bb5;
   }
-   */
+  
