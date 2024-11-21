@@ -1,18 +1,12 @@
-import '../styles/globals.css';  // Import global CSS
-import PropTypes from 'prop-types';
-import { SessionProvider } from 'next-auth/react';
+/* eslint-disable react/jsx-props-no-spreading */
+import PropTypes from "prop-types";
+// import "@/styles/globals.css";
 
-function MyApp({ Component, pageProps: { session, ...pageProps } }) {
-  return (
-    <SessionProvider session={session}>
-      <Component {...pageProps} />
-    </SessionProvider>
-  )
+export default function App({ Component, pageProps }) {
+  return <Component {...pageProps} />;
 }
 
-MyApp.propTypes = {
+App.propTypes = {
   Component: PropTypes.elementType.isRequired,
-  pageProps: PropTypes.object.isRequired,
+  pageProps: PropTypes.shape({}),
 };
-
-export default MyApp;
