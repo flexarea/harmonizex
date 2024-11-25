@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { useSession, signOut } from 'next-auth/react';
+import UserProfile from '../../components/UserProfile'
 
 
 export default function MatchBoard() {
@@ -65,6 +66,7 @@ export default function MatchBoard() {
         <button type="button" onClick={() => signOut()}>
           Sign out
         </button>
+        <UserProfile />
       </p>
       {data?.items ? (
         data.items.map(artist => (
