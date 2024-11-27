@@ -1,47 +1,7 @@
-import { useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
-import { useSession, signOut } from 'next-auth/react';
-import UserProfile from '../../components/UserProfile'
-import Layout from '../../components/layout'
+import { signOut } from 'next-auth/react';
 
 
-export default function MatchBoard() {
-  const { data: session, status } = useSession({ refetchOnWindowFocus: true });
-  const [data, setData] = useState(null);
-  const [error, setError] = useState(null);
-  const [isLoading, setIsLoading] = useState(true)
-  const router = useRouter();
-
-  useEffect(() => {
-
-    if (!session) {
-      setIsLoading(false);
-      return
-    }
-
-    const fetchData = async () => {
-      try {
-        setIsLoading(true)
-        const response = await fetch('/api/spotify/data');
-        if (!response.ok) {
-          if (response.status === 401) {
-            router.push("/login/signIn")
-            return
-          }
-          throw new Error('Failed to fetch data');
-        }
-        const data = await response.json();
-        console.log(data)
-        setData(data);
-      } catch (error) {
-        setError(error.message);
-      } finally {
-        setIsLoading(false)
-      }
-    };
-
-    fetchData();
-  }, [session, router]);
+export default function MatchBoard({ sessionData: session, data, isLoading, error, status }) {
 
 
   if (error) {

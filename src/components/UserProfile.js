@@ -1,5 +1,5 @@
 import { Avatar } from "@mui/material"
-function UserProfile() {
+function UserProfile({ data }) {
   return (
     <Avatar alt="user avatar" src="public/ourImages/profpic2.jpg" />
   )
