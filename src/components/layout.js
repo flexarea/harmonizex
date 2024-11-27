@@ -2,7 +2,7 @@ import { LabelOff } from "@mui/icons-material"
 import UserProfile from "./UserProfile"
 import { Box } from "@mui/material"
 
-function Layout({ children }) {
+function Layout({ children, userInfo }) {
   return (
     <div>
       <Box sx={{
@@ -11,7 +11,7 @@ function Layout({ children }) {
         right: 16,
         zIndex: 1000,
       }}>
-        <UserProfile />
+        <UserProfile userInfo={userInfo} />
       </Box>
       {children}
     </div>

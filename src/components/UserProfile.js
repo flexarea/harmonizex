@@ -1,7 +1,12 @@
 import { Avatar } from "@mui/material"
-function UserProfile({ data }) {
+function UserProfile({ userInfo }) {
+  const profileImage = userInfo?.images?.[0].url || 'public//profpic2.jpg'
   return (
-    <Avatar alt="user avatar" src="public/ourImages/profpic2.jpg" />
+    <Avatar
+      alt="user avatar"
+      src={profileImage}
+      sx={{ width: 40, height: 40 }}
+    />
   )
 }
 

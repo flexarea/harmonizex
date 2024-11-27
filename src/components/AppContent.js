@@ -4,20 +4,17 @@ import { useSession } from 'next-auth/react';
 
 // Separate component to use hooks after SessionProvider
 function AppContent({ Component, pageProps, noLayoutPages, router }) {
-  const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState(null);
-  const [data, setData] = useState(null)
+  const [userInfo, setUserInfo] = useState(null)
   const { data: sessionData, status } = useSession({ refetchOnWindowFocus: true });
 
   useEffect(() => {
     if (!sessionData) {
-      setIsLoading(false);
       return
     }
     const fetchData = async () => {
       try {
-        setIsLoading(true)
-        const response = await fetch('/api/spotify/data?type=artists');
+        const response = await fetch('/api/spotify/data?type=user');
         if (!response.ok) {
           if (response.status === 401) {
             router.push("/login/signIn")
@@ -27,11 +24,10 @@ function AppContent({ Component, pageProps, noLayoutPages, router }) {
         }
         const data = await response.json();
         console.log(data)
-        setData(data);
+        setUserInfo(data);
       } catch (error) {
         setError(error.message);
       } finally {
-        setIsLoading(false)
       }
     };
     fetchData();
@@ -39,8 +35,7 @@ function AppContent({ Component, pageProps, noLayoutPages, router }) {
 
   const props = {
     ...pageProps,
-    data,
-    isLoading,
+    userInfo,
     error,
     sessionData,
     status
@@ -49,7 +44,7 @@ function AppContent({ Component, pageProps, noLayoutPages, router }) {
   return noLayoutPages.includes(router.pathname) ? (
     <Component {...props} />
   ) : (
-    <Layout data={data}>
+    <Layout userInfo={userInfo}>
       <Component {...props} />
     </Layout>
   );
