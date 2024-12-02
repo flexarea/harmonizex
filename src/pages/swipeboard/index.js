@@ -1,26 +1,22 @@
-import { useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
-import { useSession, signOut } from 'next-auth/react';
+import { signOut } from 'next-auth/react';
+import { useState, useEffect } from 'react';
 
 
-export default function MatchBoard() {
-  const { data: session, status } = useSession({ refetchOnWindowFocus: true });
-  const [data, setData] = useState(null);
-  const [error, setError] = useState(null);
+export default function MatchBoard({ sessionData: session, error, status }) {
+
   const [isLoading, setIsLoading] = useState(true)
-  const router = useRouter();
+  const [data, setData] = useState(null)
+
 
   useEffect(() => {
-
     if (!session) {
       setIsLoading(false);
       return
     }
-
     const fetchData = async () => {
       try {
         setIsLoading(true)
-        const response = await fetch('/api/spotify/data');
+        const response = await fetch('/api/spotify/data?type=artists');
         if (!response.ok) {
           if (response.status === 401) {
             router.push("/login/signIn")
@@ -37,9 +33,8 @@ export default function MatchBoard() {
         setIsLoading(false)
       }
     };
-
     fetchData();
-  }, [session, router]);
+  }, [session]);
 
 
   if (error) {
@@ -59,6 +54,7 @@ export default function MatchBoard() {
   }
 
   return (
+
     <div>
       <p>
         Signed in as {session.user.email}{' '}
