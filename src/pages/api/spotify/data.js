@@ -47,7 +47,6 @@ dataRouter.get(async (req, res) => {
 				})
 			}
 		}
-
 		if (!response.ok) {
 			const error = await response.json();
 			return res.status(response.status).json({
