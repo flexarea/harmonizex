@@ -1,6 +1,9 @@
 import { Avatar } from "@mui/material"
+<<<<<<< HEAD
 import PropTypes from 'prop-types'
 
+=======
+>>>>>>> main
 function UserProfile({ userInfo }) {
   const profileImage = userInfo?.images?.[0].url || 'public//profpic2.jpg'
   return (
@@ -11,6 +14,7 @@ function UserProfile({ userInfo }) {
     />
   )
 }
+<<<<<<< HEAD
 UserProfile.propTypes = {
   userInfo: PropTypes.shape({
     images: PropTypes.arrayOf(
@@ -23,3 +27,7 @@ UserProfile.propTypes = {
 
 export default UserProfile
 
+=======
+
+export default UserProfile
+>>>>>>> main
