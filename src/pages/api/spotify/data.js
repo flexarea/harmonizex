@@ -1,6 +1,7 @@
 import { createRouter } from "next-connect";
 import { authOptions } from "../auth/[...nextauth]"
 import { getServerSession } from "next-auth";
+import { breadcrumbsClasses } from "@mui/material";
 
 const dataRouter = createRouter();
 
@@ -22,9 +23,30 @@ dataRouter.get(async (req, res) => {
 	}
 
 	try {
-		const response = await fetch('https://api.spotify.com/v1/me/top/artists', {
-			headers: { 'Authorization': `Bearer ${session.user.accessToken}` }
-		});
+		let response;
+
+		switch (req.query.type) {
+			case "user": {
+
+				response = await fetch('https://api.spotify.com/v1/me', {
+					headers: { 'Authorization': `Bearer ${session.user.accessToken}` }
+				});
+				break;
+			}
+			case "artists": {
+
+				response = await fetch('https://api.spotify.com/v1/me/top/artists', {
+					headers: { 'Authorization': `Bearer ${session.user.accessToken}` }
+				});
+				break;
+			}
+			default: {
+				return res.status(400).json({
+					error: 'Bad request',
+					message: 'Invalid query type'
+				})
+			}
+		}
 
 		if (!response.ok) {
 			const error = await response.json();
