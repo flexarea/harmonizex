@@ -1,9 +1,6 @@
 /* eslint-disable func-names */
-const knex = require("knex")({
-  /* your knex configuration */
-});
-
-/**
+const knex = require("knex");
+ /*
  * Main function: Filters a list of candidates based on a user's preferences and scores.
  */
 
