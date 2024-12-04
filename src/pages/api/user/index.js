@@ -21,6 +21,27 @@ router
 			res.status(tokenresponse.status).end("token error")
 		}
 	})
+	.post(async (req, res) => {
+		try {
+		  console.log('Received Data:', req.body);
+		  
+		  const { name, age, gender, preferences } = req.body;
+		  const preferenceValues = Object.values(preferences);  // Get all the preference values
+  
+		
+		  if (!name || !age || !gender) {
+			throw new Error("Missing required fields");
+		  }
+		  else if (preferenceValues.every(value => value === false)) {
+			throw new Error("At least one preference must be selected");
+		  }
+		  res.status(200).json({ message: 'Data received successfully', data: req.body });
+		} catch (error) {
+		  console.error('Error in POST /api/user:', error);
+		  res.status(500).json({ error: error.message });
+		}
+	  });
+	  
 
 
 export default router.handler()
