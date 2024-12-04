@@ -2,8 +2,8 @@
 // knex/migrations/YYYYMMDDHHMMSS_create_api_data_table.js
 
 exports.up = function (knex) {
-  return knex.schema.createTable("api_data", (table) => {
-    table.increments("user_id").primary();
+  return knex.schema.createTable("spotify_data", (table) => {
+    table.int("user_id").primary();
     table.string("name");
     table.string("email");
     table.int("age");
@@ -16,7 +16,7 @@ exports.up = function (knex) {
 };
 
 exports.down = function (knex) {
-  return knex.schema.dropTable("api_data");
+  return knex.schema.dropTable("spotify_data");
 };
 
 /* User Model
