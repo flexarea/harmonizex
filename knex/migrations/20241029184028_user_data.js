@@ -1,9 +1,9 @@
 /* eslint-disable func-names */
 // knex/migrations/YYYYMMDDHHMMSS_user_data.js
 
-exports.up = function(knex) {
+exports.up = function (knex) {
   return knex.schema.createTable("user_data", (table) => {
-    table.increments("user_id").primary();
+    table.int("user_id").primary();
 
     table.string("name");
     table.string("email");
@@ -35,15 +35,14 @@ exports.up = function(knex) {
     table.string("genre_2");
     table.string("genre_3");
     table.string("playlist");
-    
+
     table.timestamps(true, true); // adds created_at and updated_at
   });
 };
 
-exports.down = function(knex) {
+exports.down = function (knex) {
   return knex.schema.dropTable("user_data");
 };
-
 
 /* Per Friday Meetind discussion
 {
