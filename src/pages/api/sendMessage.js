@@ -1,6 +1,6 @@
 // src/pages/api/sendMessage.js
 
-import knex from '../../knex'; // Adjust the path
+const knex = require("knex");
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {

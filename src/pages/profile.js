@@ -1,20 +1,42 @@
-import React from "react";
-
+import React, { useEffect, useState } from "react";
 import Profile from "../components/Profile";
+import { useSession } from "next-auth/react";
 
 function ProfilePage() {
-  const currentUser = {
-    id: "1",
-    name: "Jane Doe",
-    age: 28,
-    bio: "I love listening to Indie Music!",
-    avatarUrl:
-      "https://images.unsplash.com/photo-1730311410811-821740da6459?q=80&w=1935&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  };
+  const { data: session, status } = useSession();
+  const [currentUser, setCurrentUser] = useState(null);
 
-  return (
-    <Profile currentUser={currentUser} /> // passes the currentUser data to Profile
-  );
+  useEffect(() => {
+    if (status === "authenticated") {
+      async function fetchCurrentUser() {
+        try {
+          const res = await fetch('/api/currentUser');
+          if (res.ok) {
+            const data = await res.json();
+            setCurrentUser(data.currentUser);
+          } else {
+            // Handle error
+          }
+        } catch (error) {
+          console.error('Error fetching current user:', error);
+        }
+      }
+      fetchCurrentUser();
+    }
+  }, [status]);
+
+  if (status === "loading" || !currentUser) {
+    return <div>Loading...</div>;
+  }
+
+  if (!session) {
+    if (typeof window !== 'undefined') {
+      window.location.href = '/login';
+    }
+    return null;
+  }
+
+  return <Profile currentUser={currentUser} />;
 }
 
 export default ProfilePage;

@@ -1,6 +1,6 @@
 // src/pages/api/getMessages.js
 
-import knex from '../../knex'; // Adjust the path
+const knex = requore("knex");
 
 export default async function handler(req, res) {
   try {

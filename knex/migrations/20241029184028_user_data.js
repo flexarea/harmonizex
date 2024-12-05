@@ -10,7 +10,6 @@ exports.up = function (knex) {
     table.int("age");
     table.string("gender");
     table.string("sexuality");
-    table.string("location");
 
     // 1 yes, 0 no
     table.int("prefer_men");
@@ -22,19 +21,6 @@ exports.up = function (knex) {
     table.string("song_3");
     table.string("song_4");
     table.string("song_5");
-    table.string("song_6");
-    table.string("song_7");
-    table.string("song_8");
-    table.string("song_9");
-    table.string("artist_1");
-    table.string("artist_2");
-    table.string("artist_3");
-    table.string("artist_4");
-    table.string("artist_5");
-    table.string("genre_1");
-    table.string("genre_2");
-    table.string("genre_3");
-    table.string("playlist");
 
     table.timestamps(true, true); // adds created_at and updated_at
   });
