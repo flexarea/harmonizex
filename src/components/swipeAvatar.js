@@ -3,25 +3,26 @@ import PropTypes from "prop-types";
 import Image from "next/image";
 import styles from "../styles/Profile.module.css";
 
-function Profile({ user }) {
+function Profile({ currentUser }) {
   return (
     <>
       <Image
-        src={user.avatarUrl}
-        alt={user.name}
+        src={currentUser.avatarUrl}
+        alt={currentUser.name}
         className={styles.avatar}
         width={300}
         height={300}
       />
       <h3>
-        {user.name}, {user.age}
+        {currentUser.name}, {currentUser.age}
       </h3>
-      <p>{user.bio}</p>
+      <p>{currentUser.bio}</p>
     </>
   );
 }
+
 Profile.propTypes = {
-  user: PropTypes.shape({
+  currentUser: PropTypes.shape({
     avatarUrl: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     age: PropTypes.number.isRequired,

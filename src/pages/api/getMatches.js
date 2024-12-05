@@ -1,6 +1,6 @@
 // Create an API endpoint at src/pages/api/getMatches.js
 
-import knex from '../../knex'; // Adjust the path to your knex instance
+const knex = require("knex");
 
 export default async function handler(req, res) {
   try {

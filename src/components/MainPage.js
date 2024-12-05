@@ -1,6 +1,8 @@
-import { useRouter } from "next/router";
-import PropTypes from "prop-types";
-import styles from "../styles/MainPage.module.css";
+// components/MainPage.js
+
+import { useRouter } from 'next/router';
+import PropTypes from 'prop-types';
+import styles from '../styles/MainPage.module.css';
 
 function MainPage({ currentUser }) {
   const router = useRouter();
@@ -10,13 +12,13 @@ function MainPage({ currentUser }) {
       <div className={styles.mainPage}>
         <h2>Welcome, {currentUser.name}!</h2>
         <nav>
-          <button type="button" onClick={() => router.push("/swipe")}>
+          <button type="button" onClick={() => router.push('/swipe')}>
             Start Swiping
           </button>
-          <button type="button" onClick={() => router.push("/matches")}>
+          <button type="button" onClick={() => router.push('/matches')}>
             View Matches
           </button>
-          <button type="button" onClick={() => router.push("/profile")}>
+          <button type="button" onClick={() => router.push('/profile')}>
             Edit Profile
           </button>
         </nav>
@@ -27,7 +29,7 @@ function MainPage({ currentUser }) {
 
 MainPage.propTypes = {
   currentUser: PropTypes.shape({
-    id: PropTypes.string.isRequired,
+    id: PropTypes.number.isRequired, // Adjusted type based on database
     name: PropTypes.string.isRequired,
     age: PropTypes.number,
     bio: PropTypes.string,
