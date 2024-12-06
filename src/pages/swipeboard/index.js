@@ -2,7 +2,7 @@ import { signOut } from 'next-auth/react';
 import { useState, useEffect } from 'react';
 
 
-export default function MatchBoard({ sessionData: session, error, status }) {
+export default function MatchBoard({ sessionData: session, error, setError, status }) {
 
   const [isLoading, setIsLoading] = useState(true)
   const [data, setData] = useState(null)
@@ -16,7 +16,7 @@ export default function MatchBoard({ sessionData: session, error, status }) {
     const fetchData = async () => {
       try {
         setIsLoading(true)
-        const response = await fetch('/api/spotify/data?type=artists');
+        const response = await fetch('/api/spotify/data?type=tracks');
         if (!response.ok) {
           if (response.status === 401) {
             router.push("/login/signIn")

@@ -37,6 +37,7 @@ function AppContent({ Component, pageProps, noLayoutPages, router }) {
     ...pageProps,
     userInfo,
     error,
+    setError,
     sessionData,
     status
   };
