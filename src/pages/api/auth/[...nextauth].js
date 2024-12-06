@@ -1,5 +1,6 @@
 import NextAuth from "next-auth"
 import SpotifyProvider from "next-auth/providers/spotify";
+import User from "../../../../models/User"
 
 const scope = "user-read-recently-played user-read-playback-state user-top-read user-modify-playback-state user-read-currently-playing user-follow-read playlist-read-private user-read-email user-read-private user-library-read";
 export const authOptions = {
@@ -24,20 +25,27 @@ export const authOptions = {
 			}
 			return false //deny sign-in for other providers 
 		},
-		async jwt({ token, account, profile }) {
+		async jwt({ token, account, user }) {
 			// If this is a new account, replace the existing token
 			if (account) {
 				token.accessToken = account.access_token;
 				token.refreshToken = account.refresh_token;
 				token.accessTokenExpires = account.expires_at * 1000; // Convert to ms
-				return token;
 			}
 			//initial sign-in
-			if (account && profile) {
-				token.accessToken = account.access_token
-				token.refreshToken = account.refresh_token
-				token.spotifyId = profile.id
-				token.accessTokenExpires = account.expires_at * 1000
+			if (user) {
+				let localUser = await User.query().findOne("spotifyId", user.id)
+				if (!localUser) {
+					//create new user record in db
+					localUser = await User.query().insertAndFetch({
+						spotifyId: user.id,
+						name: user.name,
+						email: user.email,
+						profile_pic: user.images?.[0]?.url
+					})
+				}
+				//add id to token
+				token.user.id = localUser.id;
 			}
 			return token
 		},
@@ -47,7 +55,6 @@ export const authOptions = {
 				...session.user,
 				accessToken: token.accessToken,
 				refreshToken: token.refreshToken,
-				SpotifyId: token.spotifyId
 			}
 			return session;
 		},
