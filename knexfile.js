@@ -1,17 +1,55 @@
-// knexfile.js
+/* eslint-disable import/no-extraneous-dependencies */
+const { loadEnvConfig } = require("@next/env");
 
-module.exports = {
-  client: "pg",
-  connection: {
-    connectionString: process.env.DATABASE_URL,
-    ssl: {
-      rejectUnauthorized: false,
-    },
-  },
+// Load environment variables
+const dev = process.env.NODE_ENV !== "production";
+const { DATABASE_URL } = loadEnvConfig("./", dev).combinedEnv;
+
+// Common settings for migrations and seeds
+const defaultSettings = {
   migrations: {
     directory: "./knex/migrations",
   },
   seeds: {
     directory: "./knex/seeds",
+  },
+};
+
+module.exports = {
+  test: {
+    ...defaultSettings,
+    client: "pg",
+    connection: async () => {
+      const { PostgreSqlContainer } = await import("@testcontainers/postgresql");
+
+      const container = await new PostgreSqlContainer("postgres:16").start();
+      return {
+        host: container.getHost(),
+        port: container.getPort(),
+        database: container.getDatabase(),
+        user: container.getUsername(),
+        password: container.getPassword(),
+      };
+    },
+    seeds: {
+      directory: "./knex/seeds/test",
+    },
+  },
+
+  development: {
+    ...defaultSettings,
+    client: "pg",
+    connection: {
+      connectionString: DATABASE_URL,
+    },
+  },
+
+  production: {
+    ...defaultSettings,
+    client: "pg",
+    connection: {
+      connectionString: DATABASE_URL,
+      ssl: { rejectUnauthorized: false }, // SSL for production
+    },
   },
 };

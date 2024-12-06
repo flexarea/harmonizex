@@ -3,32 +3,27 @@
 
 exports.up = function (knex) {
   return knex.schema.createTable("user_data", (table) => {
-    table.int("user_id").primary();
-
+    table.integer("user_id").primary(); 
     table.string("name");
     table.string("email");
-    table.int("age");
+    table.integer("age"); 
     table.string("gender");
-    table.string("sexuality");
-
-    // 1 yes, 0 no
-    table.int("prefer_men");
-    table.int("prefer_women");
-    table.int("prefer_enby");
-
+    table.boolean("prefer_men"); // Use 'boolean' for true/false
+    table.boolean("prefer_women"); // Use 'boolean' for true/false
+    table.boolean("prefer_enby"); // Use 'boolean' for true/false
     table.string("song_1");
     table.string("song_2");
     table.string("song_3");
     table.string("song_4");
     table.string("song_5");
-
-    table.timestamps(true, true); // adds created_at and updated_at
+    table.timestamps(true, true);
   });
 };
 
 exports.down = function (knex) {
   return knex.schema.dropTable("user_data");
 };
+
 
 /* Per Friday Meetind discussion
 {
