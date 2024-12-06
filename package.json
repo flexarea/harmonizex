@@ -22,6 +22,7 @@
     "@next/env": "^15.0.3",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
+    "db-errors": "^0.2.3",
     "dotenv": "^16.4.5",
     "fetch": "^1.1.0",
     "knex": "^3.1.0",
