@@ -33,7 +33,7 @@ dataRouter.get(async (req, res) => {
 				});
 				break;
 			}
-			case "artists": {
+			case "tracks": {
 
 				response = await fetch('https://api.spotify.com/v1/me/top/tracks', {
 					headers: { 'Authorization': `Bearer ${session.user.accessToken}` }

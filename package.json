@@ -22,6 +22,7 @@
     "@next/env": "^15.0.3",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
+    "db-errors": "^0.2.3",
     "dotenv": "^16.4.5",
     "fetch": "^1.1.0",
     "knex": "^3.1.0",
@@ -29,6 +30,7 @@
     "next-auth": "^4.24.10",
     "next-connect": "^1.0.0-next.4",
     "node-fetch": "^3.3.2",
+    "objection": "^3.1.5",
     "pg": "^8.13.1",
     "prop-types": "^15.8.1",
     "query-string": "^9.1.1",
@@ -40,6 +42,7 @@
     "*.{js,css,md,json,jsx}": "prettier --write"
   },
   "devDependencies": {
+    "@testcontainers/postgresql": "^10.16.0",
     "@testing-library/jest-dom": "^6.4.2",
     "@testing-library/react": "^14.2.1",
     "cross-env": "^7.0.3",
