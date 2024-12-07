@@ -16,7 +16,7 @@ export default class User extends BaseModel {
         spotifyId: { type: "string" },
         name: { type: "string" },
         email: { type: "string" },
-        profie_pic: { type: "string" },
+        profile_pic: { type: "string" },
       },
     };
   }
