@@ -1,7 +1,5 @@
 import NextAuth from "next-auth"
-import SpotifyProvider from "next-auth/providers/spotify";
-import User from "../../../../models/User"
-
+import SpotifyProvider from "next-auth/providers/spotify"; import User from "../../../../models/User"
 const scope = "user-read-recently-played user-read-playback-state user-top-read user-modify-playback-state user-read-currently-playing user-follow-read playlist-read-private user-read-email user-read-private user-library-read";
 export const authOptions = {
 	// Configure one or more authentication providers
@@ -39,13 +37,15 @@ export const authOptions = {
 					//create new user record in db
 					localUser = await User.query().insertAndFetch({
 						spotify_id: user.id,
-						name: user.name,
 						email: user.email,
 						profile_pic: user.images?.[0]?.url
 					})
 				}
 				//add id to token
-				token.user.id = localUser.id;
+				if (!token.user) {
+					token.user = {}
+				}
+				token.user.id = localUser.user_id;
 			}
 			return token
 		},

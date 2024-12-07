@@ -5,6 +5,9 @@ export default class User extends BaseModel {
   static get tableName() {
     return "User";
   }
+  static get idColumn() {
+    return 'user_id';  // Tell Objection to use user_id as primary key
+  }
 
   static get jsonSchema() {
     return {
@@ -12,9 +15,8 @@ export default class User extends BaseModel {
       required: ["spotify_id"],
 
       properties: {
-        id: { type: "integer" },
+        user_id: { type: "integer" },
         spotify_id: { type: "string" },
-        name: { type: "string" },
         email: { type: "string" },
         profile_pic: { type: "string" },
       },

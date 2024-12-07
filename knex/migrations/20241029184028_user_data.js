@@ -1,14 +1,14 @@
 /* eslint-disable func-names */
 // knex/migrations/YYYYMMDDHHMMSS_user_data.js
 
-exports.up = function (knex) {
+exports.up = function(knex) {
   return knex.schema.createTable("User", (table) => {
-    table.integer("user_id").primary(); 
+    table.increments("user_id").primary();
     table.string("profile_pic");
     table.string("spotify_id");
     table.string("name");
     table.string("email");
-    table.integer("age"); 
+    table.integer("age");
     table.string("gender");
     table.boolean("prefer_men"); // Use 'boolean' for true/false
     table.boolean("prefer_women"); // Use 'boolean' for true/false
@@ -22,8 +22,8 @@ exports.up = function (knex) {
   });
 };
 
-exports.down = function (knex) {
-  return knex.schema.dropTable("User");
+exports.down = function(knex) {
+  return knex.schema.dropTableIfExists("User");
 };
 
 
