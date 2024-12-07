@@ -9,11 +9,11 @@ export default class User extends BaseModel {
   static get jsonSchema() {
     return {
       type: "object",
-      required: ["spotifyId"],
+      required: ["spotify_id"],
 
       properties: {
         id: { type: "integer" },
-        spotifyId: { type: "string" },
+        spotify_id: { type: "string" },
         name: { type: "string" },
         email: { type: "string" },
         profile_pic: { type: "string" },
@@ -24,7 +24,7 @@ export default class User extends BaseModel {
   // Override this method to exclude googleId
   $formatJson(json) {
     const formattedJson = super.$formatJson(json);
-    delete formattedJson.spotifyId;
+    delete formattedJson.spotify_id;
     return formattedJson;
   }
 }

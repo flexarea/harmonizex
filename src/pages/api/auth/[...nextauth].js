@@ -34,11 +34,11 @@ export const authOptions = {
 			}
 			//initial sign-in
 			if (user) {
-				let localUser = await User.query().findOne("spotifyId", user.id)
+				let localUser = await User.query().findOne("spotify_id", user.id)
 				if (!localUser) {
 					//create new user record in db
 					localUser = await User.query().insertAndFetch({
-						spotifyId: user.id,
+						spotify_id: user.id,
 						name: user.name,
 						email: user.email,
 						profile_pic: user.images?.[0]?.url
