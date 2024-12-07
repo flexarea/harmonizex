@@ -11,12 +11,12 @@ exports.up = function (knex) {
     table
       .foreign('sender_id')
       .references('user_id')
-      .inTable('user_data')
+      .inTable('User')
       .onDelete('CASCADE');
     table
       .foreign('receiver_id')
       .references('user_id')
-      .inTable('user_data')
+      .inTable('User')
       .onDelete('CASCADE');
   });
 };

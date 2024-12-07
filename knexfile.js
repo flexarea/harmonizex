@@ -32,7 +32,7 @@ module.exports = {
       };
     },
     seeds: {
-      directory: "./knex/seeds/test",
+      directory: "./knex/seeds/sample_user_data.js",
     },
   },
 

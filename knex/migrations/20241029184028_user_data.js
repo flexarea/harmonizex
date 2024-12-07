@@ -2,8 +2,10 @@
 // knex/migrations/YYYYMMDDHHMMSS_user_data.js
 
 exports.up = function (knex) {
-  return knex.schema.createTable("user_data", (table) => {
+  return knex.schema.createTable("User", (table) => {
     table.integer("user_id").primary(); 
+    table.string("profile_pic");
+    table.string("spotify_id");
     table.string("name");
     table.string("email");
     table.integer("age"); 
@@ -21,7 +23,7 @@ exports.up = function (knex) {
 };
 
 exports.down = function (knex) {
-  return knex.schema.dropTable("user_data");
+  return knex.schema.dropTable("User");
 };
 
 

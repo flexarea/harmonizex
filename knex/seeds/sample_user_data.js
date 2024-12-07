@@ -1,8 +1,9 @@
 // knex/seeds/user_data.js
-
 const users = [
   {
     user_id: 1,
+    profile_pic: "https://i.scdn.co/image/ab6775700000ee85c21eeeee9294fbb653f5cb4a",
+    spotify_id: "spotify:artist:6jJ0s89eD6tflJhX7kJ75H",  // Fake Spotify ID
     name: "Alice Smith",
     email: "alice@example.com",
     age: 28,
@@ -18,6 +19,8 @@ const users = [
   },
   {
     user_id: 2,
+    profile_pic: "https://i.scdn.co/image/ab6775700000ee85c21eeeee9294fbb653f5cb4a",
+    spotify_id: "spotify:artist:4tC7PnXzDms9A5ql42enfD",  // Fake Spotify ID
     name: "Bob Johnson",
     email: "bob@example.com",
     age: 32,
@@ -33,6 +36,8 @@ const users = [
   },
   {
     user_id: 3,
+    profile_pic: "https://i.scdn.co/image/ab6775700000ee85c21eeeee9294fbb653f5cb4a",
+    spotify_id: "spotify:artist:5Ce7XEqt6Q7IVtnXz2uW06",  // Fake Spotify ID
     name: "Charlie Brown",
     email: "charlie@example.com",
     age: 25,
@@ -48,6 +53,8 @@ const users = [
   },
   {
     user_id: 4,
+    profile_pic: "https://i.scdn.co/image/ab6775700000ee85c21eeeee9294fbb653f5cb4a",
+    spotify_id: "spotify:artist:6xWtiVebwn4dtHzVZPBHdx",  // Fake Spotify ID
     name: "David Lee",
     email: "david@example.com",
     age: 30,
@@ -63,6 +70,8 @@ const users = [
   },
   {
     user_id: 5,
+    profile_pic: "https://i.scdn.co/image/ab6775700000ee85c21eeeee9294fbb653f5cb4a",
+    spotify_id: "spotify:artist:7ksfe8Wz9cST22mIHDeMnO",  // Fake Spotify ID
     name: "Eve White",
     email: "eve@example.com",
     age: 22,
@@ -78,6 +87,8 @@ const users = [
   },
   {
     user_id: 6,
+    profile_pic: "https://i.scdn.co/image/ab6775700000ee85c21eeeee9294fbb653f5cb4a",
+    spotify_id: "spotify:artist:3z6NMPXbJlUom4O0bu5jBp",  // Fake Spotify ID
     name: "Frank Harris",
     email: "frank@example.com",
     age: 35,
@@ -93,6 +104,8 @@ const users = [
   },
   {
     user_id: 7,
+    profile_pic: "https://i.scdn.co/image/ab6775700000ee85c21eeeee9294fbb653f5cb4a",
+    spotify_id: "spotify:artist:6EjJX4YVsTk8G91of0Oem9",  // Fake Spotify ID
     name: "Grace King",
     email: "grace@example.com",
     age: 27,
@@ -108,6 +121,8 @@ const users = [
   },
   {
     user_id: 8,
+    profile_pic: "https://i.scdn.co/image/ab6775700000ee85c21eeeee9294fbb653f5cb4a",
+    spotify_id: "spotify:artist:2lWi9Up9WbTKdqLU61hMYd",  // Fake Spotify ID
     name: "Harry Kim",
     email: "harry@example.com",
     age: 26,
@@ -125,10 +140,10 @@ const users = [
 
 exports.seed = function (knex) {
   // Deletes ALL existing entries
-  return knex("user_data")
+  return knex("User")
     .del()
     .then(function () {
       // Inserts seed entries
-      return knex("user_data").insert(users);
+      return knex("User").insert(users);
     });
 };
