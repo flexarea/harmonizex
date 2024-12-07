@@ -38,7 +38,7 @@ export const authOptions = {
 					localUser = await User.query().insertAndFetch({
 						spotify_id: user.id,
 						email: user.email,
-						profile_pic: user.images?.[0]?.url
+						profile_pic: user.image
 					})
 				}
 				//add id to token
