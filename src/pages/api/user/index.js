@@ -11,7 +11,7 @@ router
 			headers: { 'authorization': `Bearer${req.query.access_token}` },
 		};
 		//use the access token to access the spotify web api
-		const userinfo = await fetch('https://api.spotify.com/v1/me/top/artists', options)
+		const userinfo = await fetch('https://api.spotify.com/v1/me/top/tracks', options)
 		const userdata = userinfo.json()
 
 		if (userinfo.ok) {

@@ -35,7 +35,7 @@ dataRouter.get(async (req, res) => {
 			}
 			case "artists": {
 
-				response = await fetch('https://api.spotify.com/v1/me/top/artists', {
+				response = await fetch('https://api.spotify.com/v1/me/top/tracks', {
 					headers: { 'Authorization': `Bearer ${session.user.accessToken}` }
 				});
 				break;
@@ -57,6 +57,7 @@ dataRouter.get(async (req, res) => {
 		}
 
 		const data = await response.json()
+		console.log("Fetched data:", data);
 		return res.status(200).json(data)
 	} catch (error) {
 		return res.status(500).json({ error: 'Internal Server Error', message: error.message })
