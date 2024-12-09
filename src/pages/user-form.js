@@ -12,7 +12,8 @@ const UserFormPage = () => {
   useEffect(() => {
 
     if (session && !session?.user?.newUser) {
-      router.push(`swipeboard/${session.id}`)
+      console.log("current session", session)
+      router.push(`swipeboard/${session.user.id}`)
     }
   }, [session])
 
