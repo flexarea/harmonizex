@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { TextField, Button, Checkbox, Typography } from "@mui/material";
+import { useRouter } from "next/router";
 
-const UserForm = () => {
+
+const UserForm = ({user_id}) => {
   const [formData, setFormData] = useState({
     name: "",
     age: "",
@@ -13,6 +15,7 @@ const UserForm = () => {
     }
   });
 
+  const router = useRouter();
   // Function to handle changes in the form inputs (text fields and checkboxes)
   const handleChange = (e) => {
     const { name, value, checked, type } = e.target;
@@ -35,13 +38,14 @@ const UserForm = () => {
 
     console.log("Form Data:", formData);
 
-    const response = await fetch("/api/user", {
+    const response = await fetch(`/api/user/${user_id}`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(formData)
     });
     if (response.ok) {
-      alert("Form submitted successfully!");
+      // Redirect to /swipe if the form submission is successful
+      router.push("/swipe");
     } else {
       alert("Something went wrong.");
     }

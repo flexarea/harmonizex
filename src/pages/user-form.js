@@ -18,6 +18,8 @@ const UserFormPage = () => {
   }, [session])
 
   if (!session?.user?.newUser) return null
+  const user_id = session?.user?.id
+
 
   return (
     <Box
@@ -31,7 +33,7 @@ const UserFormPage = () => {
       <Typography variant="h4" align="center" gutterBottom>
         Fill out your information
       </Typography>
-      <UserForm />
+      <UserForm user_id={user_id} />
     </Box>
   )
 };
