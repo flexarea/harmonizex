@@ -2,7 +2,6 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
-import Link from '@mui/material/Link';
 import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
 import MuiCard from '@mui/material/Card';
@@ -54,11 +53,19 @@ const SignInContainer = styled(Stack)(({ theme }) => ({
   },
 }));
 
+const handleRedirect = (session) => {
+  if (!session) {
+    return "/swipeboard"
+  } else {
+    return session?.user
+  }
+}
+
 export default function SignIn(props) {
   const handleSignIn = async () => {
     try {
       await signIn("spotify", {
-        callbackUrl: "/swipeboard",
+        callbackUrl: "/user-form",
         redirect: true,
         // Add these parameters to force account selection
         authorization: {
