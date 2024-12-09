@@ -5,6 +5,7 @@ const { loadEnvConfig } = require("@next/env");
 const dev = process.env.NODE_ENV !== "production";
 const { DATABASE_URL } = loadEnvConfig("./", dev).combinedEnv;
 
+// Common settings for migrations and seeds
 const defaultSettings = {
   migrations: {
     directory: "./knex/migrations",
@@ -20,6 +21,7 @@ module.exports = {
     client: "pg",
     connection: async () => {
       const { PostgreSqlContainer } = await import("@testcontainers/postgresql");
+
       const container = await new PostgreSqlContainer("postgres:16").start();
       return {
         host: container.getHost(),
@@ -30,7 +32,7 @@ module.exports = {
       };
     },
     seeds: {
-      directory: "./knex/seeds/test",
+      directory: "./knex/seeds/sample_user_data.js",
     },
   },
 
@@ -48,9 +50,7 @@ module.exports = {
     client: "pg",
     connection: {
       connectionString: DATABASE_URL,
-      ssl: {
-        rejectUnauthorized: false, // Allow self-signed certificates
-      },
+      ssl: { rejectUnauthorized: false }, // SSL for production
     },
   },
 };
