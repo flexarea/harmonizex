@@ -33,6 +33,7 @@ export const authOptions = {
 			}
 			//initial sign-in
 			if (user) {
+				token.newUser = false;
 				let localUser = await User.query().findOne("spotify_id", user.id)
 				if (!localUser) {
 					//create new user record in db
@@ -41,7 +42,7 @@ export const authOptions = {
 						email: user.email,
 						profile_pic: user.image
 					})
-					user.newUser = true;
+					token.newUser = true;
 				}
 				//add id to token
 				if (!token.user) {
@@ -58,6 +59,8 @@ export const authOptions = {
 				...session.user,
 				accessToken: token.accessToken,
 				refreshToken: token.refreshToken,
+				newUser: token.newUser,
+				id: token.user.id
 			}
 			return session;
 		},
