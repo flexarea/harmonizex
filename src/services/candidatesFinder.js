@@ -8,7 +8,7 @@ const knex = require("knex");
  * Hard Filter: Filter users by gender and age.
  */
 async function hardFilter(user) {
-  return knex("users")
+  return knex("Users")
     .whereNot("id", user.id) // Exclude the user themselves
     .andWhere(function () {
       // Gender filter
