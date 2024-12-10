@@ -1,4 +1,3 @@
-import hardFilter from "../../services/candidatesFinder";
 import { knex } from "../../../knex/knex";
 import { createRouter } from "next-connect";
 import { getServerSession } from "next-auth/session";
@@ -31,7 +30,6 @@ router.get(authenticated, async (req, res) => {
               tempBuffer.push('prefer_enby')
               break;
             }
-
             default: {
               return null
             }
@@ -55,14 +53,15 @@ router.get(authenticated, async (req, res) => {
               return true //found a match
             }
           }
-          return false //no match 
         }
       })
     }
 
     const candidates = getMatchingCandidate();
     if (candidates) {
-      res.status(200).json({ data })
+      res.status(200).json(candidates)
+    } else {
+      res.status(404).json() //display no candidate available UI
     }
   } catch (error) {
     res.status(500).json({ error: error.message })
