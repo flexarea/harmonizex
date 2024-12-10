@@ -11,8 +11,7 @@ export const authOptions = {
 			authorization: {
 				params: { scope },
 			}
-		}),
-	],
+		}),],
 	secret: process.env.NEXTAUTH_SECRET,
 	pages: {
 		signIn: '/login/SignIn',
