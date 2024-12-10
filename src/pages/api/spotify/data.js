@@ -40,6 +40,12 @@ dataRouter.get(async (req, res) => {
 				});
 				break;
 			}
+			case "track": {
+				response = await fetch(`https://api.spotify.com/v1/tracks/${req.query.track_id}`, {
+					headers: { 'Authorization': `Bearer ${session.user.accessToken}` }
+				})
+				break;
+			}
 			default: {
 				return res.status(400).json({
 					error: 'Bad request',

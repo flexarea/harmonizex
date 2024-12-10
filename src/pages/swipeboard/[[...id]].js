@@ -1,7 +1,5 @@
 import { signOut } from 'next-auth/react';
 import { useState, useEffect } from 'react';
-
-
 export default function MatchBoard({ sessionData: session, error, setError, status }) {
 
    const [isLoading, setIsLoading] = useState(true)
@@ -16,7 +14,7 @@ export default function MatchBoard({ sessionData: session, error, setError, stat
       const fetchData = async () => {
          try {
             setIsLoading(true)
-            const response = await fetch('/api/spotify/data?type=tracks');
+            const response = await fetch('/api/spotify/data?type=track&track_id=5EXhLfpoHtSNOYEsiWp5sY');
             if (!response.ok) {
                if (response.status === 401) {
                   router.push("/login/signIn")
@@ -25,7 +23,7 @@ export default function MatchBoard({ sessionData: session, error, setError, stat
                throw new Error('Failed to fetch data');
             }
             const data = await response.json();
-            console.log(data)
+            console.log("track data: ", data)
             setData(data);
          } catch (error) {
             setError(error.message);
