@@ -3,12 +3,14 @@
 # Project Setup
 
 ## Spotify API Setup
+
 To run this project, each developer needs to set up their own Spotify Developer account and application:
 
 1. Go to [Spotify Developer Dashboard](https://developer.spotify.com/dashboard)
 2. Log in with your Spotify account
 3. Click "Create App"
 4. Fill in the app details:
+
    - App name: (choose any name)
    - App description: (brief description)
    - Redirect URI: `http://localhost:3000/api/auth/callback/spotify`
@@ -16,11 +18,13 @@ To run this project, each developer needs to set up their own Spotify Developer 
 
 5. After creating the app, you'll get your Client ID and Client Secret
 6. Copy `.env.example` to `.env.local`:
+
    ```bash
    cp .env.example .env.local
    ```
 
 7. Fill in your `.env.local` with your Spotify app credentials:
+
    ```
    NEXTAUTH_URL=http://localhost:3000
    NEXTAUTH_SECRET=generate-a-random-string-here
@@ -34,12 +38,15 @@ To run this project, each developer needs to set up their own Spotify Developer 
    ```
 
 ## Running the Project
+
 1. Install dependencies:
+
    ```bash
    npm install
    ```
 
 2. Run the development server:
+
    ```bash
    npm run dev
    ```
@@ -47,6 +54,7 @@ To run this project, each developer needs to set up their own Spotify Developer 
 3. Open [http://localhost:3000](http://localhost:3000)
 
 ## Common Issues
+
 - If you get an "OAuthCallback" error, check that:
   - Your Spotify app's redirect URI exactly matches `http://localhost:3000/api/auth/callback/spotify`
   - You've properly set up all environment variables
