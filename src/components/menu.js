@@ -1,5 +1,5 @@
-import { Avatar } from "@mui/material"
 import * as React from 'react';
+import Button from '@mui/material/Button';
 import ClickAwayListener from '@mui/material/ClickAwayListener';
 import Grow from '@mui/material/Grow';
 import Paper from '@mui/material/Paper';
@@ -7,19 +7,13 @@ import Popper from '@mui/material/Popper';
 import MenuItem from '@mui/material/MenuItem';
 import MenuList from '@mui/material/MenuList';
 import Stack from '@mui/material/Stack';
-import { signOut, useSession } from 'next-auth/react';
 
-
-function UserProfile({ userInfo }) {
-  const profileImage = userInfo?.images?.[0].url || 'public//profpic2.jpg'
+export default function MenuListComposition() {
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef(null);
-  const { data: session } = useSession();
 
   const handleToggle = () => {
-    if (session) {
-      setOpen((prevOpen) => !prevOpen);
-    }
+    setOpen((prevOpen) => !prevOpen);
   };
 
   const handleClose = (event) => {
@@ -51,18 +45,24 @@ function UserProfile({ userInfo }) {
 
   return (
     <Stack direction="row" spacing={2}>
+      <Paper>
+        <MenuList>
+          <MenuItem>Profile</MenuItem>
+          <MenuItem>My account</MenuItem>
+          <MenuItem>Logout</MenuItem>
+        </MenuList>
+      </Paper>
       <div>
-        <Avatar
-          alt="user avatar"
+        <Button
           ref={anchorRef}
           id="composition-button"
           aria-controls={open ? 'composition-menu' : undefined}
           aria-expanded={open ? 'true' : undefined}
           aria-haspopup="true"
           onClick={handleToggle}
-          src={profileImage}
-          sx={{ width: 40, height: 40 }}
-        />
+        >
+          Dashboard
+        </Button>
         <Popper
           open={open}
           anchorEl={anchorRef.current}
@@ -89,7 +89,7 @@ function UserProfile({ userInfo }) {
                   >
                     <MenuItem onClick={handleClose}>Profile</MenuItem>
                     <MenuItem onClick={handleClose}>My account</MenuItem>
-                    <MenuItem onClick={() => signOut()}>Logout</MenuItem>
+                    <MenuItem onClick={handleClose}>Logout</MenuItem>
                   </MenuList>
                 </ClickAwayListener>
               </Paper>
@@ -101,4 +101,3 @@ function UserProfile({ userInfo }) {
   );
 }
 
-export default UserProfile
