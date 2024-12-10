@@ -7,15 +7,19 @@ import Popper from '@mui/material/Popper';
 import MenuItem from '@mui/material/MenuItem';
 import MenuList from '@mui/material/MenuList';
 import Stack from '@mui/material/Stack';
+import { signOut, useSession } from 'next-auth/react';
 
 
 function UserProfile({ userInfo }) {
   const profileImage = userInfo?.images?.[0].url || 'public//profpic2.jpg'
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef(null);
+  const { data: session } = useSession();
 
   const handleToggle = () => {
-    setOpen((prevOpen) => !prevOpen);
+    if (session) {
+      setOpen((prevOpen) => !prevOpen);
+    }
   };
 
   const handleClose = (event) => {
@@ -85,7 +89,7 @@ function UserProfile({ userInfo }) {
                   >
                     <MenuItem onClick={handleClose}>Profile</MenuItem>
                     <MenuItem onClick={handleClose}>My account</MenuItem>
-                    <MenuItem onClick={handleClose}>Logout</MenuItem>
+                    <MenuItem onClick={() => signOut()}>Logout</MenuItem>
                   </MenuList>
                 </ClickAwayListener>
               </Paper>
