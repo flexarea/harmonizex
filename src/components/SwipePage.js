@@ -1,31 +1,72 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
-import MatchCard from "./swipeCard";
-import styles from "../styles/SwipePage.module.css";
+import { Avatar, Button, Container, Box, Typography, createTheme, ThemeProvider, styled } from "@mui/material";
+
+const StyledBox = styled(Box)(({ theme }) => ({
+  backgroundColor: theme.palette.background.paper, // Use theme background paper color for dark mode
+  borderRadius: "8px",
+  padding: theme.spacing(2),
+  boxShadow: "hsla(220, 30%, 5%, 0.5) 0px 5px 15px 0px, hsla(220, 25%, 10%, 0.7) 0px 15px 35px -5px",
+}));
+
+const SongBox = styled(Box)(({ theme }) => ({
+  display: "flex",
+  alignItems: "center",
+  borderRadius: "8px",
+  padding: theme.spacing(1),
+  gap: theme.spacing(2),
+  backgroundColor: theme.palette.background.paper, // Use theme background paper color for dark mode
+  boxShadow: "hsla(220, 30%, 5%, 0.5) 0px 5px 15px 0px, hsla(220, 25%, 10%, 0.7) 0px 15px 35px -5px",
+}));
+
+const theme = createTheme({
+  palette: {
+    mode: "dark", // Enable dark mode
+    primary: {
+      main: "#2196f3", // Blue color for like button
+    },
+    secondary: {
+      main: "#FF0000", // Red color for dislike button
+    },
+    background: {
+      default: "#0d1117", // Dark background color
+      paper: "#161b22", // Slightly lighter dark background for boxes
+    },
+  },
+  typography: {
+    h3: {
+      fontWeight: "bold",
+      textAlign: "center",
+      fontSize: "1.5rem",
+    },
+    body1: {
+      textAlign: "center",
+      margin: "10px 0",
+    },
+    h6: {
+      textAlign: "center",
+      fontSize: "1.5rem",
+      color: " #bdb5e7 ",
+    },
+  },
+});
 
 function Swipe() {
   const router = useRouter();
-
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [likes, setLikes] = useState([]); // Track liked song IDs
-  const [, setDislikes] = useState([]);
-  const [justLiked, setJustLiked] = useState(false);
-  const [canUndo, setCanUndo] = useState(false);
-  const [actionHistory, setActionHistory] = useState([]); // Action history stack
+  const [usersToSwipe, setUsersToSwipe] = useState([]);
+  const [userToSwipe, setUserToSwipe] = useState(null);
   const [noMoreMatches, setNoMoreMatches] = useState(false);
-  const [usersToSwipe, setUsersToSwipe] = useState([]); // New state for users to swipe
-  const [userToSwipe, setUserToSwipe] = useState(null); // Current user to swipe
+  const [songs, setSongs] = useState([]);
 
-  // Fetch candidates from API when component mounts
   useEffect(() => {
     async function fetchCandidates() {
       try {
-        const res = await fetch("/api/getCandidates"); // Adjust userId as needed
+        const res = await fetch("/api/getCandidates");
         const data = await res.json();
         if (res.ok) {
-          //setUsersToSwipe(data.candidates);
-          //setCurrentIndex(0);
-          console.log(data)
+          setUsersToSwipe(data);
+          setCurrentIndex(0);
         } else {
           console.error("Error fetching candidates:", data.error);
         }
@@ -33,246 +74,173 @@ function Swipe() {
         console.error("Error fetching candidates:", error);
       }
     }
-
     fetchCandidates();
   }, []);
 
-  // Update userToSwipe when currentIndex or usersToSwipe changes
   useEffect(() => {
-    if (usersToSwipe.length > 0 && currentIndex < usersToSwipe.length) {
-      const user = usersToSwipe[currentIndex];
+    async function fetchSongs() {
+      if (usersToSwipe.length > 0 && currentIndex < usersToSwipe.length) {
+        const user = usersToSwipe[currentIndex];
+        setUserToSwipe(user);
 
-      // Construct songs array from song_1, song_2, song_3
-      const songs = [];
-      if (user.song_1) {
-        songs.push({
-          songId: user.song_1,
-          name: user.song_1,
-          url: `/audio/${user.song_1}.mp3`,
-        });
+        const songIds = [user.song_1, user.song_2, user.song_3, user.song_4, user.song_5];
+        const songDetails = await Promise.all(
+          songIds.map(async (songId) => {
+            if (songId) {
+              try {
+                const res = await fetch(`/api/spotify/data?type=track&track_id=${songId}`);
+                return res.ok ? await res.json() : null;
+              } catch (error) {
+                console.error("Error fetching song details:", error);
+                return null;
+              }
+            }
+            return null;
+          })
+        );
+        setSongs(songDetails.filter((song) => song !== null));
+      } else {
+        setUserToSwipe(null);
+        setSongs([]);
       }
-      if (user.song_2) {
-        songs.push({
-          songId: user.song_2,
-          name: user.song_2,
-          url: `/audio/${user.song_2}.mp3`,
-        });
-      }
-      if (user.song_3) {
-        songs.push({
-          songId: user.song_3,
-          name: user.song_3,
-          url: `/audio/${user.song_3}.mp3`,
-        });
-      }
-
-      // Set avatarUrl, assuming user.avatar_url is available, else set default
-      const avatarUrl = user.avatar_url || "/default-avatar.png";
-
-      setUserToSwipe({
-        ...user,
-        songs,
-        songId: songs.length > 0 ? songs[0].songId : null, // Use first song's ID
-        avatarUrl,
-      });
-    } else {
-      setUserToSwipe(null);
-      setNoMoreMatches(true);
     }
+    fetchSongs();
   }, [usersToSwipe, currentIndex]);
 
   const moveToNext = () => {
     if (currentIndex < usersToSwipe.length - 1) {
       setCurrentIndex((prevIndex) => prevIndex + 1);
     } else {
-      setNoMoreMatches(true); // main page if no more users
+      setNoMoreMatches(true);
     }
   };
 
   const handleBackToMain = () => {
-    router.push("/"); // main page
+    router.push("/swipeboard");
   };
 
-  // useEffect to handle hasLikedSong check
-  useEffect(() => {
-    if (justLiked && userToSwipe) {
-      console.log("Checking hasLikedSong after like:", {
-        currentSongId: userToSwipe.songId,
-        likes,
-        hasLikedSong: likes.includes(userToSwipe.songId),
-      });
-      setJustLiked(false);
-    }
-  }, [likes, justLiked, userToSwipe]);
-
-  useEffect(() => {
-    // Reset the index to 0 if no more matches are available
-    if (noMoreMatches) {
-      setCurrentIndex(0);
-    }
-  }, [noMoreMatches]);
-
-  const onMatchCardLike = () => {
-    setActionHistory((prev) => [
-      ...prev,
-      {
-        type: "matchLike",
-        userId: userToSwipe.id,
-        prevIndex: currentIndex,
-      },
-    ]);
-    setCanUndo(true);
-    moveToNext();
-  };
-
-  const onMatchCardDislike = () => {
-    setActionHistory((prev) => [
-      ...prev,
-      {
-        type: "matchDislike",
-        userId: userToSwipe.id,
-        prevIndex: currentIndex,
-      },
-    ]);
-    setCanUndo(true);
-    moveToNext();
-  };
-
-  const handleUndo = () => {
-    const lastAction = actionHistory[actionHistory.length - 1];
-    if (!lastAction) return;
-
-    // revert to previous index
-    setCurrentIndex(lastAction.prevIndex);
-
-    // remove last action from history
-    setActionHistory((prev) => prev.slice(0, -1));
-
-    // update undo button visibility
-    setCanUndo(actionHistory.length > 1);
-  };
-
-  if (noMoreMatches) {
+  if (noMoreMatches || usersToSwipe.length === 0) {
     return (
-      <div className={styles.noMoreMatches}>
-        <h2>No more matches available</h2>
-        <p>Check back later or update your preferences to see more profiles.</p>
-        <button
-          type="button"
+      <Container maxWidth="sm" sx={{ textAlign: "center", marginTop: 4 }}>
+        <Typography variant="h4" gutterBottom>
+          No more matches available
+        </Typography>
+        <Typography variant="body1">
+          Check back later or update your preferences to see more profiles.
+        </Typography>
+        <Button
+          variant="contained"
+          color="primary"
           onClick={handleBackToMain}
-          className={styles.noMoreMatchesButton}
+          sx={{ marginTop: 2 }}
         >
           Back to Main Page
-        </button>
-      </div>
+        </Button>
+      </Container>
     );
   }
 
-  // If userToSwipe is null, show a loading state
   if (!userToSwipe) {
-    return <div>Loading...</div>;
+    return <Typography variant="h6" align="center">Loading...</Typography>;
   }
 
-  // Now it's safe to access userToSwipe.songs
-  const randomSong =
-    userToSwipe.songs[Math.floor(Math.random() * userToSwipe.songs.length)];
-  console.log("Audio URL:", randomSong?.url);
-
-  console.log({
-    likesArray: likes,
-    currentSongId: userToSwipe.songId,
-    songIdFromUser: userToSwipe.songs?.[0]?.id,
-  });
-
-  console.log("userToSwipe:", userToSwipe);
-  console.log("songId type:", typeof userToSwipe.songId);
-  console.log("likes array:", likes);
-  console.log(
-    "includes check:",
-    likes.some((id) => id === userToSwipe.songId)
-  );
-
-  const onLike = () => {
-    const songToLike = userToSwipe.songId;
-    console.log("Liking song:", songToLike);
-
-    setLikes((prev) => {
-      console.log("Previous likes:", prev);
-      const newLikes = [...prev, songToLike];
-      console.log("New likes:", newLikes);
-      setJustLiked(true);
-      return newLikes;
-    });
-  };
-
-  const onDislike = () => {
-    setActionHistory((prevHistory) => [
-      ...prevHistory,
-      { type: "dislike", userId: userToSwipe.id, prevIndex: currentIndex },
-    ]);
-    setDislikes((prev) => [...prev, userToSwipe.id]);
-    moveToNext();
-  };
-
-  const hasLikedSong = likes.includes(userToSwipe.songId);
-
-  console.log("Current state:", {
-    songToSwipe: userToSwipe.songId,
-    currentLikes: likes,
-    hasLikedSong,
-  });
-
-  console.log({
-    currentUserSongId: userToSwipe.songId,
-    likesArray: likes,
-    hasLikedSong,
-  });
-
   return (
-    <div className={styles.swipePage}>
-      <div>
-        <button
-          type="button"
-          onClick={handleUndo}
-          className={styles.undoButton}
-          disabled={!canUndo}
+    <ThemeProvider theme={theme}>
+      <Container
+        maxWidth="sm"
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-between",
+          height: "100vh",
+          padding: 2,
+          backgroundColor: theme.palette.background.default, // Apply theme background color
+        }}
+      >
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            marginTop: 2,
+          }}
         >
-          🔙 Undo
-        </button>
-      </div>
-      {hasLikedSong ? (
-        <MatchCard
-          user={userToSwipe}
-          onLike={onMatchCardLike} // specific match card handlers
-          onDislike={onMatchCardDislike}
-        />
-      ) : (
-        <div className={styles.matchHidden}>
-          <h4>Like the song to reveal the match!</h4>
-          <div className={styles.songDisplay}>
-            <h5>Now playing: {randomSong.name}</h5>
-            <audio key={randomSong.url} controls>
-              <source src={randomSong.url} type="audio/mp3" />
-              Your browser does not support the audio element.
-            </audio>
-            <button
-              type="button"
-              onClick={onLike}
-              className={styles.likeButton}
-            >
-              👍
-            </button>
-            <button
-              type="button"
-              onClick={onDislike}
-              className={styles.dislikeButton}
-            >
-              👎
-            </button>
-          </div>
-        </div>
-      )}
-    </div>
+          <Avatar
+            src={userToSwipe.profile_pic || "/default-avatar.png"}
+            alt={`${userToSwipe.name}'s avatar`}
+            sx={{
+              width: 100,
+              height: 100,
+              marginBottom: 3,
+              boxShadow: "15px 15px 15px rgba(0, 0, 0, 0.3)",
+            }}
+          />
+          <Typography variant="h3" gutterBottom>
+            {userToSwipe.name}
+          </Typography>
+        </Box>
+
+        <StyledBox>
+          <Typography variant="h6" gutterBottom sx={{ fontWeight: "bold" }}>
+            Favorite Songs
+          </Typography>
+          <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
+            {songs.map((song, index) => (
+              <SongBox key={index}>
+                <Avatar
+                  src={song.album?.images[0]?.url || "/default-album.png"}
+                  alt={song.name || "Unknown Track"}
+                  sx={{ width: 60, height: 60 }}
+                />
+                <Typography variant="body1">{song.name || "Unknown Track"}</Typography>
+              </SongBox>
+            ))}
+          </Box>
+        </StyledBox>
+
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            position: "fixed",
+            bottom: 20,
+            left: "50%",
+            transform: "translateX(-50%)",
+            width: "100%",
+            maxWidth: "400px",
+          }}
+        >
+          <Button
+            variant="contained"
+            color="secondary"
+            onClick={moveToNext}
+            sx={{
+              width: "60px",
+              height: "60px",
+              borderRadius: "50%",
+              fontSize: "2rem",
+              marginRight: 2,
+            }}
+          >
+            👎
+          </Button>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={moveToNext}
+            sx={{
+              width: "60px",
+              height: "60px",
+              borderRadius: "50%",
+              fontSize: "2rem",
+              marginLeft: 2,
+            }}
+          >
+            👍
+          </Button>
+        </Box>
+      </Container>
+    </ThemeProvider>
   );
 }
 
