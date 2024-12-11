@@ -1,6 +1,6 @@
 import { wrapError, DBError } from "db-errors";
 import { getServerSession } from "next-auth/next";
-import { authOptions } from "@/pages/api/auth/[...nextauth]";
+import { authOptions } from "../pages/api/auth/[...nextauth]";
 import User from "../../models/User";
 
 // A very simple error handler. In a production setting you would

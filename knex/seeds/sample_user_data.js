@@ -3,7 +3,7 @@ const users = [
   {
     user_id: 1,
     profile_pic: "https://i.scdn.co/image/ab6775700000ee85c21eeeee9294fbb653f5cb4a",
-    spotify_id: "spotify:artist:6jJ0s89eD6tflJhX7kJ75H",  // Fake Spotify ID
+    spotify_id: "6jJ0s89eD6tflJhX7kJ75H",  // Fake Spotify ID
     name: "Alice Smith",
     email: "alice@example.com",
     age: 28,
@@ -20,7 +20,7 @@ const users = [
   {
     user_id: 2,
     profile_pic: "https://i.scdn.co/image/ab6775700000ee85c21eeeee9294fbb653f5cb4a",
-    spotify_id: "spotify:artist:4tC7PnXzDms9A5ql42enfD",  // Fake Spotify ID
+    spotify_id: "4tC7PnXzDms9A5ql42enfD",  // Fake Spotify ID
     name: "Bob Johnson",
     email: "bob@example.com",
     age: 32,
@@ -37,7 +37,7 @@ const users = [
   {
     user_id: 3,
     profile_pic: "https://i.scdn.co/image/ab6775700000ee85c21eeeee9294fbb653f5cb4a",
-    spotify_id: "spotify:artist:5Ce7XEqt6Q7IVtnXz2uW06",  // Fake Spotify ID
+    spotify_id: "5Ce7XEqt6Q7IVtnXz2uW06",  // Fake Spotify ID
     name: "Charlie Brown",
     email: "charlie@example.com",
     age: 25,
@@ -54,7 +54,7 @@ const users = [
   {
     user_id: 4,
     profile_pic: "https://i.scdn.co/image/ab6775700000ee85c21eeeee9294fbb653f5cb4a",
-    spotify_id: "spotify:artist:6xWtiVebwn4dtHzVZPBHdx",  // Fake Spotify ID
+    spotify_id: "6xWtiVebwn4dtHzVZPBHdx",  // Fake Spotify ID
     name: "David Lee",
     email: "david@example.com",
     age: 30,
@@ -71,7 +71,7 @@ const users = [
   {
     user_id: 5,
     profile_pic: "https://i.scdn.co/image/ab6775700000ee85c21eeeee9294fbb653f5cb4a",
-    spotify_id: "spotify:artist:7ksfe8Wz9cST22mIHDeMnO",  // Fake Spotify ID
+    spotify_id: "7ksfe8Wz9cST22mIHDeMnO",  // Fake Spotify ID
     name: "Eve White",
     email: "eve@example.com",
     age: 22,
@@ -88,7 +88,7 @@ const users = [
   {
     user_id: 6,
     profile_pic: "https://i.scdn.co/image/ab6775700000ee85c21eeeee9294fbb653f5cb4a",
-    spotify_id: "spotify:artist:3z6NMPXbJlUom4O0bu5jBp",  // Fake Spotify ID
+    spotify_id: "3z6NMPXbJlUom4O0bu5jBp",  // Fake Spotify ID
     name: "Frank Harris",
     email: "frank@example.com",
     age: 35,
@@ -105,7 +105,7 @@ const users = [
   {
     user_id: 7,
     profile_pic: "https://i.scdn.co/image/ab6775700000ee85c21eeeee9294fbb653f5cb4a",
-    spotify_id: "spotify:artist:6EjJX4YVsTk8G91of0Oem9",  // Fake Spotify ID
+    spotify_id: "6EjJX4YVsTk8G91of0Oem9",  // Fake Spotify ID
     name: "Grace King",
     email: "grace@example.com",
     age: 27,
@@ -122,7 +122,7 @@ const users = [
   {
     user_id: 8,
     profile_pic: "https://i.scdn.co/image/ab6775700000ee85c21eeeee9294fbb653f5cb4a",
-    spotify_id: "spotify:artist:2lWi9Up9WbTKdqLU61hMYd",  // Fake Spotify ID
+    spotify_id: "2lWi9Up9WbTKdqLU61hMYd",  // Fake Spotify ID
     name: "Harry Kim",
     email: "harry@example.com",
     age: 26,
@@ -138,12 +138,10 @@ const users = [
   },
 ];
 
-exports.seed = function (knex) {
-  // Deletes ALL existing entries
-  return knex("User")
-    .del()
-    .then(function () {
-      // Inserts seed entries
-      return knex("User").insert(users);
-    });
+exports.seed = async function(knex) {
+  // Use async/await for clearer flow
+  await knex("User").del();
+  await knex("User").insert(users);
+  // Reset sequence to match the highest user_id
+  await knex.raw(`SELECT setval('"User_user_id_seq"', (SELECT MAX(user_id) FROM "User"))`);
 };
