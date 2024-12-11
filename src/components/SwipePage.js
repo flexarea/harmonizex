@@ -20,11 +20,12 @@ function Swipe() {
   useEffect(() => {
     async function fetchCandidates() {
       try {
-        const res = await fetch("/api/getCandidates?userId=1&minScore=3"); // Adjust userId as needed
+        const res = await fetch("/api/getCandidates"); // Adjust userId as needed
         const data = await res.json();
         if (res.ok) {
-          setUsersToSwipe(data.candidates);
-          setCurrentIndex(0);
+          //setUsersToSwipe(data.candidates);
+          //setCurrentIndex(0);
+          console.log(data)
         } else {
           console.error("Error fetching candidates:", data.error);
         }

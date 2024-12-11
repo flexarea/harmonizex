@@ -36,11 +36,20 @@ export const authOptions = {
 				let localUser = await User.query().findOne("spotify_id", user.id)
 				if (!localUser) {
 					//create new user record in db
-					localUser = await User.query().insertAndFetch({
-						spotify_id: user.id,
-						email: user.email,
-						profile_pic: user.image
-					})
+					try {
+						localUser = await User.query().insertAndFetch({
+							spotify_id: user.id,
+							email: user.email,
+							profile_pic: user.image
+						})
+					} catch (error) {
+						console.log('Insert values:', {
+							spotify_id: user.id,
+							email: user.email,
+							profile_pic: user.image
+						});
+						throw error;
+					}
 					token.newUser = true;
 				}
 				//add id to token
