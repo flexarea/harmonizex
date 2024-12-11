@@ -1,47 +1,30 @@
 import { knex } from "../../../knex/knex";
 import { createRouter } from "next-connect";
-import { getServerSession } from "next-auth/next";
-import { authOptions } from "./auth/[...nextauth]";
-import { authenticated } from "../../lib/middleware";
+// import { getServerSession } from "next-auth/next";
+// import { authOptions } from "./auth/[...nextauth]";
+// import { authenticated } from "../../lib/middleware";
 
+// const router = createRouter();
+// const session = await getServerSession(req, res, authOptions);
+// const user_id = session.user.id;
+// console.log("User ID:", user_id);
 const router = createRouter();
 
-router.post(authenticated, async (req, res) => {
+router.post(async (req, res) => {
   try {
-    const session = await getServerSession(req, res, authOptions);
-    if (!session || !session.user) {
-      return res.status(401).json({ error: "Unauthorized" });
-    }
+    // Log the request body to confirm it is received correctly
+    console.log("Received POST request with body:", req.body);
 
-    const user_id = session.user.id;
-    const { target_user_id, liked } = req.body;
-
-    if (!target_user_id || liked === undefined) {
-      return res.status(400).json({ error: "Missing required fields" });
-    }
-
-    // Log inputs to debug
-    console.log("User ID:", user_id);
-    console.log("Target User ID:", target_user_id);
-    console.log("Liked:", liked);
-
-    // (Example DB logic - Replace with your logic)
-    // Update or insert interaction in the database
-    const result = await knex("interactions")
-      .insert({ user_id, target_user_id, liked })
-      .onConflict(["user_id", "target_user_id"]) // Assuming composite primary key
-      .merge();
-
-    console.log("DB Operation Result:", result);
-
-    return res.status(200).json({ message: "Interaction processed successfully" });
+    // Send a simple success response
+    return res.status(200).json({ message: "Request received successfully" });
   } catch (error) {
-    console.error("Error in /api/interactions:", error);
+    console.error("Error handling POST request:", error);
     return res.status(500).json({ error: "Internal Server Error" });
   }
 });
 
 export default router;
+
 
 
 //     try {
