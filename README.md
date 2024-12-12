@@ -142,3 +142,21 @@ project-root/
 ├── package.json
 └── tsconfig.json
 ```
+
+### Migrations to do before running app
+   ```
+   npx knex migrate:latest
+   npx knex seed:run --specific=sample_user_data.js //run this seed file before the sample_swipes_data.js becuase of foreign key relation
+   npx knex seed:run --specific=sample_swipes_data.js
+
+   ```
+
+### Common errors you might run into
+ 
+ - watchpack error (Occurs due to corrupted file path and next doesnt know which path/socket to watch) so you just have to clear the cache by going to terminal and running 
+
+  ```
+  rm -rf .next
+
+   ```
+  

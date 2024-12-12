@@ -109,8 +109,6 @@ function Swipe() {
 
   const updateInteraction = async (target_user_id, liked) => {
     try {
-      console.log("target_user_id", target_user_id);
-      console.log("liked", liked);
 
       const payload = {
         target_user_id,
@@ -126,6 +124,9 @@ function Swipe() {
   
       if (!res.ok) {
         console.error("Failed to update interaction:", await res.json());
+      }
+      else {
+        console.log("Interaction updated successfully");
       }
     } catch (error) {
       console.error("Error updating interaction:", error);
