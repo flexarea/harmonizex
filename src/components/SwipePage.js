@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { Avatar, Button, Container, Box, Typography, createTheme, ThemeProvider, styled } from "@mui/material";
 
 const StyledBox = styled(Box)(({ theme }) => ({
-  backgroundColor: theme.palette.background.paper, // Use theme background paper color for dark mode
+  backgroundColor: theme.palette.background.paper,
   borderRadius: "8px",
   padding: theme.spacing(2),
   boxShadow: "hsla(220, 30%, 5%, 0.5) 0px 5px 15px 0px, hsla(220, 25%, 10%, 0.7) 0px 15px 35px -5px",
@@ -15,22 +15,22 @@ const SongBox = styled(Box)(({ theme }) => ({
   borderRadius: "8px",
   padding: theme.spacing(1),
   gap: theme.spacing(2),
-  backgroundColor: theme.palette.background.paper, // Use theme background paper color for dark mode
+  backgroundColor: theme.palette.background.paper,
   boxShadow: "hsla(220, 30%, 5%, 0.5) 0px 5px 15px 0px, hsla(220, 25%, 10%, 0.7) 0px 15px 35px -5px",
 }));
 
 const theme = createTheme({
   palette: {
-    mode: "dark", // Enable dark mode
+    mode: "dark",
     primary: {
-      main: "#2196f3", // Blue color for like button
+      main: "#2196f3",
     },
     secondary: {
-      main: "#FF0000", // Red color for dislike button
+      main: "#FF0000",
     },
     background: {
-      default: "#0d1117", // Dark background color
-      paper: "#161b22", // Slightly lighter dark background for boxes
+      default: "#0d1117",
+      paper: "#161b22",
     },
   },
   typography: {
@@ -107,16 +107,56 @@ function Swipe() {
     fetchSongs();
   }, [usersToSwipe, currentIndex]);
 
-  const moveToNext = () => {
-    if (currentIndex < usersToSwipe.length - 1) {
-      setCurrentIndex((prevIndex) => prevIndex + 1);
-    } else {
-      setNoMoreMatches(true);
+  const updateInteraction = async (target_user_id, liked) => {
+    try {
+
+      const payload = {
+        target_user_id,
+        liked,
+      };
+      console.log("Payload being sent:", JSON.stringify(payload, null, 2));
+
+      const res = await fetch("/api/interactions", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+  
+      if (!res.ok) {
+        console.error("Failed to update interaction:", await res.json());
+      }
+      else {
+        console.log("Interaction updated successfully");
+      }
+    } catch (error) {
+      console.error("Error updating interaction:", error);
     }
   };
 
   const handleBackToMain = () => {
     router.push("/swipeboard");
+  };
+
+  const handleLike = async () => {
+    if (userToSwipe) {
+      await updateInteraction(userToSwipe.user_id, true); // Like
+    }
+    moveToNext();
+  };
+
+  const handleDislike = async () => {
+    if (userToSwipe) {
+      await updateInteraction(userToSwipe.user_id, false); // Dislike
+    }
+    moveToNext();
+  };
+
+  const moveToNext = () => {
+    if (currentIndex + 1 < usersToSwipe.length) {
+      setCurrentIndex(currentIndex + 1);
+    } else {
+      setNoMoreMatches(true);
+    }
   };
 
   if (noMoreMatches || usersToSwipe.length === 0) {
@@ -154,7 +194,7 @@ function Swipe() {
           justifyContent: "space-between",
           height: "100vh",
           padding: 2,
-          backgroundColor: theme.palette.background.default, // Apply theme background color
+          backgroundColor: theme.palette.background.default,
         }}
       >
         <Box
@@ -213,7 +253,7 @@ function Swipe() {
           <Button
             variant="contained"
             color="secondary"
-            onClick={moveToNext}
+            onClick={handleDislike}
             sx={{
               width: "60px",
               height: "60px",
@@ -227,7 +267,7 @@ function Swipe() {
           <Button
             variant="contained"
             color="primary"
-            onClick={moveToNext}
+            onClick={handleLike}
             sx={{
               width: "60px",
               height: "60px",
