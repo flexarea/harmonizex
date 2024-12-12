@@ -13,7 +13,7 @@ const UserFormPage = () => {
 
     if (session && !session?.user?.newUser) {
       console.log("current session", session)
-      router.push(`swipeboard/${session.user.id}`)
+      router.push(`swipe/${session.user.id}`)
     }
   }, [session])
 
