@@ -3,19 +3,23 @@ import { useRouter } from "next/router";
 import { Avatar, Button, Container, Box, Typography, createTheme, ThemeProvider, styled } from "@mui/material";
 
 const StyledBox = styled(Box)(({ theme }) => ({
-  backgroundColor: theme.palette.background.paper,
-  borderRadius: "8px",
+  borderRadius: "30px",
   padding: theme.spacing(2),
+
+  height: "48vh",
+  backgroundColor: "#99d1d1",
   boxShadow: "hsla(220, 30%, 5%, 0.5) 0px 5px 15px 0px, hsla(220, 25%, 10%, 0.7) 0px 15px 35px -5px",
 }));
 
 const SongBox = styled(Box)(({ theme }) => ({
   display: "flex",
   alignItems: "center",
-  borderRadius: "8px",
+  borderRadius: "30px",
+  width: "350px",
+  height: "42px",
   padding: theme.spacing(1),
   gap: theme.spacing(2),
-  backgroundColor: theme.palette.background.paper,
+  backgroundColor: "rgba(255, 255, 255, 0.8)",
   boxShadow: "hsla(220, 30%, 5%, 0.5) 0px 5px 15px 0px, hsla(220, 25%, 10%, 0.7) 0px 15px 35px -5px",
 }));
 
@@ -121,7 +125,7 @@ function Swipe() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
       });
-  
+
       if (!res.ok) {
         console.error("Failed to update interaction:", await res.json());
       }
@@ -191,10 +195,14 @@ function Swipe() {
         sx={{
           display: "flex",
           flexDirection: "column",
-          justifyContent: "space-between",
-          height: "100vh",
+          //justifyContent: "center",
+          height: "90vh",
           padding: 2,
-          backgroundColor: theme.palette.background.default,
+          position: "absolute",  // Add this
+          top: "40%",           // Add this
+          left: "50%",          // Add this
+          transform: "translate(-50%, -50%)", // Add this
+          margin: 0,            // Add this
         }}
       >
         <Box
@@ -202,40 +210,49 @@ function Swipe() {
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
-            marginTop: 2,
+            marginTop: "100px",
           }}
         >
           <Avatar
             src={userToSwipe.profile_pic || "/default-avatar.png"}
             alt={`${userToSwipe.name}'s avatar`}
             sx={{
-              width: 100,
-              height: 100,
-              marginBottom: 3,
+              width: 65,
+              height: 65,
+              marginBottom: 1,
               boxShadow: "15px 15px 15px rgba(0, 0, 0, 0.3)",
             }}
           />
-          <Typography variant="h3" gutterBottom>
+          <Typography
+            sx={{ marginBottom: "25px", fontSize: "17px" }}
+            variant="h5" gutterBottom
+          >
             {userToSwipe.name}
           </Typography>
         </Box>
 
         <StyledBox>
-          <Typography variant="h6" gutterBottom sx={{ fontWeight: "bold" }}>
+          <Typography variant="h6" gutterBottom sx={{ fontWeight: "bold", color: "black" }}>
             Favorite Songs
           </Typography>
-          <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
+          <Box sx={{ display: "flex", flexDirection: "column", gap: 2, marginTop: 2, alignItems: "center" }}>
             {songs.map((song, index) => (
               <SongBox key={index}>
                 <Avatar
                   src={song.album?.images[0]?.url || "/default-album.png"}
                   alt={song.name || "Unknown Track"}
-                  sx={{ width: 60, height: 60 }}
+                  sx={{ width: 40, height: 40 }}
                 />
-                <Typography variant="body1">{song.name || "Unknown Track"}</Typography>
+                <Typography
+                  sx={{ color: "black" }}
+                  variant="body1">
+                  {song.name || "Unknown Track"}
+                </Typography>
               </SongBox>
             ))}
+
           </Box>
+
         </StyledBox>
 
         <Box
@@ -243,7 +260,7 @@ function Swipe() {
             display: "flex",
             justifyContent: "center",
             position: "fixed",
-            bottom: 20,
+            bottom: "0.5px",
             left: "50%",
             transform: "translateX(-50%)",
             width: "100%",
@@ -252,7 +269,6 @@ function Swipe() {
         >
           <Button
             variant="contained"
-            color="secondary"
             onClick={handleDislike}
             sx={{
               width: "60px",
@@ -260,13 +276,13 @@ function Swipe() {
               borderRadius: "50%",
               fontSize: "2rem",
               marginRight: 2,
+              background: "#ff575a"
             }}
           >
             👎
           </Button>
           <Button
             variant="contained"
-            color="primary"
             onClick={handleLike}
             sx={{
               width: "60px",
@@ -274,6 +290,7 @@ function Swipe() {
               borderRadius: "50%",
               fontSize: "2rem",
               marginLeft: 2,
+              background: "#6cf257"
             }}
           >
             👍

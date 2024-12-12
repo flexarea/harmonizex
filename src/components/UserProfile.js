@@ -8,8 +8,6 @@ import MenuItem from '@mui/material/MenuItem';
 import MenuList from '@mui/material/MenuList';
 import Stack from '@mui/material/Stack';
 import { signOut, useSession } from 'next-auth/react';
-
-
 function UserProfile({ userInfo }) {
   const profileImage = userInfo?.images?.[0].url || 'public//profpic2.jpg'
   const [open, setOpen] = React.useState(false);
@@ -61,7 +59,7 @@ function UserProfile({ userInfo }) {
           aria-haspopup="true"
           onClick={handleToggle}
           src={profileImage}
-          sx={{ width: 40, height: 40 }}
+          sx={{ width: 60, height: 60, marginRight: "10px", marginTop: "10px" }}
         />
         <Popper
           open={open}
