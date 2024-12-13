@@ -9,6 +9,12 @@ const StyledBox = styled(Box)(({ theme }) => ({
   height: "48vh",
   backgroundColor: "#99d1d1",
   boxShadow: "hsla(220, 30%, 5%, 0.5) 0px 5px 15px 0px, hsla(220, 25%, 10%, 0.7) 0px 15px 35px -5px",
+  [theme.breakpoints.down('sm')]: { // for mobile devices
+    height: "60vh",
+  },
+  [theme.breakpoints.up('md')]: { // for tablets and up
+    height: "50vh",
+  },
 }));
 
 const SongBox = styled(Box)(({ theme }) => ({
@@ -21,6 +27,15 @@ const SongBox = styled(Box)(({ theme }) => ({
   gap: theme.spacing(2),
   backgroundColor: "rgba(255, 255, 255, 0.8)",
   boxShadow: "hsla(220, 30%, 5%, 0.5) 0px 5px 15px 0px, hsla(220, 25%, 10%, 0.7) 0px 15px 35px -5px",
+
+  [theme.breakpoints.down('sm')]: { // for mobile devices
+    width: "200px",
+    height: "32px",
+  },
+  [theme.breakpoints.up('md')]: { // for tablets and up
+    width: "350px",
+  },
+
 }));
 
 const theme = createTheme({
@@ -199,10 +214,9 @@ function Swipe() {
           height: "90vh",
           padding: 2,
           position: "absolute",  // Add this
-          top: "40%",           // Add this
+          top: { md: "45%" },           // Add this
           left: "50%",          // Add this
           transform: "translate(-50%, -50%)", // Add this
-          margin: 0,            // Add this
         }}
       >
         <Box
@@ -217,8 +231,8 @@ function Swipe() {
             src={userToSwipe.profile_pic || "/default-avatar.png"}
             alt={`${userToSwipe.name}'s avatar`}
             sx={{
-              width: 65,
-              height: 65,
+              width: { md: 60, sm: 20 },
+              height: { md: 60, sm: 20 },
               marginBottom: 1,
               boxShadow: "15px 15px 15px rgba(0, 0, 0, 0.3)",
             }}
@@ -259,24 +273,28 @@ function Swipe() {
           sx={{
             display: "flex",
             justifyContent: "center",
-            position: "fixed",
+            position: "relative",
             bottom: "0.5px",
             left: "50%",
             transform: "translateX(-50%)",
             width: "100%",
             maxWidth: "400px",
+            [theme.breakpoints.down('sm')]: { // for mobile devices
+            },
+            marginTop: "30px",
+
           }}
         >
           <Button
             variant="contained"
             onClick={handleDislike}
             sx={{
-              width: "60px",
-              height: "60px",
+              width: { md: "60px", sm: "8px" },
+              height: { md: "60px", sm: "8px" },
               borderRadius: "50%",
               fontSize: "2rem",
               marginRight: 2,
-              background: "#ff575a"
+              background: "#f05b5e"
             }}
           >
             👎
@@ -285,12 +303,12 @@ function Swipe() {
             variant="contained"
             onClick={handleLike}
             sx={{
-              width: "60px",
-              height: "60px",
+              width: { md: "60px", sm: "8px" },
+              height: { md: "60px", sm: "8px" },
               borderRadius: "50%",
               fontSize: "2rem",
               marginLeft: 2,
-              background: "#6cf257"
+              background: "#72e868"
             }}
           >
             👍
