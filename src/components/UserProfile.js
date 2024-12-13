@@ -1,4 +1,4 @@
-import { Avatar } from "@mui/material"
+import { Avatar, Box } from "@mui/material"
 import * as React from 'react';
 import ClickAwayListener from '@mui/material/ClickAwayListener';
 import Grow from '@mui/material/Grow';
@@ -8,8 +8,8 @@ import MenuItem from '@mui/material/MenuItem';
 import MenuList from '@mui/material/MenuList';
 import Stack from '@mui/material/Stack';
 import { signOut, useSession } from 'next-auth/react';
-
-
+import WhatshotIcon from '@mui/icons-material/Whatshot';
+import { Whatshot } from "@mui/icons-material";
 function UserProfile({ userInfo }) {
   const profileImage = userInfo?.images?.[0].url || 'public//profpic2.jpg'
   const [open, setOpen] = React.useState(false);
@@ -52,17 +52,34 @@ function UserProfile({ userInfo }) {
   return (
     <Stack direction="row" spacing={2}>
       <div>
-        <Avatar
-          alt="user avatar"
-          ref={anchorRef}
-          id="composition-button"
-          aria-controls={open ? 'composition-menu' : undefined}
-          aria-expanded={open ? 'true' : undefined}
-          aria-haspopup="true"
-          onClick={handleToggle}
-          src={profileImage}
-          sx={{ width: 40, height: 40 }}
-        />
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "row"
+          }}
+        >
+          <WhatshotIcon
+            fontSize="large"
+            sx={{ marginTop: "25px", marginRight: "40px", color: "#ff4e26" }}
+          />
+
+          <Avatar
+            alt="user avatar"
+            ref={anchorRef}
+            id="composition-button"
+            aria-controls={open ? 'composition-menu' : undefined}
+            aria-expanded={open ? 'true' : undefined}
+            aria-haspopup="true"
+            onClick={handleToggle}
+            src={profileImage}
+            sx={{
+              width: { md: 65, sm: 20 },
+              height: { md: 65, sm: 20 },
+              marginRight: "10px",
+              marginTop: "10px"
+            }}
+          />
+        </Box>
         <Popper
           open={open}
           anchorEl={anchorRef.current}

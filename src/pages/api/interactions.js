@@ -2,10 +2,11 @@ import { knex } from "../../../knex/knex";
 import { createRouter } from "next-connect";
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "./auth/[...nextauth]";
+import { authenticated } from "../../lib/middleware";
 
 const router = createRouter();
 
-router.post(async (req, res) => {
+router.post(authenticated, async (req, res) => {
   try {
     const session = await getServerSession(req, res, authOptions);
     const user_id = session.user.id;
