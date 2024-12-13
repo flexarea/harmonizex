@@ -166,7 +166,7 @@ function Swipe() {
   };
 
   const handleBackToMain = () => {
-    router.push("/swipeboard");
+    router.push("/matches");
   };
 
   const handleLike = async () => {
@@ -195,7 +195,7 @@ function Swipe() {
     return (
       <Container maxWidth="sm" sx={{ textAlign: "center", marginTop: 4 }}>
         <Typography variant="h4" gutterBottom>
-          No more matches available
+          No more Users to swipe on 😢
         </Typography>
         <Typography variant="body1">
           Check back later or update your preferences to see more profiles.
@@ -206,7 +206,7 @@ function Swipe() {
           onClick={handleBackToMain}
           sx={{ marginTop: 2 }}
         >
-          Back to Main Page
+          Go to your Matches
         </Button>
       </Container>
     );

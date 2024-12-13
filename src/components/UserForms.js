@@ -45,7 +45,7 @@ const UserForm = ({user_id}) => {
     });
     if (response.ok) {
       // Redirect to /swipe if the form submission is successful
-      router.push("/swipe");
+      router.push("/swipeboard");
     } else {
       alert("Something went wrong.");
     }
