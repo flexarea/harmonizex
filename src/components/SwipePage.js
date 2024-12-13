@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { Avatar, Button, Container, Box, Typography, createTheme, ThemeProvider, styled } from "@mui/material";
+import { HeightTwoTone } from "@mui/icons-material";
 
 const StyledBox = styled(Box)(({ theme }) => ({
   borderRadius: "30px",
@@ -12,10 +13,11 @@ const StyledBox = styled(Box)(({ theme }) => ({
   [theme.breakpoints.down('sm')]: { // for mobile devices
     height: "60vh",
   },
-  [theme.breakpoints.up('md')]: { // for tablets and up
+  [theme.breakpoints.up('sm')]: { // for tablets and up
     height: "50vh",
   },
 }));
+
 
 const SongBox = styled(Box)(({ theme }) => ({
   display: "flex",
@@ -29,8 +31,8 @@ const SongBox = styled(Box)(({ theme }) => ({
   boxShadow: "hsla(220, 30%, 5%, 0.5) 0px 5px 15px 0px, hsla(220, 25%, 10%, 0.7) 0px 15px 35px -5px",
 
   [theme.breakpoints.down('sm')]: { // for mobile devices
-    width: "200px",
-    height: "32px",
+    width: "230px",
+    height: "25px",
   },
   [theme.breakpoints.up('md')]: { // for tablets and up
     width: "350px",
@@ -58,6 +60,7 @@ const theme = createTheme({
       textAlign: "center",
       fontSize: "1.5rem",
     },
+    top: { sm: "45%" },           // Add this
     body1: {
       textAlign: "center",
       margin: "10px 0",
@@ -66,6 +69,16 @@ const theme = createTheme({
       textAlign: "center",
       fontSize: "1.5rem",
       color: " #bdb5e7 ",
+    },
+  },
+  breakpoints: {
+    values: {
+      xs: 0,
+      sm: 377,
+      md: 750,
+      lg: 1280,
+      xl: 1920,
+      xxl: 2000,
     },
   },
 });
@@ -206,18 +219,25 @@ function Swipe() {
   return (
     <ThemeProvider theme={theme}>
       <Container
-        maxWidth="sm"
-        sx={{
+        sx={(theme) => ({
           display: "flex",
           flexDirection: "column",
           //justifyContent: "center",
           height: "90vh",
           padding: 2,
           position: "absolute",  // Add this
-          top: { md: "45%" },           // Add this
           left: "50%",          // Add this
           transform: "translate(-50%, -50%)", // Add this
-        }}
+
+          [theme.breakpoints.up('md')]: { // for tablets and up
+            maxWidth: "md",
+            top: "45%"
+          },
+          [theme.breakpoints.down('sm')]: { // for tablets and up
+            maxWidth: "sm",
+            top: "40%"
+          },
+        })}
       >
         <Box
           sx={{
@@ -230,12 +250,12 @@ function Swipe() {
           <Avatar
             src={userToSwipe.profile_pic || "/default-avatar.png"}
             alt={`${userToSwipe.name}'s avatar`}
-            sx={{
-              width: { md: 60, sm: 20 },
-              height: { md: 60, sm: 20 },
+            sx={(theme) => ({
               marginBottom: 1,
               boxShadow: "15px 15px 15px rgba(0, 0, 0, 0.3)",
-            }}
+              width: "60px",
+              height: "60px"
+            })}
           />
           <Typography
             sx={{ marginBottom: "25px", fontSize: "17px" }}
@@ -288,35 +308,49 @@ function Swipe() {
           <Button
             variant="contained"
             onClick={handleDislike}
-            sx={{
+            sx={(theme) => ({
               width: { md: "60px", sm: "8px" },
               height: { md: "60px", sm: "8px" },
               borderRadius: "50%",
-              fontSize: "2rem",
+              fontSize: { lg: "2rem", xs: "1rem", md: "1.5rem" },
               marginRight: 2,
-              background: "#f05b5e"
-            }}
+              background: "#f05b5e",
+
+              [theme.breakpoints.down('sm')]: { // for mobile devices
+                width: "60px",
+                height: "60px",
+                fontSize: "2rem"
+              },
+            })}
           >
             👎
           </Button>
           <Button
+
             variant="contained"
-            onClick={handleLike}
-            sx={{
+            onClick={handleDislike}
+            sx={(theme) => ({
               width: { md: "60px", sm: "8px" },
               height: { md: "60px", sm: "8px" },
               borderRadius: "50%",
-              fontSize: "2rem",
-              marginLeft: 2,
-              background: "#72e868"
-            }}
+              fontSize: { lg: "2rem", xs: "1rem", md: "1.5rem" },
+              marginRight: 2,
+              background: "#72e868",
+              [theme.breakpoints.down('sm')]: { // for mobile devices
+                width: "60px",
+                height: "60px",
+                fontSize: "2rem"
+              },
+            })}
           >
             👍
           </Button>
         </Box>
+
       </Container>
-    </ThemeProvider>
+    </ThemeProvider >
   );
 }
 
 export default Swipe;
+
