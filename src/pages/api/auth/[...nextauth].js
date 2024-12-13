@@ -1,6 +1,8 @@
+/* eslint-disable no-param-reassign */
 import NextAuth from "next-auth"
-import SpotifyProvider from "next-auth/providers/spotify"; import User from "../../../../models/User"
-import { redirect } from "next/dist/server/api-utils";
+import SpotifyProvider from "next-auth/providers/spotify";
+ import User from "../../../../models/User"
+
 const scope = "user-read-recently-played user-read-playback-state user-top-read user-modify-playback-state user-read-currently-playing user-follow-read playlist-read-private user-read-email user-read-private user-library-read";
 export const authOptions = {
 	// Configure one or more authentication providers
@@ -21,7 +23,7 @@ export const authOptions = {
 			if (account.provider === "spotify" && profile?.id) {
 				return true
 			}
-			return false //deny sign-in for other providers 
+			return false // deny sign-in for other providers 
 		},
 		async jwt({ token, account, user }) {
 			// If this is a new account, replace the existing token
@@ -30,12 +32,12 @@ export const authOptions = {
 				token.refreshToken = account.refresh_token;
 				token.accessTokenExpires = account.expires_at * 1000; // Convert to ms
 			}
-			//initial sign-in
+			// initial sign-in
 			if (user) {
 				token.newUser = false;
 				let localUser = await User.query().findOne("spotify_id", user.id)
 				if (!localUser) {
-					//create new user record in db
+					// create new user record in db
 					try {
 						localUser = await User.query().insertAndFetch({
 							spotify_id: user.id,
@@ -52,12 +54,12 @@ export const authOptions = {
 					}
 					token.newUser = true;
 				}
-				//add id to token
+				// add id to token
 				if (!token.user) {
 					token.user = {}
 				}
 				token.user.id = localUser.user_id;
-				//set id to state so it can be used as url query
+				// set id to state so it can be used as url query
 			}
 			return token
 		},
