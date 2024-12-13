@@ -1,20 +1,15 @@
-import { Avatar, Box } from "@mui/material"
-import * as React from 'react';
-import ClickAwayListener from '@mui/material/ClickAwayListener';
-import Grow from '@mui/material/Grow';
-import Paper from '@mui/material/Paper';
-import Popper from '@mui/material/Popper';
-import MenuItem from '@mui/material/MenuItem';
-import MenuList from '@mui/material/MenuList';
-import Stack from '@mui/material/Stack';
-import { signOut, useSession } from 'next-auth/react';
-import WhatshotIcon from '@mui/icons-material/Whatshot';
+import { Avatar, Box, MenuItem, MenuList, Paper, Popper, Stack } from "@mui/material";
+import * as React from "react";
+import ClickAwayListener from "@mui/material/ClickAwayListener";
+import Grow from "@mui/material/Grow";
+import { signOut, useSession } from "next-auth/react";
+import WhatshotIcon from "@mui/icons-material/Whatshot";
 import { createTheme, ThemeProvider } from "@mui/material";
 import { useRouter } from "next/router";
 
 function UserProfile({ userInfo }) {
+  const router = useRouter();
 
-  const router = useRouter()
   const theme = createTheme({
     breakpoints: {
       values: {
@@ -28,45 +23,45 @@ function UserProfile({ userInfo }) {
     },
   });
 
-  const profileImage = userInfo?.images?.[0]?.url || '../../../ourImages/prof.png'
+  const profileImage = userInfo?.images?.[0]?.url || "../../../ourImages/prof.png";
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef(null);
   const { data: session } = useSession();
 
+  // Toggle dropdown menu
   const handleToggle = () => {
     if (session) {
       setOpen((prevOpen) => !prevOpen);
     }
   };
 
+  // Close dropdown menu
   const handleClose = (event) => {
-    if (anchorRef.current && anchorRef.current.contains(event.target)) {
+    if (event && anchorRef.current && anchorRef.current.contains(event.target)) {
       return;
     }
-
     setOpen(false);
   };
 
+  // Handle keyboard interactions
   function handleListKeyDown(event) {
-    if (event.key === 'Tab') {
+    if (event.key === "Tab" || event.key === "Escape") {
       event.preventDefault();
-      setOpen(false);
-    } else if (event.key === 'Escape') {
       setOpen(false);
     }
   }
-  // Navigate to the matches page
+
+  // Navigate to matches page
   const handleMatchesClick = () => {
     router.push("/matches");
   };
 
-  // return focus to the button when we transitioned from !open -> open
+  // Return focus to the button when menu closes
   const prevOpen = React.useRef(open);
   React.useEffect(() => {
     if (prevOpen.current === true && open === false) {
       anchorRef.current.focus();
     }
-
     prevOpen.current = open;
   }, [open]);
 
@@ -77,27 +72,29 @@ function UserProfile({ userInfo }) {
           <Box
             sx={{
               display: "flex",
-              flexDirection: "row"
+              flexDirection: "row",
             }}
           >
+            {/* Matches Icon */}
             <WhatshotIcon
               fontSize="large"
-              sx={(theme) => ({
+              sx={{
                 marginTop: "25px",
                 marginRight: "40px",
                 color: "#ff4e26",
-                [theme.breakpoints.up('sm')]: { fontSize: "large", marginTop: "25px", marginRight: "10px" },
-                [theme.breakpoints.up('md')]: { fontSize: "2rem", marginTop: "25px", marginRight: "10px" },
-              })}
-              onClick={handleMatchesClick} // Add click handler
+                cursor: "pointer",
+                "&:hover": { color: "#ff7043" },
+              }}
+              onClick={handleMatchesClick}
             />
 
+            {/* Profile Avatar */}
             <Avatar
               alt="user avatar"
               ref={anchorRef}
               id="composition-button"
-              aria-controls={open ? 'composition-menu' : undefined}
-              aria-expanded={open ? 'true' : undefined}
+              aria-controls={open ? "composition-menu" : undefined}
+              aria-expanded={open ? "true" : undefined}
               aria-haspopup="true"
               onClick={handleToggle}
               src={profileImage}
@@ -105,10 +102,13 @@ function UserProfile({ userInfo }) {
                 width: { md: 65, sm: 40 },
                 height: { md: 65, sm: 40 },
                 marginRight: "10px",
-                marginTop: "10px"
+                marginTop: "10px",
+                cursor: "pointer",
               }}
             />
           </Box>
+
+          {/* Dropdown Menu */}
           <Popper
             open={open}
             anchorEl={anchorRef.current}
@@ -121,8 +121,7 @@ function UserProfile({ userInfo }) {
               <Grow
                 {...TransitionProps}
                 style={{
-                  transformOrigin:
-                    placement === 'bottom-start' ? 'left top' : 'left bottom',
+                  transformOrigin: placement === "bottom-start" ? "left top" : "left bottom",
                 }}
               >
                 <Paper>
@@ -133,11 +132,31 @@ function UserProfile({ userInfo }) {
                       aria-labelledby="composition-button"
                       onKeyDown={handleListKeyDown}
                     >
-                      <MenuItem onClick={handleClose}>Profile</MenuItem>
-                      <MenuItem onClick={handleClose}>My account</MenuItem>
-                      <MenuItem onClick={() => signOut({
-                        callbackUrl: '/login/SignIn'
-                      })}>Logout</MenuItem>
+                      {/* Profile Menu Item */}
+                      <MenuItem onClick={handleClose}>
+                        Profile
+                      </MenuItem>
+
+                      {/* My Account Menu Item */}
+                      <MenuItem 
+                        onClick={() => {
+                          handleClose();
+                          router.push("https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab_channel=RickAstley");
+                        }}
+                      >
+                        My Account
+                      </MenuItem>
+
+                      {/* Logout Menu Item */}
+                      <MenuItem
+                        onClick={() =>
+                          signOut({
+                            callbackUrl: "/login/SignIn",
+                          })
+                        }
+                      >
+                        Logout
+                      </MenuItem>
                     </MenuList>
                   </ClickAwayListener>
                 </Paper>
@@ -150,5 +169,4 @@ function UserProfile({ userInfo }) {
   );
 }
 
-export default UserProfile
-
+export default UserProfile;
