@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { Box, Typography, Avatar, styled } from "@mui/material";
+import { Box, Typography, Avatar, styled, Button } from "@mui/material";
+import { useRouter } from "next/router";
 
 const MatchCard = styled(Box)(({ theme }) => ({
   display: "flex",
@@ -34,6 +35,7 @@ const Email = styled(Typography)(({ theme }) => ({
 
 const Matches = () => {
   const [matches, setMatches] = useState([]);
+  const router = useRouter();
 
   useEffect(() => {
     const fetchMatches = async () => {
@@ -45,6 +47,10 @@ const Matches = () => {
     };
     fetchMatches();
   }, []);
+
+  const handleChatClick = (matchId) => {
+    router.push(`/chat/${matchId}`); // Navigate to the chat page with matchId as the dynamic route
+  };
 
   return (
     <Box
@@ -72,6 +78,22 @@ const Matches = () => {
               <Email variant="body2" sx={{ color: "text.secondary" }}>
                 {match.email}
               </Email>
+              <Button
+                variant="contained"
+                onClick={() => handleChatClick(match.user_id)}
+                sx={{
+                  backgroundColor: "#007BFF",
+                  color: "#fff",
+                  borderRadius: "8px",
+                  textTransform: "none",
+                  "&:hover": {
+                    backgroundColor: "#0056b3",
+                  },
+                  marginTop: "10px",
+                }}
+              >
+                Chat
+              </Button>
             </Box>
           </MatchCard>
         ))

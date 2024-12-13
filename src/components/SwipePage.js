@@ -330,7 +330,7 @@ function Swipe() {
 
           <Favorite
             fontSize="large"
-            onClick={handleDislike}
+            onClick={handleLike}
             sx={(theme) => ({
               marginRight: 2,
               color: "red",
