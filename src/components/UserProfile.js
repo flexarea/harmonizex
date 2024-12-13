@@ -28,7 +28,7 @@ function UserProfile({ userInfo }) {
     },
   });
 
-  const profileImage = userInfo?.images?.[0].url || 'public//profpic2.jpg'
+  const profileImage = userInfo?.images?.[0]?.url || '../../../ourImages/prof.png'
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef(null);
   const { data: session } = useSession();
