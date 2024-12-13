@@ -1,24 +1,24 @@
-import React, { useEffect } from "react";
-import UserForm from "../components/UserForms";
+// import React, { useEffect } from "react";
 import { Box, Typography } from "@mui/material";
 import { useSession } from 'next-auth/react';
-import { useRouter } from "next/router";
+import UserForm from "../components/UserForms";
+// import { useRouter } from "next/router";
 
 
-const UserFormPage = () => {
+function UserFormPage(){
   const { data: session } = useSession()
-  const router = useRouter()
+  // const router = useRouter()
 
-  useEffect(() => {
+  // useEffect(() => {
 
-    if (session && !session?.user?.newUser) {
-      console.log("current session", session)
-      router.push(`swipeboard/${session.user.id}`)
-    }
-  }, [session])
+  //   if (session && !session?.user?.newUser) {
+  //     console.log("current session", session)
+  //     router.push(`swipeboard/${session.user.id}`)
+  //   }
+  // }, [session])
 
-  if (!session?.user?.newUser) return null
-  const user_id = session?.user?.id
+  // if (!session?.user?.newUser) return null
+  const userId = session?.user?.id
 
 
   return (
@@ -33,10 +33,9 @@ const UserFormPage = () => {
       <Typography variant="h4" align="center" gutterBottom>
         Fill out your information
       </Typography>
-      <UserForm user_id={user_id} />
+      <UserForm user_id={userId} />
     </Box>
-  )
-};
-
+  );
+}
 export default UserFormPage;
 
