@@ -1,3 +1,4 @@
+// Import remains the same
 import React, { useState, useEffect, useRef } from "react";
 import {
   Box,
@@ -9,9 +10,8 @@ import {
   ListItem,
   ListItemText,
   Avatar,
-} from "@mui/material"; // Ensure ListItem is included here
+} from "@mui/material";
 import { useRouter } from "next/router";
-
 
 const Chat = () => {
   const router = useRouter();
@@ -21,6 +21,7 @@ const Chat = () => {
   const [currentUserId, setCurrentUserId] = useState(null); // Store the current user ID
   const [matchUserData, setMatchUserData] = useState(null); // Store matched user's name and profile picture
   const messagesEndRef = useRef(null); // to scroll to the latest message
+  const pollingInterval = useRef(null); // Ref to store polling interval
 
   // Fetch current user's ID
   useEffect(() => {
@@ -63,24 +64,36 @@ const Chat = () => {
     fetchMatchUserData();
   }, [matchId]);
 
-  // Fetch chat old messages between the current user and the matched user or already existing messages
-  useEffect(() => {
-    const fetchMessages = async () => {
-      if (!matchId || !currentUserId) return;
+  // Fetch chat messages
+  const fetchMessages = async () => {
+    if (!matchId || !currentUserId) return;
 
-      try {
-        const res = await fetch(`/api/chat/messages?matchId=${matchId}`);
-        const data = await res.json();
-        setMessages(data);
-      } catch (error) {
-        console.error("Error fetching messages:", error);
+    try {
+      const res = await fetch(`/api/chat/messages?matchId=${matchId}`);
+      const data = await res.json();
+      setMessages(data);
+    } catch (error) {
+      console.error("Error fetching messages:", error);
+    }
+  };
+
+  // Set up polling to fetch messages
+  useEffect(() => {
+    fetchMessages(); // Fetch messages initially
+
+    if (!pollingInterval.current) {
+      pollingInterval.current = setInterval(fetchMessages, 100); // Fetch every 2 seconds
+    }
+
+    return () => {
+      if (pollingInterval.current) {
+        clearInterval(pollingInterval.current); // Cleanup polling on unmount
+        pollingInterval.current = null;
       }
     };
-
-    fetchMessages();
   }, [matchId, currentUserId]);
 
-  // Auto-scroll to the latest message...got help from chatgpt for this lol
+  // Auto-scroll to the latest message
   useEffect(() => {
     if (messagesEndRef.current) {
       messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
@@ -104,7 +117,7 @@ const Chat = () => {
 
       if (res.ok) {
         const sentMessage = await res.json();
-        setMessages((prev) => [...prev, sentMessage]);
+        setMessages((prev) => [...prev, sentMessage]); // Optimistically update messages
         setNewMessage("");
       }
     } catch (error) {
@@ -112,7 +125,7 @@ const Chat = () => {
     }
   };
 
-  const handleKeyPress = (e) => {//to press enter to send message
+  const handleKeyPress = (e) => {
     if (e.key === "Enter") {
       e.preventDefault();
       sendMessage();
@@ -159,12 +172,7 @@ const Chat = () => {
           {matchUserData && (
             <>
               <Avatar src={matchUserData.profile_pic || "/default-avatar.png"} />
-              <Typography
-                variant="h6"
-                sx={{
-                  fontWeight: "bold",
-                }}
-              >
+              <Typography variant="h6" sx={{ fontWeight: "bold" }}>
                 Chat with {matchUserData.name}
               </Typography>
             </>
