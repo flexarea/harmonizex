@@ -1,51 +1,72 @@
-import { LabelOff } from "@mui/icons-material"
-import UserProfile from "./UserProfile"
-import { Box, Typography } from "@mui/material"
-import { useRouter } from "next/router"
-import { useSession } from "next-auth/react"
+import UserProfile from "./UserProfile";
+import { Box, Typography } from "@mui/material";
+import { useRouter } from "next/router";
+import { useSession } from "next-auth/react";
 
 function Layout({ children, userInfo }) {
+  const router = useRouter();
+  const { data: session } = useSession();
 
-  const router = useRouter()
-  const { data: session } = useSession()
+  // Handle click on the harmonize title
   const handleClick = () => {
     if (!session) {
-      router.push('/login/SignIn')
+      router.push("/login/SignIn"); // Redirect to login if not signed in
+    } else {
+      router.push(`/swipeboard/${session?.user?.id}`); // Redirect to swipeboard
     }
-    router.push(`/swipeboard/${session?.user?.id}`)
-  }
+  };
+
   return (
     <div>
-      <Box sx={{
-        display: "flex",
-        position: "fixed",
-        top: 16,
-        left: 16,
-        right: 16,
-        zIndex: 1000,
-      }}>
+      {/* Top Bar */}
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          position: "fixed",
+          top: 16,
+          left: 16,
+          right: 16,
+          zIndex: 1000,
+          padding: "8px 16px",
+          borderRadius: "8px",
+          background: "transparent",
+        }}
+      >
+        {/* Harmonize Title */}
         <Typography
-          variant="h2"
+          variant="h6" // Smaller size
           sx={{
-            marginRight: "16px"
+            cursor: "pointer",
+            fontWeight: "bold",
+            color: "white", // Default color white
+            textTransform: "",
+            "&:hover": {
+              color: "#ff7043", // Orange on hover
+            },
+            fontSize: { xs: "1.25rem", sm: "1.5rem", md: "1.75rem" }, // Responsive font size
           }}
           onClick={handleClick}
         >
-          harmonize
+          Harmonize
         </Typography>
-      </Box>
-      <Box sx={{
-        display: "flex",
-        position: "fixed",
-        top: 16,
-        right: 16,
-        zIndex: 1000,
-      }}>
+
+        {/* User Profile */}
         <UserProfile userInfo={userInfo} />
       </Box>
-      {children}
+
+      {/* Content Area */}
+      <Box
+        sx={{
+          marginTop: "80px", // Prevent overlap with fixed header
+          padding: "16px",
+        }}
+      >
+        {children}
+      </Box>
     </div>
-  )
+  );
 }
 
-export default Layout
+export default Layout;
