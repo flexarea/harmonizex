@@ -25,7 +25,7 @@ function Layout({ children, userInfo }) {
           justifyContent: "space-between",
           alignItems: "center",
           position: "fixed",
-          top: 16,
+          top: 0,
           left: 16,
           right: 16,
           zIndex: 1000,
@@ -36,16 +36,16 @@ function Layout({ children, userInfo }) {
       >
         {/* Harmonize Title */}
         <Typography
-          variant="h6" // Smaller size
+          variant="h3" // Adjusted to make it larger (was "h6")
           sx={{
             cursor: "pointer",
             fontWeight: "bold",
             color: "white", // Default color white
-            textTransform: "",
+            textTransform: 0, // Added uppercase for style
             "&:hover": {
               color: "#ff7043", // Orange on hover
             },
-            fontSize: { xs: "1.25rem", sm: "1.5rem", md: "1.75rem" }, // Responsive font size
+            fontSize: { xs: "1rem", sm: "1.5rem", md: "2rem" }, // Increased font sizes
           }}
           onClick={handleClick}
         >
@@ -59,7 +59,6 @@ function Layout({ children, userInfo }) {
       {/* Content Area */}
       <Box
         sx={{
-          marginTop: "80px", // Prevent overlap with fixed header
           padding: "16px",
         }}
       >
