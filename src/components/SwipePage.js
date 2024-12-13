@@ -1,23 +1,41 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { Avatar, Button, Container, Box, Typography, createTheme, ThemeProvider, styled } from "@mui/material";
-import { HeightTwoTone } from "@mui/icons-material";
+import { Favorite, HeightTwoTone } from "@mui/icons-material";
+import CancelIcon from '@mui/icons-material/Cancel';
 
 const StyledBox = styled(Box)(({ theme }) => ({
   borderRadius: "30px",
   padding: theme.spacing(2),
 
-  height: "48vh",
-  backgroundColor: "#99d1d1",
-  boxShadow: "hsla(220, 30%, 5%, 0.5) 0px 5px 15px 0px, hsla(220, 25%, 10%, 0.7) 0px 15px 35px -5px",
+  height: "80vh",
   [theme.breakpoints.down('sm')]: { // for mobile devices
     height: "60vh",
   },
   [theme.breakpoints.up('sm')]: { // for tablets and up
-    height: "50vh",
+    height: "650px",
   },
+
+  ...theme.applyStyles('dark', {
+    boxShadow:
+      'hsla(220, 30%, 20%, 0.5) 0px 5px 15px 0px, hsla(220, 25%, 25%, 0.08) 0px 15px 35px -5px',
+
+  }),
 }));
 
+const SpotifyPlayer = ({ trackId }) => {
+  return (
+    <iframe
+      src={`https://open.spotify.com/embed/track/${trackId}`}
+      width="400px"
+      height="80px"
+      frameBorder="0"
+      allowtransparency="true"
+      allow="encrypted-media"
+      style={{ borderRadius: '12px' }}
+    />
+  );
+};
 
 const SongBox = styled(Box)(({ theme }) => ({
   display: "flex",
@@ -32,7 +50,7 @@ const SongBox = styled(Box)(({ theme }) => ({
 
   [theme.breakpoints.down('sm')]: { // for mobile devices
     width: "230px",
-    height: "25px",
+    height: "27px",
   },
   [theme.breakpoints.up('md')]: { // for tablets and up
     width: "350px",
@@ -74,7 +92,7 @@ const theme = createTheme({
   breakpoints: {
     values: {
       xs: 0,
-      sm: 377,
+      sm: 431,
       md: 750,
       lg: 1280,
       xl: 1920,
@@ -138,6 +156,8 @@ function Swipe() {
     }
     fetchSongs();
   }, [usersToSwipe, currentIndex]);
+
+
 
   const updateInteraction = async (target_user_id, liked) => {
     try {
@@ -223,7 +243,6 @@ function Swipe() {
           display: "flex",
           flexDirection: "column",
           //justifyContent: "center",
-          height: "90vh",
           padding: 2,
           position: "absolute",  // Add this
           left: "50%",          // Add this
@@ -231,7 +250,8 @@ function Swipe() {
 
           [theme.breakpoints.up('md')]: { // for tablets and up
             maxWidth: "md",
-            top: "45%"
+            maxHeight: "90vh",
+            top: "40%"
           },
           [theme.breakpoints.down('sm')]: { // for tablets and up
             maxWidth: "sm",
@@ -258,31 +278,20 @@ function Swipe() {
             })}
           />
           <Typography
-            sx={{ marginBottom: "25px", fontSize: "17px" }}
-            variant="h5" gutterBottom
+            sx={{ marginBottom: "20px", fontSize: "17px" }}
+            variant="h5"
           >
             {userToSwipe.name}
           </Typography>
         </Box>
 
         <StyledBox>
-          <Typography variant="h6" gutterBottom sx={{ fontWeight: "bold", color: "black" }}>
+          <Typography variant="h6" gutterBottom sx={{ fontWeight: "bold", color: "white" }}>
             Favorite Songs
           </Typography>
-          <Box sx={{ display: "flex", flexDirection: "column", gap: 2, marginTop: 2, alignItems: "center" }}>
+          <Box sx={{ display: "flex", flexDirection: "column", gap: 2, marginTop: 1, alignItems: "center" }}>
             {songs.map((song, index) => (
-              <SongBox key={index}>
-                <Avatar
-                  src={song.album?.images[0]?.url || "/default-album.png"}
-                  alt={song.name || "Unknown Track"}
-                  sx={{ width: 40, height: 40 }}
-                />
-                <Typography
-                  sx={{ color: "black" }}
-                  variant="body1">
-                  {song.name || "Unknown Track"}
-                </Typography>
-              </SongBox>
+              <SpotifyPlayer trackId={song.id} />
             ))}
 
           </Box>
@@ -301,50 +310,37 @@ function Swipe() {
             maxWidth: "400px",
             [theme.breakpoints.down('sm')]: { // for mobile devices
             },
-            marginTop: "30px",
+            marginTop: "80px",
 
           }}
         >
-          <Button
-            variant="contained"
+          <CancelIcon
+            fontSize="large"
             onClick={handleDislike}
             sx={(theme) => ({
-              width: { md: "60px", sm: "8px" },
-              height: { md: "60px", sm: "8px" },
-              borderRadius: "50%",
-              fontSize: { lg: "2rem", xs: "1rem", md: "1.5rem" },
               marginRight: 2,
-              background: "#f05b5e",
+              color: "yellow",
+              [theme.breakpoints.down('sm')]: { // for mobile devices
+                width: "60px",
+                height: "60px",
+                fontSize: "2rem",
+              },
+            })}
+          />
 
+          <Favorite
+            fontSize="large"
+            onClick={handleDislike}
+            sx={(theme) => ({
+              marginRight: 2,
+              color: "red",
               [theme.breakpoints.down('sm')]: { // for mobile devices
                 width: "60px",
                 height: "60px",
                 fontSize: "2rem"
               },
             })}
-          >
-            👎
-          </Button>
-          <Button
-
-            variant="contained"
-            onClick={handleDislike}
-            sx={(theme) => ({
-              width: { md: "60px", sm: "8px" },
-              height: { md: "60px", sm: "8px" },
-              borderRadius: "50%",
-              fontSize: { lg: "2rem", xs: "1rem", md: "1.5rem" },
-              marginRight: 2,
-              background: "#72e868",
-              [theme.breakpoints.down('sm')]: { // for mobile devices
-                width: "60px",
-                height: "60px",
-                fontSize: "2rem"
-              },
-            })}
-          >
-            👍
-          </Button>
+          />
         </Box>
 
       </Container>

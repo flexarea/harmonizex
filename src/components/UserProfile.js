@@ -9,11 +9,12 @@ import MenuList from '@mui/material/MenuList';
 import Stack from '@mui/material/Stack';
 import { signOut, useSession } from 'next-auth/react';
 import WhatshotIcon from '@mui/icons-material/Whatshot';
-import { Whatshot } from "@mui/icons-material";
 import { createTheme, ThemeProvider } from "@mui/material";
+import { useRouter } from "next/router";
 
 function UserProfile({ userInfo }) {
 
+  const router = useRouter()
   const theme = createTheme({
     breakpoints: {
       values: {
@@ -134,7 +135,9 @@ function UserProfile({ userInfo }) {
                     >
                       <MenuItem onClick={handleClose}>Profile</MenuItem>
                       <MenuItem onClick={handleClose}>My account</MenuItem>
-                      <MenuItem onClick={() => signOut()}>Logout</MenuItem>
+                      <MenuItem onClick={() => signOut({
+                        callbackUrl: '/login/SignIn'
+                      })}>Logout</MenuItem>
                     </MenuList>
                   </ClickAwayListener>
                 </Paper>
