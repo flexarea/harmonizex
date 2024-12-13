@@ -42,7 +42,7 @@ module.exports = {
     client: "pg",
     connection: {
       connectionString: DATABASE_URL,
-      ssl: false, // Disable SSL for local development
+      ssl: true, // Disable SSL for local development
     },
   },
 
