@@ -32,8 +32,7 @@ module.exports = {
       };
     },
     seeds: {
-      directory: "./knex/seeds/sample_user_data.js",
-      directory: "./knex/seeds/sample_swipes_data.js",
+      directory: ["./knex/seeds/sample_user_data.js", "./knex/seeds/sample_swipes_data.js"],
     },
   },
 
@@ -42,7 +41,7 @@ module.exports = {
     client: "pg",
     connection: {
       connectionString: DATABASE_URL,
-      ssl: true, // Disable SSL for local development
+      ssl: false, // Disable SSL for local development
     },
   },
 
