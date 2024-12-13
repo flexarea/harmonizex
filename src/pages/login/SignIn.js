@@ -53,14 +53,6 @@ const SignInContainer = styled(Stack)(({ theme }) => ({
   },
 }));
 
-const handleRedirect = (session) => {
-  if (!session) {
-    return "/swipeboard"
-  } else {
-    return session?.user
-  }
-}
-
 export default function SignIn(props) {
   const handleSignIn = async () => {
     try {
