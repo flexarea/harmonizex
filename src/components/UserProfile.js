@@ -14,7 +14,7 @@ function UserProfile({ userInfo }) {
     breakpoints: {
       values: {
         xs: 0,
-        sm: 370,
+        sm: 391,
         md: 760,
         lg: 1280,
         xl: 1920,
@@ -23,7 +23,7 @@ function UserProfile({ userInfo }) {
     },
   });
 
-  const profileImage = userInfo?.images?.[0]?.url || "../../../ourImages/prof.png";
+  const profileImage = userInfo?.images?.[0]?.url || "../../public/ourImages/prof.png";
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef(null);
   const { data: session } = useSession();
@@ -78,13 +78,19 @@ function UserProfile({ userInfo }) {
             {/* Matches Icon */}
             <WhatshotIcon
               fontSize="large"
-              sx={{
+              sx={(theme) => ({
                 marginTop: "25px",
                 marginRight: "40px",
                 color: "#ff4e26",
                 cursor: "pointer",
                 "&:hover": { color: "#ff7043" },
-              }}
+                [theme.breakpoints.down('sm')]: { // for mobile devices
+                  marginTop: "20px",
+                  marginRight: "15px",
+                  fontSize: "large"
+                },
+
+              })}
               onClick={handleMatchesClick}
             />
 
@@ -98,13 +104,17 @@ function UserProfile({ userInfo }) {
               aria-haspopup="true"
               onClick={handleToggle}
               src={profileImage}
-              sx={{
+              sx={(theme) => ({
                 width: { md: 65, sm: 40 },
                 height: { md: 65, sm: 40 },
                 marginRight: "10px",
                 marginTop: "10px",
                 cursor: "pointer",
-              }}
+                [theme.breakpoints.down('sm')]: { // for mobile devices
+                  marginRight: "1%",
+                  fontSize: "large"
+                },
+              })}
             />
           </Box>
 
@@ -138,7 +148,7 @@ function UserProfile({ userInfo }) {
                       </MenuItem>
 
                       {/* My Account Menu Item */}
-                      <MenuItem 
+                      <MenuItem
                         onClick={() => {
                           handleClose();
                           router.push("https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab_channel=RickAstley");
