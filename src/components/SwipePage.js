@@ -9,10 +9,10 @@ const StyledBox = styled(Box)(({ theme }) => ({
   borderRadius: "30px",
   padding: theme.spacing(2),
 
-  [theme.breakpoints.down('sm')]: { // for mobile devices
+  [theme.breakpoints.down('sm')]: {
     height: "63vh",
   },
-  [theme.breakpoints.up('sm')]: { // for tablets and up
+  [theme.breakpoints.up('sm')]: {
     height: "60vh",
   },
 
@@ -47,11 +47,11 @@ const SpotifyPlayer = ({ trackId }) => {
 
 const SongBox = styled(Box)(({ theme }) => ({
   width: "100%",
-  [theme.breakpoints.down('sm')]: { // for mobile devices
+  [theme.breakpoints.down('sm')]: {
     maxWidth: "100%",
     height: "80px",
   },
-  [theme.breakpoints.up('sm')]: { // for tablets and up
+  [theme.breakpoints.up('sm')]: {
     maxWidth: "70%",
     height: "80px",
   },
@@ -85,7 +85,7 @@ const theme = createTheme({
       textAlign: "center",
       fontSize: "1.5rem",
     },
-    top: { sm: "45%" },           // Add this
+    top: { sm: "45%" },
     body1: {
       textAlign: "center",
       margin: "10px 0",
@@ -249,7 +249,6 @@ function Swipe() {
         sx={(theme) => ({
           display: "flex",
           flexDirection: "column",
-          //justifyContent: "center",
           padding: 2,
           position: "absolute",
           left: "50%",
@@ -315,7 +314,7 @@ function Swipe() {
             bottom: "0.5px",
             left: "50%",
             transform: "translateX(-50%)",
-            [theme.breakpoints.down('sm')]: { // for mobile devices
+            [theme.breakpoints.down('sm')]: {
             },
             marginTop: "16px",
           }}
@@ -327,7 +326,7 @@ function Swipe() {
             onClick={handleDislike}
             sx={{
               '&:hover': {
-                backgroundColor: 'rgba(255, 255, 0, 0.1)',  // subtle yellow background
+                backgroundColor: 'rgba(255, 255, 0, 0.1)',
               }
             }}
           >
@@ -335,7 +334,7 @@ function Swipe() {
               fontSize="large"
               sx={(theme) => ({
                 color: "yellow",
-                [theme.breakpoints.down('sm')]: { // for mobile devices
+                [theme.breakpoints.down('sm')]: {
                   width: "60px",
                   height: "60px",
                   fontSize: "2rem",
@@ -353,7 +352,7 @@ function Swipe() {
               onClick={handleLike}
               sx={(theme) => ({
                 color: "red",
-                [theme.breakpoints.down('sm')]: { // for mobile devices
+                [theme.breakpoints.down('sm')]: {
                   width: "60px",
                   height: "60px",
                   fontSize: "2rem"

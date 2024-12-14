@@ -41,7 +41,7 @@ function Layout({ children, userInfo }) {
         <Stack
           direction="row"
           alignItems="center"
-          spacing={1} // Adds spacing between logo and text
+          spacing={1}
         >
           <Box sx={{ position: 'relative', width: '24px', height: '24px' }}>
             <Image
@@ -53,12 +53,12 @@ function Layout({ children, userInfo }) {
             />
           </Box>
           <Typography
-            variant="h5" // Adjusted to make it larger (was "h6")
+            variant="h5"
             sx={{
               cursor: "pointer",
               fontWeight: "bold",
-              color: theme.palette.text.primary, // Default color white
-              textTransform: 0, // Added uppercase for style
+              color: theme.palette.text.primary,
+              textTransform: 0,
               "&:hover": {
                 color: "#ff7043", // Orange on hover
               },
