@@ -1,19 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
-import { Avatar, Button, Container, Box, Typography, createTheme, ThemeProvider, styled } from "@mui/material";
-import { Favorite, HeightTwoTone } from "@mui/icons-material";
+import { Avatar, Button, Container, Box, Typography, createTheme, ThemeProvider, styled, Icon } from "@mui/material";
+import { Favorite } from "@mui/icons-material";
 import CancelIcon from '@mui/icons-material/Cancel';
+import IconButton from "@mui/material/IconButton";
 
 const StyledBox = styled(Box)(({ theme }) => ({
   borderRadius: "30px",
   padding: theme.spacing(2),
 
-  height: "80vh",
   [theme.breakpoints.down('sm')]: { // for mobile devices
-    height: "60vh",
+    height: "65vh",
   },
   [theme.breakpoints.up('sm')]: { // for tablets and up
-    height: "650px",
+    height: "55vh",
   },
 
   ...theme.applyStyles('dark', {
@@ -25,37 +25,43 @@ const StyledBox = styled(Box)(({ theme }) => ({
 
 const SpotifyPlayer = ({ trackId }) => {
   return (
-    <iframe
-      src={`https://open.spotify.com/embed/track/${trackId}`}
-      width="400px"
-      height="80px"
-      frameBorder="0"
-      allowtransparency="true"
-      allow="encrypted-media"
-      style={{ borderRadius: '12px' }}
-    />
+    <SongBox>
+      <StyledPlayerContainer>
+
+        <iframe
+          src={`https://open.spotify.com/embed/track/${trackId}`}
+          width="100%"
+          height="100%"
+          frameBorder="0"
+          allowtransparency="true"
+          allow="encrypted-media"
+          sx={{
+            borderRadius: '12px'
+          }}
+        />
+      </StyledPlayerContainer>
+    </SongBox>
   );
 };
 
 const SongBox = styled(Box)(({ theme }) => ({
-  display: "flex",
-  alignItems: "center",
-  borderRadius: "30px",
-  width: "350px",
-  height: "42px",
-  padding: theme.spacing(1),
-  gap: theme.spacing(2),
-  backgroundColor: "rgba(255, 255, 255, 0.8)",
-  boxShadow: "hsla(220, 30%, 5%, 0.5) 0px 5px 15px 0px, hsla(220, 25%, 10%, 0.7) 0px 15px 35px -5px",
-
+  width: "100%",
   [theme.breakpoints.down('sm')]: { // for mobile devices
-    width: "230px",
-    height: "27px",
+    maxWidth: "100%",
+    height: "80px",
   },
-  [theme.breakpoints.up('md')]: { // for tablets and up
-    width: "350px",
+  [theme.breakpoints.up('sm')]: { // for tablets and up
+    maxWidth: "350px",
+    width: "80px",
   },
 
+}));
+
+const StyledPlayerContainer = styled(Box)(({ theme }) => ({
+  borderRadius: '12px',
+  overflow: 'hidden',
+  background: 'transparent',
+  height: '100%'
 }));
 
 const theme = createTheme({
@@ -244,18 +250,20 @@ function Swipe() {
           flexDirection: "column",
           //justifyContent: "center",
           padding: 2,
-          position: "absolute",  // Add this
-          left: "50%",          // Add this
-          transform: "translate(-50%, -50%)", // Add this
+          position: "absolute",
+          left: "50%",
+          transform: "translate(-50%, -50%)",
+          top: "50%",
+          height: "auto",
 
-          [theme.breakpoints.up('md')]: { // for tablets and up
+          [theme.breakpoints.up('md')]: { //    
             maxWidth: "md",
-            maxHeight: "90vh",
-            top: "40%"
+            minHeight: "90vh",
+            top: "50%"
           },
-          [theme.breakpoints.down('sm')]: { // for tablets and up
+          [theme.breakpoints.down('sm')]: { //   
             maxWidth: "sm",
-            top: "40%"
+            top: "50%"
           },
         })}
       >
@@ -306,41 +314,52 @@ function Swipe() {
             bottom: "0.5px",
             left: "50%",
             transform: "translateX(-50%)",
-            width: "100%",
-            maxWidth: "400px",
             [theme.breakpoints.down('sm')]: { // for mobile devices
             },
-            marginTop: "80px",
-
+            marginTop: "16px",
           }}
         >
-          <CancelIcon
-            fontSize="large"
-            onClick={handleDislike}
-            sx={(theme) => ({
-              marginRight: 2,
-              color: "yellow",
-              [theme.breakpoints.down('sm')]: { // for mobile devices
-                width: "60px",
-                height: "60px",
-                fontSize: "2rem",
-              },
-            })}
-          />
 
-          <Favorite
-            fontSize="large"
-            onClick={handleLike}
-            sx={(theme) => ({
-              marginRight: 2,
-              color: "red",
-              [theme.breakpoints.down('sm')]: { // for mobile devices
-                width: "60px",
-                height: "60px",
-                fontSize: "2rem"
-              },
-            })}
-          />
+          <IconButton
+            color="secondary"
+            aria-label="Not Interested"
+            onClick={handleDislike}
+            sx={{
+              '&:hover': {
+                backgroundColor: 'rgba(255, 255, 0, 0.1)',  // subtle yellow background
+              }
+            }}
+          >
+            <CancelIcon
+              fontSize="large"
+              sx={(theme) => ({
+                color: "yellow",
+                [theme.breakpoints.down('sm')]: { // for mobile devices
+                  width: "60px",
+                  height: "60px",
+                  fontSize: "2rem",
+                },
+              })}
+            />
+          </IconButton>
+          <IconButton
+            color="secondary"
+            aria-label="Interested"
+            onClick={handleDislike}
+          >
+            <Favorite
+              fontSize="large"
+              onClick={handleLike}
+              sx={(theme) => ({
+                color: "red",
+                [theme.breakpoints.down('sm')]: { // for mobile devices
+                  width: "60px",
+                  height: "60px",
+                  fontSize: "2rem"
+                },
+              })}
+            />
+          </IconButton>
         </Box>
 
       </Container>
