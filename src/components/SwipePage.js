@@ -213,7 +213,7 @@ function Swipe() {
 
   if (noMoreMatches || usersToSwipe.length === 0) {
     return (
-      <Container maxWidth="sm" sx={{ textAlign: "center", marginTop: 4 }}>
+      <Container maxWidth="sm" sx={{ textAlign: "center", marginTop: 15 }}>
         <Typography variant="h4" gutterBottom>
           No more Users to swipe on 😢
         </Typography>
