@@ -1,5 +1,4 @@
 ![workflow status](https://github.com/csci312-f24/project-camelshump/actions/workflows/node.js.yml/badge.svg)
-
 # Project Setup
 
 ## Spotify API Setup
