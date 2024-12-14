@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
-import { Avatar, Button, Container, Box, Typography, createTheme, ThemeProvider, styled, Icon } from "@mui/material";
+import { Avatar, Button, Container, Box, Typography, createTheme, ThemeProvider, styled } from "@mui/material";
 import { Favorite } from "@mui/icons-material";
 import CancelIcon from '@mui/icons-material/Cancel';
 import IconButton from "@mui/material/IconButton";
@@ -10,10 +10,10 @@ const StyledBox = styled(Box)(({ theme }) => ({
   padding: theme.spacing(2),
 
   [theme.breakpoints.down('sm')]: { // for mobile devices
-    height: "65vh",
+    height: "63vh",
   },
   [theme.breakpoints.up('sm')]: { // for tablets and up
-    height: "55vh",
+    height: "60vh",
   },
 
   ...theme.applyStyles('dark', {
@@ -36,7 +36,8 @@ const SpotifyPlayer = ({ trackId }) => {
           allowtransparency="true"
           allow="encrypted-media"
           sx={{
-            borderRadius: '12px'
+            borderRadius: '12px',
+            display: "block"
           }}
         />
       </StyledPlayerContainer>
@@ -51,8 +52,8 @@ const SongBox = styled(Box)(({ theme }) => ({
     height: "80px",
   },
   [theme.breakpoints.up('sm')]: { // for tablets and up
-    maxWidth: "350px",
-    width: "80px",
+    maxWidth: "70%",
+    height: "80px",
   },
 
 }));
@@ -61,7 +62,7 @@ const StyledPlayerContainer = styled(Box)(({ theme }) => ({
   borderRadius: '12px',
   overflow: 'hidden',
   background: 'transparent',
-  height: '100%'
+  height: '100%',
 }));
 
 const theme = createTheme({
@@ -259,7 +260,7 @@ function Swipe() {
           [theme.breakpoints.up('md')]: { //    
             maxWidth: "md",
             minHeight: "90vh",
-            top: "50%"
+            top: "48%"
           },
           [theme.breakpoints.down('sm')]: { //   
             maxWidth: "sm",

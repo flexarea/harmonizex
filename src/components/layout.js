@@ -2,10 +2,12 @@ import UserProfile from "./UserProfile";
 import { Box, Typography } from "@mui/material";
 import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
+import { useTheme } from "@mui/material/styles";
 
 function Layout({ children, userInfo }) {
   const router = useRouter();
   const { data: session } = useSession();
+  const theme = useTheme()
 
   // Handle click on the harmonize title
   const handleClick = () => {
@@ -40,7 +42,7 @@ function Layout({ children, userInfo }) {
           sx={{
             cursor: "pointer",
             fontWeight: "bold",
-            color: "white", // Default color white
+            color: theme.palette.text.primary, // Default color white
             textTransform: 0, // Added uppercase for style
             "&:hover": {
               color: "#ff7043", // Orange on hover
