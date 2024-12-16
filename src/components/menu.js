@@ -73,6 +73,7 @@ export default function MenuListComposition() {
         >
           {({ TransitionProps, placement }) => (
             <Grow
+              // eslint-disable-next-line react/jsx-props-no-spreading
               {...TransitionProps}
               style={{
                 transformOrigin:
@@ -85,6 +86,7 @@ export default function MenuListComposition() {
                     autoFocusItem={open}
                     id="composition-menu"
                     aria-labelledby="composition-button"
+                    // eslint-disable-next-line react/jsx-no-bind
                     onKeyDown={handleListKeyDown}
                   >
                     <MenuItem onClick={handleClose}>Profile</MenuItem>

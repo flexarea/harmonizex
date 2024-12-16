@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import React, { useState, useEffect } from "react";
 import { Box, Typography, Avatar, styled, Button } from "@mui/material";
 import { useRouter } from "next/router";
@@ -22,6 +23,7 @@ const MatchCard = styled(Box)(({ theme }) => ({
   },
 }));
 
+// eslint-disable-next-line no-unused-vars
 const Email = styled(Typography)(({ theme }) => ({
   opacity: 0,
   transition: "opacity 0.3s ease-in-out",
@@ -33,7 +35,7 @@ const Email = styled(Typography)(({ theme }) => ({
   },
 }));
 
-const Matches = () => {
+function Matches() {
   const [matches, setMatches] = useState([]);
   const router = useRouter();
 
@@ -104,6 +106,6 @@ const Matches = () => {
       )}
     </Box>
   );
-};
+}
 
 export default Matches;

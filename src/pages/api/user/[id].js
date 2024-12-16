@@ -1,3 +1,5 @@
+/* eslint-disable no-console */
+/* eslint-disable consistent-return */
 import { createRouter } from "next-connect";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../auth/[...nextauth]";
@@ -32,11 +34,11 @@ router
   })
   .post(async (req, res) => {
     try {
-      const user_id = req.query.id;
+      const userId = req.query.id;
       // Fetch session and access token
       const session = await getServerSession(req, res, authOptions);
 
-      console.log(`Authenticated user_id: ${user_id}`);
+      console.log(`Authenticated user_id: ${userId}`);
 
       console.log("Received Data:", req.body);
 
@@ -68,12 +70,13 @@ router
       // Extract the Spotify IDs of the top 5 songs
       const songIds = data.items.map(song => song.id);
 
+      // eslint-disable-next-line no-unused-vars
       const updatedRows = await knex("User")
-        .where("user_id", user_id) // Find the user by ID
+        .where("user_id", userId) // Find the user by ID
         .update({
-          name: name,
-          age: age,
-          gender: gender,
+          name,
+          age,
+          gender,
           prefer_men: preferences.prefer_men,
           prefer_women: preferences.prefer_women,
           prefer_enby: preferences.prefer_enby,

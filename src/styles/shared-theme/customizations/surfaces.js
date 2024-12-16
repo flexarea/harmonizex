@@ -57,8 +57,7 @@ export const surfacesCustomizations = {
   },
   MuiCard: {
     styleOverrides: {
-      root: ({ theme }) => {
-        return {
+      root: ({ theme }) => ({
           padding: 16,
           gap: 16,
           transition: 'all 100ms ease',
@@ -84,8 +83,7 @@ export const surfacesCustomizations = {
               },
             },
           ],
-        };
-      },
+        }),
     },
   },
   MuiCardContent: {

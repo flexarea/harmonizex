@@ -1,6 +1,7 @@
+/* eslint-disable no-console */
 import { createRouter } from "next-connect";
-import { authOptions } from "../auth/[...nextauth]"
 import { getServerSession } from "next-auth";
+import { authOptions } from "../auth/[...nextauth]"
 
 const dataRouter = createRouter();
 

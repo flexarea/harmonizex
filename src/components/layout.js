@@ -1,11 +1,11 @@
-import UserProfile from "./UserProfile";
-import { Box, Typography } from "@mui/material";
+import { Box, Typography, Stack } from "@mui/material";
 import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
 import { useTheme } from "@mui/material/styles";
-import { Stack } from "@mui/material";
 import Image from "next/image";
+import UserProfile from "./UserProfile";
 
+// eslint-disable-next-line react/prop-types
 function Layout({ children, userInfo }) {
   const router = useRouter();
   const { data: session } = useSession();

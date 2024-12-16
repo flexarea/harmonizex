@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -6,10 +7,10 @@ import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
 import MuiCard from '@mui/material/Card';
 import { styled } from '@mui/material/styles';
+import { signIn } from 'next-auth/react';
 import { SpotifyIcon } from '../../styles/CustomIcons';
 import AppTheme from '../../styles/shared-theme/AppTheme';
 import ColorModeSelect from '../../styles/shared-theme/ColorModeSelect';
-import { signIn } from 'next-auth/react';
 
 const Card = styled(MuiCard)(({ theme }) => ({
   display: 'flex',
@@ -73,6 +74,7 @@ export default function SignIn(props) {
   }
 
   return (
+    // eslint-disable-next-line react/jsx-props-no-spreading
     <AppTheme {...props}>
       <CssBaseline enableColorScheme />
       <SignInContainer direction="column" justifyContent="space-between">

@@ -58,7 +58,9 @@ export const navigationCustomizations = {
   },
   MuiSelect: {
     defaultProps: {
+      // eslint-disable-next-line react/display-name
       IconComponent: React.forwardRef((props, ref) => (
+        // eslint-disable-next-line react/jsx-props-no-spreading
         <UnfoldMoreRoundedIcon fontSize="small" {...props} ref={ref} />
       )),
     },

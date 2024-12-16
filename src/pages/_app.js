@@ -1,9 +1,9 @@
 import { useRouter } from "next/router";
 import PropTypes from "prop-types";
-import AppContent from "../components/AppContent"
 import { SessionProvider } from "next-auth/react";
-import AppTheme from "../styles/shared-theme/AppTheme";
 import { GlobalStyles } from "@mui/material";
+import AppContent from "../components/AppContent"
+import AppTheme from "../styles/shared-theme/AppTheme";
 
 function MyApp({ Component, pageProps: { session, ...pageProps } }) {
   const router = useRouter()
@@ -37,6 +37,7 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
 
 MyApp.propTypes = {
   Component: PropTypes.elementType.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
   pageProps: PropTypes.object.isRequired,
 };
 

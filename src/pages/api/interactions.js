@@ -1,6 +1,7 @@
-import { knex } from "../../../knex/knex";
+/* eslint-disable no-console */
 import { createRouter } from "next-connect";
 import { getServerSession } from "next-auth/next";
+import { knex } from "../../../knex/knex";
 import { authOptions } from "./auth/[...nextauth]";
 import { authenticated } from "../../lib/middleware";
 
@@ -9,25 +10,25 @@ const router = createRouter();
 router.post(authenticated, async (req, res) => {
   try {
     const session = await getServerSession(req, res, authOptions);
-    const user_id = session.user.id;
-    const { target_user_id, liked } = req.body;
+    const userId = session.user.id;
+    const { targetUserId, liked } = req.body;
 
     // Validate required fields
-    if (!user_id || !target_user_id) {
+    if (!userId || !targetUserId) {
       return res.status(400).json({ error: "Missing required fields" });
     }
 
     // Fetch the existing interaction record for the user
     const existingInteraction = await knex("interactions")
-      .where("user_id", user_id)
+      .where("user_id", userId)
       .first();
 
     if (!existingInteraction) {
       // Create a new interaction record
       const newInteraction = {
-        user_id,
-        likes: liked ? [target_user_id] : [],
-        dislikes: !liked ? [target_user_id] : [],
+        userId,
+        likes: liked ? [targetUserId] : [],
+        dislikes: !liked ? [targetUserId] : [],
       };
       await knex("interactions").insert(newInteraction);
     } else {
@@ -35,12 +36,12 @@ router.post(authenticated, async (req, res) => {
       const updatedInteraction = { ...existingInteraction };
       const arrayToUpdate = liked ? 'likes' : 'dislikes';
 
-      if (!updatedInteraction[arrayToUpdate].includes(target_user_id)) {
-        updatedInteraction[arrayToUpdate].push(target_user_id);
+      if (!updatedInteraction[arrayToUpdate].includes(targetUserId)) {
+        updatedInteraction[arrayToUpdate].push(targetUserId);
       }
 
       await knex("interactions")
-        .where("user_id", user_id)
+        .where("user_id", userId)
         .update({
           [arrayToUpdate]: updatedInteraction[arrayToUpdate],
         });
