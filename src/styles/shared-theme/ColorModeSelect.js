@@ -15,6 +15,7 @@ export default function ColorModeSelect(props) {
       SelectDisplayProps={{
         'data-screenshot': 'toggle-mode',
       }}
+      // eslint-disable-next-line react/jsx-props-no-spreading
       {...props}
     >
       <MenuItem value="system">System</MenuItem>

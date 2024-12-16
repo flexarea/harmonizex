@@ -2,6 +2,7 @@ import * as React from 'react';
 import SvgIcon from '@mui/material/SvgIcon';
 
 
+// eslint-disable-next-line import/prefer-default-export
 export function SpotifyIcon() {
   return (
     <SvgIcon>

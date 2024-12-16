@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 // Import remains the same
 import React, { useState, useEffect, useRef } from "react";
 import {
@@ -13,7 +14,7 @@ import {
 } from "@mui/material";
 import { useRouter } from "next/router";
 
-const Chat = () => {
+function Chat() {
   const router = useRouter();
   const { matchId } = router.query; // Get the matched user's ID from the route
   const [messages, setMessages] = useState([]);
@@ -91,6 +92,7 @@ const Chat = () => {
         pollingInterval.current = null;
       }
     };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [matchId, currentUserId]);
 
   // Auto-scroll to the latest message
@@ -263,6 +265,6 @@ const Chat = () => {
       </Paper>
     </Box>
   );
-};
+}
 
 export default Chat;

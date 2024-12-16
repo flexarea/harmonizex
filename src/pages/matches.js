@@ -1,7 +1,7 @@
 import { Typography, Box } from "@mui/material";
 import Matches from "../components/match_component";
 
-const MatchesPage = () => {
+function MatchesPage() {
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
       <Typography 
@@ -17,6 +17,6 @@ const MatchesPage = () => {
       <Matches />
     </Box>
   );
-};
+}
 
 export default MatchesPage;

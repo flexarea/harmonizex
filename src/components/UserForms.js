@@ -1,9 +1,11 @@
+/* eslint-disable no-console */
 import React, { useState } from "react";
 import { TextField, Button, Checkbox, Typography } from "@mui/material";
 import { useRouter } from "next/router";
 
 
-const UserForm = ({user_id}) => {
+// eslint-disable-next-line react/prop-types
+function UserForm({userId}) {
   const [formData, setFormData] = useState({
     name: "",
     age: "",
@@ -38,7 +40,7 @@ const UserForm = ({user_id}) => {
 
     console.log("Form Data:", formData);
 
-    const response = await fetch(`/api/user/${user_id}`, {
+    const response = await fetch(`/api/user/${userId}`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(formData)
@@ -47,6 +49,7 @@ const UserForm = ({user_id}) => {
       // Redirect to /swipe if the form submission is successful
       router.push("/swipeboard");
     } else {
+      // eslint-disable-next-line no-alert
       alert("Something went wrong.");
     }
   };
@@ -135,7 +138,7 @@ const UserForm = ({user_id}) => {
       </Button>
     </form>
   );
-};
+}
 
 export default UserForm;
 

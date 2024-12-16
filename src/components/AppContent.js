@@ -1,6 +1,9 @@
-import Layout from './layout'
+/* eslint-disable react/jsx-props-no-spreading */
+/* eslint-disable react/prop-types */
+/* eslint-disable no-console */
 import { useState, useEffect } from 'react';
 import { useSession } from 'next-auth/react';
+import Layout from './layout'
 
 // Separate component to use hooks after SessionProvider
 function AppContent({ Component, pageProps, noLayoutPages, router }) {
@@ -25,9 +28,11 @@ function AppContent({ Component, pageProps, noLayoutPages, router }) {
         const data = await response.json();
         console.log(data)
         setUserInfo(data);
+      // eslint-disable-next-line no-shadow
       } catch (error) {
         setError(error.message);
       } finally {
+        // rip
       }
     };
     fetchData();

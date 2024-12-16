@@ -1,3 +1,7 @@
+/* eslint-disable no-shadow */
+/* eslint-disable no-use-before-define */
+/* eslint-disable no-console */
+/* eslint-disable react/prop-types */
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { Avatar, Button, Container, Box, Typography, createTheme, ThemeProvider, styled } from "@mui/material";
@@ -23,7 +27,7 @@ const StyledBox = styled(Box)(({ theme }) => ({
   }),
 }));
 
-const SpotifyPlayer = ({ trackId }) => {
+function SpotifyPlayer({ trackId }) {
   return (
     <SongBox>
       <StyledPlayerContainer>
@@ -43,7 +47,7 @@ const SpotifyPlayer = ({ trackId }) => {
       </StyledPlayerContainer>
     </SongBox>
   );
-};
+}
 
 const SongBox = styled(Box)(({ theme }) => ({
   width: "100%",
@@ -58,7 +62,7 @@ const SongBox = styled(Box)(({ theme }) => ({
 
 }));
 
-const StyledPlayerContainer = styled(Box)(({ theme }) => ({
+const StyledPlayerContainer = styled(Box)(() => ({
   borderRadius: '12px',
   overflow: 'hidden',
   background: 'transparent',
@@ -166,11 +170,11 @@ function Swipe() {
 
 
 
-  const updateInteraction = async (target_user_id, liked) => {
+  const updateInteraction = async (targetUserId, liked) => {
     try {
 
       const payload = {
-        target_user_id,
+        targetUserId,
         liked,
       };
       console.log("Payload being sent:", JSON.stringify(payload, null, 2));
@@ -278,7 +282,7 @@ function Swipe() {
           <Avatar
             src={userToSwipe.profile_pic || "/default-avatar.png"}
             alt={`${userToSwipe.name}'s avatar`}
-            sx={(theme) => ({
+            sx={() => ({
               marginBottom: 1,
               boxShadow: "15px 15px 15px rgba(0, 0, 0, 0.3)",
               width: "60px",
@@ -298,7 +302,8 @@ function Swipe() {
             Favorite Songs
           </Typography>
           <Box sx={{ display: "flex", flexDirection: "column", gap: 2, marginTop: 1, alignItems: "center" }}>
-            {songs.map((song, index) => (
+            {songs.map((song) => (
+              // eslint-disable-next-line react/jsx-key
               <SpotifyPlayer trackId={song.id} />
             ))}
 

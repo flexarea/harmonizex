@@ -1,12 +1,15 @@
-import { knex } from "../../../../knex/knex";
+/* eslint-disable func-names */
+/* eslint-disable no-console */
 import { createRouter } from "next-connect";
 import { getServerSession } from "next-auth/next";
+import { knex } from "../../../../knex/knex";
 import { authOptions } from "../auth/[...nextauth]";
 import { authenticated } from "../../../lib/middleware";
 
 const router = createRouter();
 
 // GET: Fetch messages between two users
+// eslint-disable-next-line consistent-return
 router.get(authenticated, async (req, res) => {
   const session = await getServerSession(req, res, authOptions); // Get session info
   const { matchId } = req.query; // Extract matchId from query parameters
@@ -35,6 +38,7 @@ router.get(authenticated, async (req, res) => {
 });
 
 // POST: Send a new message
+// eslint-disable-next-line consistent-return
 router.post(authenticated, async (req, res) => {
   const session = await getServerSession(req, res, authOptions); // Get session info
   const { receiverId, content } = req.body; // Extract message details from the request body

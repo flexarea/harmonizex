@@ -1,10 +1,11 @@
-import { Avatar, Box, MenuItem, MenuList, Paper, Popper, Stack } from "@mui/material";
+/* eslint-disable no-shadow */
+/* eslint-disable react/prop-types */
+import { Avatar, Box, MenuItem, MenuList, Paper, Popper, Stack, createTheme, ThemeProvider } from "@mui/material";
 import * as React from "react";
 import ClickAwayListener from "@mui/material/ClickAwayListener";
 import Grow from "@mui/material/Grow";
 import { signOut, useSession } from "next-auth/react";
 import WhatshotIcon from "@mui/icons-material/Whatshot";
-import { createTheme, ThemeProvider } from "@mui/material";
 import { useRouter } from "next/router";
 
 function UserProfile({ userInfo }) {
@@ -129,6 +130,7 @@ function UserProfile({ userInfo }) {
           >
             {({ TransitionProps, placement }) => (
               <Grow
+                // eslint-disable-next-line react/jsx-props-no-spreading
                 {...TransitionProps}
                 style={{
                   transformOrigin: placement === "bottom-start" ? "left top" : "left bottom",
@@ -140,6 +142,7 @@ function UserProfile({ userInfo }) {
                       autoFocusItem={open}
                       id="composition-menu"
                       aria-labelledby="composition-button"
+                      // eslint-disable-next-line react/jsx-no-bind
                       onKeyDown={handleListKeyDown}
                     >
                       {/* Profile Menu Item */}

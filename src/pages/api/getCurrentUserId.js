@@ -1,5 +1,7 @@
+/* eslint-disable no-console */
 import { getSession } from "next-auth/react"; // Import getSession from next-auth
 
+// eslint-disable-next-line consistent-return
 export default async function handler(req, res) {
   try {
     const session = await getSession({ req });

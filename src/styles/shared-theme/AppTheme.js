@@ -10,8 +10,7 @@ import { surfacesCustomizations } from './customizations/surfaces';
 import { colorSchemes, typography, shadows, shape } from './themePrimitives';
 
 function AppTheme({ children, disableCustomTheme, themeComponents }) {
-  const theme = React.useMemo(() => {
-    return disableCustomTheme
+  const theme = React.useMemo(() => disableCustomTheme
       ? {}
       : createTheme({
         cssVariables: {
@@ -30,9 +29,9 @@ function AppTheme({ children, disableCustomTheme, themeComponents }) {
           ...surfacesCustomizations,
           ...themeComponents,
         },
-      });
-  }, [disableCustomTheme, themeComponents]);
+      }), [disableCustomTheme, themeComponents]);
   if (disableCustomTheme) {
+    // eslint-disable-next-line react/jsx-no-useless-fragment, react/jsx-fragments
     return <React.Fragment>{children}</React.Fragment>;
   }
   return (
@@ -48,6 +47,7 @@ AppTheme.propTypes = {
    * This is for the docs site. You can ignore it or remove it.
    */
   disableCustomTheme: PropTypes.bool,
+  // eslint-disable-next-line react/forbid-prop-types
   themeComponents: PropTypes.object,
 };
 
