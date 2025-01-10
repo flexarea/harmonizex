@@ -1,4 +1,5 @@
 ![workflow status](https://github.com/csci312-f24/project-camelshump/actions/workflows/node.js.yml/badge.svg)
+
 # Project Setup
 
 ## Spotify API Setup
@@ -93,69 +94,20 @@ Tools for mocking fetch can be installed with
 
 Note we need to pin the `node-fetch` version due to breaking changes when used with Jest in newer versions.
 
-The project structure should look like this at first
-
-```
-project-root/
-├── public/
-│   └── ourImages/
-│       ├── datingapp.jpg
-│       └── [other images]
-├── src/
-│   ├── components/
-│   │   ├── Dislikes.js
-│   │   ├── Likes.js
-│   │   ├── MainPage.js
-│   │   ├── MatchItem.js
-│   │   ├── MatchesList.js
-│   │   ├── Profile.js
-│   │   ├── SwipePage.js
-│   │   ├── UserProfile.js
-│   │   └── [other components]
-│   ├── pages/
-│   │   ├── _app.js
-│   │   ├── _document.js
-│   │   ├── api/
-│   │   │   ├── auth/
-│   │   │   │   └── [...nextauth].js
-│   │   │   ├── spotify/
-│   │   │   │   ├── auth.js
-│   │   │   │   ├── callback.js
-│   │   │   │   └── data.js
-│   │   │   └── user/
-│   │   │       └── index.js
-│   │   ├── login/
-│   │   │   ├── CustomIcons.js
-│   │   │   ├── ForgotPassword.js
-│   │   │   ├── SignIn.js
-│   │   │   └── shared-theme/
-│   │   ├── matches/
-│   │   │   └── [id].js
-│   │   ├── preference/
-│   │   │   └── [id].js
-│   │   └── swipeboard/
-│   │       └── index.js
-│   └── styles/
-│       ├── globals.css
-│       └── [other CSS modules]
-├── package.json
-└── tsconfig.json
-```
-
 ### Migrations to do before running app
-   ```
-   npx knex migrate:latest
-   npx knex seed:run --specific=sample_user_data.js //run this seed file before the sample_swipes_data.js becuase of foreign key relation
-   npx knex seed:run --specific=sample_swipes_data.js
 
-   ```
+```
+npx knex migrate:latest
+npx knex seed:run --specific=sample_user_data.js //run this seed file before the sample_swipes_data.js becuase of foreign key relation
+npx knex seed:run --specific=sample_swipes_data.js
+
+```
 
 ### Common errors you might run into
- 
- - watchpack error (Occurs due to corrupted file path and next doesnt know which path/socket to watch) so you just have to clear the cache by going to terminal and running 
 
-  ```
-  rm -rf .next
+- watchpack error (Occurs due to corrupted file path and next doesnt know which path/socket to watch) so you just have to clear the cache by going to terminal and running
 
-   ```
-  
+```
+rm -rf .next
+
+```
