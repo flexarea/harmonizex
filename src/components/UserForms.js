@@ -3,9 +3,8 @@ import React, { useState } from "react";
 import { TextField, Button, Checkbox, Typography } from "@mui/material";
 import { useRouter } from "next/router";
 
-
 // eslint-disable-next-line react/prop-types
-function UserForm({userId}) {
+function UserForm({ userId }) {
   const [formData, setFormData] = useState({
     name: "",
     age: "",
@@ -13,8 +12,13 @@ function UserForm({userId}) {
     preferences: {
       prefer_men: false,
       prefer_women: false,
-      prefer_enby: false
-    }
+      prefer_enby: false,
+      song_1: null,
+      song_2: null,
+      song_3: null,
+      song_4: null,
+      song_5: null,
+    },
   });
 
   const router = useRouter();
@@ -24,10 +28,13 @@ function UserForm({userId}) {
     if (type === "checkbox") {
       setFormData((prev) => ({
         ...prev, // Spread the previous form data
-        preferences: { ...prev.preferences, [name]: checked } // Update the specific preference (checkbox state)
+        preferences: { ...prev.preferences, [name]: checked }, // Update the specific preference (checkbox state)
       }));
     } else {
-      setFormData((prev) => ({ ...prev, [name]: value }));
+      setFormData((prev) => ({
+        ...prev,
+        [name]: type === "number" ? parseInt(value, 10) : value,
+      }));
     }
   };
   // Function to set the gender value based on the user's selection
@@ -43,7 +50,7 @@ function UserForm({userId}) {
     const response = await fetch(`/api/user/${userId}`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(formData)
+      body: JSON.stringify(formData),
     });
     if (response.ok) {
       // Redirect to /swipe if the form submission is successful
@@ -105,7 +112,7 @@ function UserForm({userId}) {
         style={{
           display: "flex",
           flexDirection: "column",
-          marginBottom: "15px"
+          marginBottom: "15px",
         }}
       >
         <label>
@@ -141,4 +148,3 @@ function UserForm({userId}) {
 }
 
 export default UserForm;
-

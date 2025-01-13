@@ -1,26 +1,25 @@
 /* eslint-disable no-console */
 import React, { useEffect } from "react";
 import { Box, Typography } from "@mui/material";
-import { useSession } from 'next-auth/react';
+import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import UserForm from "../components/UserForms";
 
-
 function UserFormPage() {
-  const { data: session } = useSession()
-  const router = useRouter()
+  const { data: session } = useSession();
+  const router = useRouter();
 
   useEffect(() => {
-
     if (session && !session?.user?.newUser) {
-      console.log("current session", session)
-      router.push(`swipeboard/${session.user.id}`)
+      console.log("current session", session);
+      router.push(`swipeboard/${session.user.id}`);
     }
-  }, [router, session])
+  }, [router, session]);
 
-  if (!session?.user?.newUser) return null
-  const userId = session?.user?.id
+  if (!session?.user?.newUser) return null;
+  const userId = session?.user?.id;
 
+  console.log(userId);
 
   return (
     <Box
@@ -36,8 +35,7 @@ function UserFormPage() {
       </Typography>
       <UserForm user_id={userId} />
     </Box>
-  )
+  );
 }
 
 export default UserFormPage;
-
