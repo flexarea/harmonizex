@@ -13,11 +13,6 @@ function UserForm({ userId }) {
       prefer_men: false,
       prefer_women: false,
       prefer_enby: false,
-      song_1: null,
-      song_2: null,
-      song_3: null,
-      song_4: null,
-      song_5: null,
     },
   });
 

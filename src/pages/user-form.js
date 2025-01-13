@@ -33,7 +33,7 @@ function UserFormPage() {
       <Typography variant="h4" align="center" gutterBottom>
         Fill out your information
       </Typography>
-      <UserForm user_id={userId} />
+      <UserForm userId={userId} />
     </Box>
   );
 }
